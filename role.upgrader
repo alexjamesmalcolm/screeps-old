@@ -2,9 +2,6 @@ var roleUpgrader = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
-        var pathing = function(creep, target) {
-            
-        }
         if(creep.memory.upgrading && creep.carry.energy == 0) {
             creep.memory.upgrading = false;
             creep.say('harvesting');
@@ -19,7 +16,6 @@ var roleUpgrader = {
                 if(creep.memory.path == false) {
                     creep.memory.path = creep.room.findPath(creep.pos, creep.room.controller.pos);
                 }
-                //creep.moveTo(creep.room.controller, {visualizePathStyle: {stroke: '#ffffff'}});
                 creep.moveByPath(creep.memory.path);
             } else {
                 creep.memory.path = false;
@@ -30,8 +26,9 @@ var roleUpgrader = {
                 if(creep.memory.path == false) {
                     creep.memory.path = creep.room.findPath(creep.pos, sources[1].pos);
                 }
-                creep.
-                creep.moveTo(sources[1], {visualizePathStyle: {stroke: '#ffaa00'}});
+                creep.moveByPath(creep.memory.path);
+            } else {
+                creep.memory.path = false;
             }
         }
 	}
