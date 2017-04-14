@@ -2,7 +2,9 @@ var roleUpgrader = {
 
     /** @param {Creep} creep **/
     run: function(creep) {
-
+        var pathing = function(creep, target) {
+            
+        }
         if(creep.memory.upgrading && creep.carry.energy == 0) {
             creep.memory.upgrading = false;
             creep.say('harvesting');
@@ -14,12 +16,21 @@ var roleUpgrader = {
 
 	    if(creep.memory.upgrading) {
             if(creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(creep.room.controller, {visualizePathStyle: {stroke: '#ffffff'}});
+                if(creep.memory.path == false) {
+                    creep.memory.path = creep.room.findPath(creep.pos, creep.room.controller.pos);
+                }
+                //creep.moveTo(creep.room.controller, {visualizePathStyle: {stroke: '#ffffff'}});
+                creep.moveByPath(creep.memory.path);
+            } else {
+                creep.memory.path = false;
             }
-        }
-        else {
+        } else {
             var sources = creep.room.find(FIND_SOURCES);
             if(creep.harvest(sources[1]) == ERR_NOT_IN_RANGE) {
+                if(creep.memory.path == false) {
+                    creep.memory.path = creep.room.findPath(creep.pos, sources[1].pos);
+                }
+                creep.
                 creep.moveTo(sources[1], {visualizePathStyle: {stroke: '#ffaa00'}});
             }
         }
