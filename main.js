@@ -3,8 +3,8 @@ var roleBuilder = require('role.builder');
 var roleUpgrader = require('role.upgrader');
 var creepCount = {
     harvesters: 3,
-    upgraders: 2,
-    builders: 2
+    upgraders: 4,
+    builders: 4
 };
 
 module.exports.loop = function () {
