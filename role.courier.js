@@ -13,6 +13,20 @@ var roleCourier = {
             }
         }
         if(creep.memory.collecting) {
+            var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                filter: function(structure) {
+                    if(structure.structureType == STRUCTURE_CONTAINER) {
+                        return _.sum(structure.store) < structure.storeCapacity
+                    } else if(structure.structureType == STRUCTURE_STORAGE) {
+                        return _.sum(structure.store) < structure.storeCapacity
+                    }
+                }
+            });
+            if(target) {
+                if(creep.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(target);
+                }
+            }
         } else {
             var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: function(structure) {
