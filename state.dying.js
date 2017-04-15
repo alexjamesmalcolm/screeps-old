@@ -1,5 +1,8 @@
 var stateDying = {
     run: function(creep) {
+        if(!creep.memory.sick) {
+            console.log('Bug in sickness');
+        }
         if(creep.ticksToLive < 1490) {
             creep.memory.sick = true;
         } else {
