@@ -7,7 +7,8 @@ var creepCount = {
     harvesters: 5,
     upgraders: 1,
     builders: 5,
-    fighters: 0
+    fighters: 0,
+    sick: 2
 };
 
 module.exports.loop = function () {
@@ -45,9 +46,17 @@ module.exports.loop = function () {
 
     for(var name in Game.creeps) {
         var creep = Game.creeps[name];
-        if(false/*creep.ticksToLive < 250*/) {
-            stateDying.run(creep);
-        } else if(false/*creep.memory.sick*/) {
+        var sick = _.filter(Game.creeps, (creep) => creep.memory.sick);
+        if(!creep.memory.sick) {
+            if(sick < creepCount.sick) {
+                if(creep.ticksToLive < 500) {
+                    creep.memory.sick = true;
+                }
+            } else {
+                creep.memory.sick = false;
+            }
+        }
+        if(creep.memory.sick) {
             stateDying.run(creep);
         } else if(creep.memory.role == 'harvester') {
             roleHarvester.run(creep);
