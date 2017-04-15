@@ -45,12 +45,17 @@ var roleBuilder = {
                 creep.repair(repairTargets[0]);
             }
 	    } else {
+		    
             var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: function(structure) {
                     if(structure.structureType == STRUCTURE_CONTAINER) {
                         return _.sum(structure.store) > 0;
                     } else if(structure.structureType == STRUCTURE_STORAGE) {
                         return _.sum(structure.store) > 0;
+                    } else if(structure.structureType == STRUCTURE_EXTENSION) {
+                        return structure.energy > 0;
+                    } else if(structure.structureType == STRUCTURE_SPAWN) {
+                        return structure.energy > 0;
                     }
                 }
             });
