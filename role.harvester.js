@@ -70,7 +70,7 @@ var roleHarvester = {
                 }
             });
             repairTargets.sort(function (a,b) {
-                return (a.hits - b.hits)
+                return ((a.hits / a.hitsMax) - (b.hits / b.hitsMax))
             });
             if(repairTargets.length > 0) {
                 creep.repair(repairTargets[0]);
