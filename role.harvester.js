@@ -41,9 +41,9 @@ var roleHarvester = {
                         //return structure.energy < structure.energyCapacity;
                         return false;
                     } else if(structure.structureType == STRUCTURE_CONTAINER) {
-                        return structure.energy < structure.energyCapacity;
+                        return _.sum(structure.store) < structure.storeCapacity
                     } else if(structure.structureType == STRUCTURE_STORAGE) {
-                        return structure.energy < strucutre.energyCapacity;
+                        return structure.energy < strucutre.energyCapacity; //Incorrect, should be similar to container
                     }
                 }
             });
