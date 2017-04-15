@@ -34,7 +34,7 @@ module.exports.loop = function () {
             var newName = spawn.createCreep([WORK,WORK,CARRY,MOVE], undefined, {role: 'builder'});
             console.log('Spawning new builder: ' + newName);
         } else if(fighters.length < creepCount['fighters']) {
-            var newName = spawn.createCreep([MOVE,MOVE,MOVE,ATTACK], undefined, {role: 'fighter'});
+            var newName = spawn.createCreep([MOVE,MOVE,MOVE,ATTACK,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH], undefined, {role: 'fighter'});
             console.log('Spawning new fighter: ' + newName);
         }
     }
