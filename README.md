@@ -1,2 +1,2 @@
-# screeps
+# Screeps
 My screeps scripts
