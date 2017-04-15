@@ -43,7 +43,7 @@ module.exports.loop = function () {
 
     for(var name in Game.creeps) {
         var creep = Game.creeps[name];
-        if(creep.ticksToLive < 100) {
+        if(creep.ticksToLive < 200) {
             stateDying.run(creep);
         } else if(creep.memory.role == 'harvester') {
             roleHarvester.run(creep);
