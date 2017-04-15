@@ -45,19 +45,25 @@ var roleBuilder = {
                 creep.repair(repairTargets[0]);
             }
 	    } else {
-	        //var sources = creep.room.find(FIND_SOURCES);
-            var source = creep.pos.findClosestByRange(FIND_SOURCES);
+            var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+                filter: function(structure) {
+                    if(structure.structureType == STRUCTURE_CONTAINER) {
+                        return _.sum(structure.store) < structure.storeCapacity;
+                    } else if(structure.structureType == STRUCTURE_STORAGE) {
+                        return _.sum(structure.store) < structure.storeCapacity;
+                    }
+                }
+            });
+            /*var source = creep.pos.findClosestByRange(FIND_SOURCES);
             if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(source);
-                /*
                 if(creep.memory.path == false) {
                     creep.memory.path = creep.room.findPath(creep.pos, sources[0].pos);
                 }
                 creep.moveByPath(creep.memory.path);
             } else {
                 creep.memory.path = false;
-                */
-            }
+            }*/
 	    }
 	}
 };
