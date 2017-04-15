@@ -4,6 +4,7 @@ var roleFighter = {
         console.log(enemy);
         if(enemy) {
             console.log(creep.attack(enemy));
+            creep.say('F: Attack');
             if(creep.attack(enemy) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(enemy);
             }
