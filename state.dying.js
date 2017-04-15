@@ -1,6 +1,6 @@
 var stateDying = {
     run: function(creep) {
-        if(creep.ticksToLive < 1000) {
+        if(creep.ticksToLive < 1400) {
             creep.memory.sick = true;
         } else {
             creep.memory.sick = false;
