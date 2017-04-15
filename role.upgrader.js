@@ -23,6 +23,19 @@ var roleUpgrader = {
                 creep.moveTo(source, {visualizePathStyle: {stroke: '#ffaa00'}});
             }
         }
+        
+        var repairTargets = creep.pos.findInRange(FIND_STRUCTURES, 1, {
+            filter: function(object) {
+                return object.hits < object.hitsMax
+                && object.hitsMax - object.hits > REPAIR_POWER;
+            }
+        });
+        repairTargets.sort(function (a,b) {
+            return (a.hits - b.hits)
+        });
+        if(repairTargets.length > 0) {
+            creep.repair(repairTargets[0]);
+        }
 	}
 };
 
