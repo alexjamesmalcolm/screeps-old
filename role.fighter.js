@@ -9,7 +9,8 @@ var roleFighter = {
                 creep.moveTo(enemy);
             }
         } else {
-            creep.move(Math.floor(Math.random()*8+1));
+            creep.moveTo(new RoomPosition(25, 20, 'W94S6'));
+            //creep.move(Math.floor(Math.random()*8+1));
         }
     }
 };
