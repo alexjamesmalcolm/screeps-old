@@ -20,6 +20,7 @@ var roleBuilder = {
                     //creep.say(creep.moveByPath(creep.memory.path));
                     if(creep.moveByPath(creep.memory.path) == ERR_NOT_FOUND) {
                         creep.memory.path = false;
+                        creep.say('Pausing');
                     }
                     //creep.moveTo(targets[0], {visualizePathStyle: {stroke: '#ffffff'}});
                 } else {
