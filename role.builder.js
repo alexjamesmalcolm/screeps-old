@@ -45,22 +45,30 @@ var roleBuilder = {
                 creep.repair(repairTargets[0]);
             }
 	    } else {
-		    
+		    console.log('Builder:');
             var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: function(structure) {
                     if(structure.structureType == STRUCTURE_CONTAINER) {
+                        console.log(_.sum(structure.store));
                         return _.sum(structure.store) > 0;
                     } else if(structure.structureType == STRUCTURE_STORAGE) {
+                        console.log(_.sum(structure.store));
                         return _.sum(structure.store) > 0;
                     } else if(structure.structureType == STRUCTURE_EXTENSION) {
+                        console.log(structure.energy);
                         return structure.energy > 0;
                     } else if(structure.structureType == STRUCTURE_SPAWN) {
+                        console.log(structure.energy);
                         return structure.energy > 0;
                     }
                 }
             });
-            if(creep.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                creep.moveTo(target);
+            if(target) {
+                console.log(target);
+                console.log(creep.withdraw(target, RESOURCE_ENERGY));
+                if(creep.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(target);
+                }
             }
             /*var source = creep.pos.findClosestByRange(FIND_SOURCES);
             if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
