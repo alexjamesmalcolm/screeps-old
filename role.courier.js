@@ -16,9 +16,9 @@ var roleCourier = {
             var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: function(structure) {
                     if(structure.structureType == STRUCTURE_CONTAINER) {
-                        return _.sum(structure.store) < structure.storeCapacity
+                        return true;
                     } else if(structure.structureType == STRUCTURE_STORAGE) {
-                        return _.sum(structure.store) < structure.storeCapacity
+                        return true;
                     }
                 }
             });
