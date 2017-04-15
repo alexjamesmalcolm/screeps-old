@@ -45,6 +45,8 @@ module.exports.loop = function () {
         var creep = Game.creeps[name];
         if(creep.ticksToLive < 400) {
             stateDying.run(creep);
+        } else if(creep.memory.sick) {
+            stateDying.run(creep);
         } else if(creep.memory.role == 'harvester') {
             roleHarvester.run(creep);
         } else if(creep.memory.role == 'builder') {
