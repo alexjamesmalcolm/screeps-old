@@ -2,7 +2,7 @@ var roleHarvester = {
     run: function(creep) {
 	    if(creep.carry.energy < creep.carryCapacity) {
 	        creep.say('Harvesting');
-            var source = creep.pos.findClosestByRange(FIND_SOURCES);
+            var source = creep.pos.findClosestByPath(FIND_SOURCES); //Inefficient
             if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
                 if(creep.memory.path == false) {
                     creep.memory.path = creep.room.findPath(creep.pos, source.pos);
