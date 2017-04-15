@@ -1,3 +1,6 @@
-var stateDying = {};
+var stateDying = {
+    run: function(creep) {
+    }
+};
 
 module.exports = stateDying;
