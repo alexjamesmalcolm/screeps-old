@@ -14,6 +14,8 @@ var stateDying = {
             creep.say('Dying');
         } else if(spawn.renewCreep(creep) == OK) {
             creep.say('Healing');
+        } else {
+            creep.say('Dying');
         }
     }
 };
