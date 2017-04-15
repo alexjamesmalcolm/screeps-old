@@ -14,11 +14,12 @@ var roleBuilder = {
 	    }
 
 	    if(creep.memory.building) {
-	        var targets = creep.room.find(FIND_CONSTRUCTION_SITES);
-            if(targets.length) {
-                if(creep.build(targets[0]) == ERR_NOT_IN_RANGE) {
+	        //var targets = creep.room.find(FIND_CONSTRUCTION_SITES);
+            var target = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES);
+            if(target) {
+                if(creep.build(target) == ERR_NOT_IN_RANGE) {
                     if(creep.memory.path == false) {
-                        creep.memory.path = creep.room.findPath(creep.pos, targets[0].pos);
+                        creep.memory.path = creep.room.findPath(creep.pos, target.pos);
                     }
                     if(creep.moveByPath(creep.memory.path) == ERR_NOT_FOUND) {
                         creep.memory.path = false;
