@@ -4,6 +4,8 @@ var roleHarvester = {
             creep.say('Harvesting');
             var source = creep.pos.findClosestByPath(FIND_SOURCES); //Inefficient
             if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
+                creep.moveTo(source);
+                /*
                 if(creep.memory.path == false) {
                     creep.memory.path = creep.room.findPath(creep.pos, source.pos);
                     creep.say('Pathing');
@@ -15,6 +17,7 @@ var roleHarvester = {
             } else {
                 creep.memory.path = false;
                 creep.say('Pausing');
+                */
             }
         } else {
             var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
@@ -28,6 +31,8 @@ var roleHarvester = {
             });
             if(target) {
                 if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    creep.moveTo(target);
+                    /*
 	    	        if(creep.memory.path == false) {
                         creep.memory.path = creep.room.findPath(creep.pos, target.pos);
                     }
@@ -39,6 +44,7 @@ var roleHarvester = {
                 } else {
                     creep.memory.path = false;
                     creep.say('Pausing');
+                    */
                 }
             }
         }
