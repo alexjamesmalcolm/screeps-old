@@ -43,7 +43,7 @@ module.exports.loop = function () {
 
     for(var name in Game.creeps) {
         var creep = Game.creeps[name];
-        if(creep.ticksToLive < 400) {
+        if(creep.ticksToLive < 250) {
             stateDying.run(creep);
         } else if(creep.memory.sick) {
             stateDying.run(creep);
