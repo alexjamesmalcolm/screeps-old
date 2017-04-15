@@ -48,6 +48,7 @@ var roleHarvester = {
                 }
             }
         }
+        /*
         var repairTargets = creep.pos.findInRange(FIND_STRUCTURES, 1, {
             filter: function(object) {
                 return object.hits < object.hitsMax
@@ -60,7 +61,7 @@ var roleHarvester = {
         if(repairTargets.length > 0) {
             creep.repair(repairTargets[0]);
         }
-        
+        */
         creep.memory.lastPos = creep.pos;
     }
 };
