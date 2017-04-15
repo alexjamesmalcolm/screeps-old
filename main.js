@@ -2,6 +2,7 @@ var roleHarvester = require('role.harvester');
 var roleBuilder = require('role.builder');
 var roleUpgrader = require('role.upgrader');
 var roleFighter = require('role.fighter');
+var roleCourier = require('role.courier');
 var stateDying = require('state.dying');
 var creepCount = {
     harvesters: 5,
