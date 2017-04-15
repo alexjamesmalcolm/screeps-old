@@ -6,7 +6,7 @@ var creepCount = {
     harvesters: 4,
     upgraders: 4,
     builders: 6,
-    fighters: 20
+    fighters: 30
 };
 
 module.exports.loop = function () {
