@@ -3,17 +3,16 @@ var roleBuilder = {
         var say = function(text) {
             creep.say('B: '+text);
         }
-
-	    if(creep.memory.building && creep.carry.energy == 0) {
+        if(creep.memory.building && creep.carry.energy == 0) {
             creep.memory.building = false;
             say('harvesting');
-	    }
-	    if(!creep.memory.building && creep.carry.energy == creep.carryCapacity) {
-	        creep.memory.building = true;
-	        say('building');
-	    }
-
-	    if(creep.memory.building) {
+        }
+        if(!creep.memory.building && creep.carry.energy == creep.carryCapacity) {
+            creep.memory.building = true;
+            say('building');
+        }
+        
+        if(creep.memory.building) {
 	        //var targets = creep.room.find(FIND_CONSTRUCTION_SITES);
             var target = creep.pos.findClosestByRange(FIND_CONSTRUCTION_SITES);
             if(target) {
@@ -66,7 +65,9 @@ var roleBuilder = {
             if(target) {
                 console.log(target);
                 console.log(creep.withdraw(target, RESOURCE_ENERGY));
+                console.log(creep.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE);
                 if(creep.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    console.log(creep.moveTo(target));
                     creep.moveTo(target);
                 }
             }
