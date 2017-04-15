@@ -5,7 +5,7 @@ var roleFighter = require('role.fighter');
 var creepCount = {
     harvesters: 3,
     upgraders: 4,
-    builders: 4,
+    builders: 6,
     fighters: 10
 };
 
