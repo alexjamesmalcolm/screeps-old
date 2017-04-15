@@ -7,7 +7,7 @@ var stateDying = require('state.dying');
 var creepCount = {
     harvesters: 4,
     upgraders: 1,
-    builders: 5,
+    builders: 3,
     fighters: 0,
     sick: 2,
     couriers: 3
