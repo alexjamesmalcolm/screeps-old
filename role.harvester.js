@@ -35,11 +35,9 @@ var roleHarvester = {
                 filter: function(structure) {
                     //console.log(structure.structureType);
                     if(structure.structureType == STRUCTURE_EXTENSION) {
-                        //return structure.energy < structure.energyCapacity;
-                        return false;
+                        return structure.energy < structure.energyCapacity;
                     } else if(structure.structureType == STRUCTURE_SPAWN) {
-                        //return structure.energy < structure.energyCapacity;
-                        return false;
+                        return structure.energy < structure.energyCapacity;
                     } else if(structure.structureType == STRUCTURE_CONTAINER) {
                         return _.sum(structure.store) < structure.storeCapacity
                     } else if(structure.structureType == STRUCTURE_STORAGE) {
