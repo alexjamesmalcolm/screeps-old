@@ -35,7 +35,7 @@ module.exports.loop = function () {
             var newName = spawn.createCreep([WORK,WORK,CARRY,MOVE], undefined, {role: 'harvester'});
             //console.log('Spawning new harvester: ' + newName);
         } else if(couriers.length < creepCount['couriers']) {
-            var newName = spawn.createCreep([CARRY,MOVE], undefined, {role: 'courier'});
+            var newName = spawn.createCreep([CARRY,CARRY,MOVE,MOVE], undefined, {role: 'courier'});
         } else if(upgraders.length < creepCount['upgraders']) {
             var newName = spawn.createCreep([WORK,WORK,CARRY,MOVE], undefined, {role: 'upgrader'});
             //console.log('Spawning new upgrader: ' + newName);
