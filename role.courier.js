@@ -41,6 +41,8 @@ var roleCourier = {
                 if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(target);
                 }
+            } else {
+                creep.move(Math.floor(Math.random()*8+1));
             }
         }
     }
