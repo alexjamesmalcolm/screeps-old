@@ -42,6 +42,7 @@ var roleHarvester = {
                 }
             }
         }
+        creep.memory.lastPos = creep.pos;
 	}
 };
 
