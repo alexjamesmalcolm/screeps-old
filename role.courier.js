@@ -22,6 +22,7 @@ var roleCourier = {
                     }
                 }
             });
+            console.log(target);
             if(target) {
                 if(creep.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(target);
