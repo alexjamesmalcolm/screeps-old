@@ -11,6 +11,7 @@ var roleHarvester = {
                 creep.say('Harvesting');
             }
         }
+        
         if(creep.memory.harvesting) {
             var source = creep.pos.findClosestByPath(FIND_SOURCES); //Inefficient
             if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
@@ -62,18 +63,18 @@ var roleHarvester = {
                     */
                 }
             }
-        }
-        var repairTargets = creep.pos.findInRange(FIND_STRUCTURES, 1, {
-            filter: function(object) {
-                return object.hits < object.hitsMax
-                && object.hitsMax - object.hits > REPAIR_POWER;
+            var repairTargets = creep.pos.findInRange(FIND_STRUCTURES, 1, {
+                filter: function(object) {
+                    return object.hits < object.hitsMax
+                    && object.hitsMax - object.hits > REPAIR_POWER;
+                }
+            });
+            repairTargets.sort(function (a,b) {
+                return (a.hits - b.hits)
+            });
+            if(repairTargets.length > 0) {
+                creep.repair(repairTargets[0]);
             }
-        });
-        repairTargets.sort(function (a,b) {
-            return (a.hits - b.hits)
-        });
-        if(repairTargets.length > 0) {
-            creep.repair(repairTargets[0]);
         }
         
         creep.memory.lastPos = creep.pos;
