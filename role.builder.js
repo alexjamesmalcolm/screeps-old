@@ -1,13 +1,16 @@
 var roleBuilder = {
     run: function(creep) {
+        var say = function(text) {
+            creep.say('B: '+text);
+        }
 
 	    if(creep.memory.building && creep.carry.energy == 0) {
             creep.memory.building = false;
-            creep.say('harvesting');
+            say('harvesting');
 	    }
 	    if(!creep.memory.building && creep.carry.energy == creep.carryCapacity) {
 	        creep.memory.building = true;
-	        creep.say('building');
+	        say('building');
 	    }
 
 	    if(creep.memory.building) {
@@ -19,7 +22,7 @@ var roleBuilder = {
                     }
                     if(creep.moveByPath(creep.memory.path) == ERR_NOT_FOUND) {
                         creep.memory.path = false;
-                        creep.say('Pausing');
+                        say('Pausing');
                     }
                 } else {
                     creep.memory.path = false;
