@@ -8,7 +8,7 @@ var creepCount = {
     harvesters: 4,
     upgraders: 1,
     builders: 5,
-    fighters: 0,
+    fighters: 20,
     sick: 2,
     couriers: 3
 };
@@ -43,7 +43,7 @@ module.exports.loop = function () {
             var newName = spawn.createCreep([WORK,WORK,CARRY,MOVE], undefined, {role: 'builder'});
             //console.log('Spawning new builder: ' + newName);
         } else if(fighters.length < creepCount['fighters']) {
-            var newName = spawn.createCreep([MOVE,MOVE,MOVE,ATTACK,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH], undefined, {role: 'fighter'});
+            var newName = spawn.createCreep([MOVE,ATTACK], undefined, {role: 'fighter'});
             //console.log('Spawning new fighter: ' + newName);
         }
     }
