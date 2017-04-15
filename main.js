@@ -8,7 +8,7 @@ var creepCount = {
     harvesters: 4,
     upgraders: 1,
     builders: 5,
-    fighters: 20,
+    fighters: 0,
     sick: 2,
     couriers: 3
 };
