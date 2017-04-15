@@ -2,13 +2,15 @@ var roleHarvester = require('role.harvester');
 var roleBuilder = require('role.builder');
 var roleUpgrader = require('role.upgrader');
 var roleFighter = require('role.fighter');
+var roleCourier = require('role.courier');
 var stateDying = require('state.dying');
 var creepCount = {
     harvesters: 5,
     upgraders: 1,
     builders: 5,
     fighters: 0,
-    sick: 2
+    sick: 2,
+    couriers: 2
 };
 
 module.exports.loop = function () {
@@ -23,6 +25,7 @@ module.exports.loop = function () {
     for(var name in Game.spawns) {
         var spawn = Game.spawns[name];
         var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
+        var couriers = _.filter(Game.creeps, (creep) => creep.memory.role == 'courier');
         var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
         var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
         var fighters = _.filter(Game.creeps, (creep) => creep.memory.role == 'fighter');
@@ -31,6 +34,8 @@ module.exports.loop = function () {
         if(harvesters.length < creepCount['harvesters']) {
             var newName = spawn.createCreep([WORK,WORK,CARRY,MOVE], undefined, {role: 'harvester'});
             //console.log('Spawning new harvester: ' + newName);
+        } else if(couriers.length < creepCount['couriers']) {
+            var newName = spawn.createCreep([CARRY,CARRY,MOVE,MOVE], undefined, {role: 'courier'});
         } else if(upgraders.length < creepCount['upgraders']) {
             var newName = spawn.createCreep([WORK,WORK,CARRY,MOVE], undefined, {role: 'upgrader'});
             //console.log('Spawning new upgrader: ' + newName);
@@ -66,6 +71,8 @@ module.exports.loop = function () {
             roleUpgrader.run(creep);
         } else if(creep.memory.role == 'fighter') {
             roleFighter.run(creep);
+        } else if(creep.memory.role == 'courier') {
+            roleCourier.run(creep);
         }
     }
 }
