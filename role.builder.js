@@ -49,16 +49,16 @@ var roleBuilder = {
                 filter: function(structure) {
                     if(structure.structureType == STRUCTURE_CONTAINER) {
                         //console.log(_.sum(structure.store));
-                        return _.sum(structure.store) > 0;
+                        return _.sum(structure.store) > 50;
                     } else if(structure.structureType == STRUCTURE_STORAGE) {
                         //console.log(_.sum(structure.store));
-                        return _.sum(structure.store) > 0;
+                        return _.sum(structure.store) > 50;
                     } else if(structure.structureType == STRUCTURE_EXTENSION) {
                         //console.log(structure.energy);
-                        return structure.energy > 0;
+                        return structure.energy > 50;
                     } else if(structure.structureType == STRUCTURE_SPAWN) {
                         //console.log(structure.energy);
-                        return structure.energy > 0;
+                        return structure.energy > 50;
                     }
                 }
             });
