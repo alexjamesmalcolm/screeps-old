@@ -21,13 +21,13 @@ var roleUpgrader = {
             var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: function(structure) {
                     if(structure.structureType == STRUCTURE_SPAWN) {
-                        return structure.energy > 0;
+                        return structure.energy > 50;
                     } else if(structure.structureType == STRUCTURE_EXTENSION) {
-                        return structure.energy > 0;
+                        return structure.energy > 50;
                     } else if(structure.structureType == STRUCTURE_STORAGE) {
-                        return _.sum(structure.store);
+                        return _.sum(structure.store) > 50;
                     } else if(structure.structureType == STRUCTURE_CONTAINER) {
-                        return _.sum(structure.store);
+                        return _.sum(structure.store) > 50;
                     }
                 }
             });
