@@ -55,7 +55,8 @@ var roleBuilder = {
                         return _.sum(structure.store) > 50;
                     } else if(structure.structureType == STRUCTURE_EXTENSION) {
                         //console.log(structure.energy);
-                        return structure.energy > 50;
+                        //return structure.energy > 50;
+                        return false; //This is so the spawn can still heal creeps that are dying.
                     } else if(structure.structureType == STRUCTURE_SPAWN) {
                         //console.log(structure.energy);
                         return structure.energy > 50;
