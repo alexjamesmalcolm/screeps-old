@@ -5,7 +5,7 @@ var roleFighter = require('role.fighter');
 var roleCourier = require('role.courier');
 var stateDying = require('state.dying');
 var creepCount = {
-    harvesters: 4,
+    harvesters: 6,
     upgraders: 1,
     builders: 3,
     fighters: 0,
