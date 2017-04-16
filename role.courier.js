@@ -42,7 +42,8 @@ var roleCourier = {
                     creep.moveTo(target);
                 }
             } else {
-                creep.move(Math.floor(Math.random()*8+1));
+                creep.moveTo(Game.flags.Flag1);
+                //creep.move(Math.floor(Math.random()*8+1));
             }
         }
     }
