@@ -7,12 +7,12 @@ var roleUpgrader = {
             creep.memory.upgrading = false;
             creep.say('Harvesting');
 	    }
-	    if(!creep.memory.upgrading && creep.carry.energy == creep.carryCapacity) {
-	        creep.memory.upgrading = true;
-	        creep.say('Upgrading');
-	    }
-
-	    if(creep.memory.upgrading) {
+        if(!creep.memory.upgrading && creep.carry.energy == creep.carryCapacity) {
+            creep.memory.upgrading = true;
+            creep.say('Upgrading');
+        }
+        
+        if(creep.memory.upgrading) {
             if(creep.upgradeController(creep.room.controller) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(creep.room.controller, {visualizePathStyle: {stroke: '#ffffff'}});
             }
@@ -31,7 +31,7 @@ var roleUpgrader = {
                     }
                 }
             });
-            if(creep.withdraw(target) == ERR_NOT_IN_RANGE) {
+            if(creep.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(target, {visualizePathStyle: {stroke: '#ffaa00'}});
             }
         }
