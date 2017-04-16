@@ -43,31 +43,31 @@ var roleBuilder = {
             if(repairTargets.length > 0) {
                 creep.repair(repairTargets[0]);
             }
-	    } else {
-		    console.log('Builder:');
+        } else {
+            //console.log('Builder:');
             var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: function(structure) {
                     if(structure.structureType == STRUCTURE_CONTAINER) {
-                        console.log(_.sum(structure.store));
+                        //console.log(_.sum(structure.store));
                         return _.sum(structure.store) > 0;
                     } else if(structure.structureType == STRUCTURE_STORAGE) {
-                        console.log(_.sum(structure.store));
+                        //console.log(_.sum(structure.store));
                         return _.sum(structure.store) > 0;
                     } else if(structure.structureType == STRUCTURE_EXTENSION) {
-                        console.log(structure.energy);
+                        //console.log(structure.energy);
                         return structure.energy > 0;
                     } else if(structure.structureType == STRUCTURE_SPAWN) {
-                        console.log(structure.energy);
+                        //console.log(structure.energy);
                         return structure.energy > 0;
                     }
                 }
             });
             if(target) {
-                console.log(target);
-                console.log(creep.withdraw(target, RESOURCE_ENERGY));
-                console.log(creep.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE);
+                //console.log(target);
+                //console.log(creep.withdraw(target, RESOURCE_ENERGY));
+                //console.log(creep.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE);
                 if(creep.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    console.log(creep.moveTo(target));
+                    //console.log(creep.moveTo(target));
                     creep.moveTo(target);
                 }
             }
