@@ -1,7 +1,7 @@
 var creepCount = require('creepCount');
 Creep.prototype.cycle = require('Creep.cycle');
 Creep.prototype.collect = require('Creep.collect');
-Creep.prototype.activeRepair = require('Creep.activeRepair');
+Creep.prototype.build = require('Creep.build');
 Creep.prototype.passiveRepair = require('Creep.passiveRepair');
 Creep.prototype.roleBuilder = require('Creep.roleBuilder');
 Creep.prototype.roleCourier = require('Creep.roleCourier');
