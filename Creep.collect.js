@@ -17,8 +17,8 @@ var CreepCollect = function(input) {
     });
     
     if(target) {
-        if(creep.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-            creep.moveTo(target);
+        if(this.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+            this.moveTo(target);
         }
     }
 };
