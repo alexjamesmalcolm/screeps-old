@@ -1,8 +1,6 @@
 var stateRecycle = {
     run: function(creep) {
         var spawn = Game.spawns['Spawn1'] //creep.pos.findClosestByRange(STRUCTURE_SPAWN);
-        console.log(creep.pos.findClosestByRange(STRUCTURE_SPAWN));
-        console.log(creep);
         if(creep.memory.recycle) {
             //var spawn = creep.memory.nearestSpawn;
             if(creep.carry.energy > 0) {
@@ -25,7 +23,6 @@ var stateRecycle = {
                     }
                 }
             } else {
-                console.log(spawn.recycleCreep(creep));
                 if(spawn.recycleCreep(creep) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(spawn);
                     creep.say('Recycling');
