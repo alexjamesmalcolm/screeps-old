@@ -4,12 +4,16 @@ var CreepBuild = function(input) {
     var creep = this;
     var repairTarget = this.pos.findClosestByRange(FIND_STRUCTURES, {
         filter: function(structure) {
-            if(structure.hits < structure.hitsMax) {
-                if(structure.hitsMax - structure.hits > REPAIR_POWER * creep.getActiveBodyparts(WORK)) {
-                    if(structures.indexOf(structure.structureType) != -1) {
-                        return true;
+            if(structure) {
+                if(structure.hits < structure.hitsMax) {
+                    if(structure.hitsMax - structure.hits > REPAIR_POWER * creep.getActiveBodyparts(WORK)) {
+                        if(structures.indexOf(structure.structureType) != -1) {
+                            return true;
+                        }
                     }
                 }
+            } else {
+                console.log(structure);
             }
         }
     });
