@@ -5,7 +5,7 @@ var stateRecycle = {
             //if()
         } else {
             creep.memory.recycle = {
-                nearestSpawn: creep.pos.findClosestByPath(STRUCTURE_SPAWN);
+                nearestSpawn: creep.pos.findClosestByPath(STRUCTURE_SPAWN)
             };
         }
     }
