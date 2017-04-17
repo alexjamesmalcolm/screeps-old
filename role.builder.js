@@ -20,6 +20,8 @@ var roleBuilder = {
                     creep.moveTo(target);
                 }
             }
+            creep.passiveRepair();
+            /*
             var repairTargets = creep.pos.findInRange(FIND_STRUCTURES, 1, {
                 filter: function(object) {
                     return object.hits < object.hitsMax
@@ -32,6 +34,7 @@ var roleBuilder = {
             if(repairTargets.length > 0) {
                 creep.repair(repairTargets[0]);
             }
+            */
         } else {
             creep.collect({
                 resource: RESOURCE_ENERGY,
