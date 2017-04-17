@@ -63,6 +63,8 @@ module.exports.loop = function () {
         }
         if(creep.memory.sick) {
             stateDying.run(creep);
+        } else if(creep.memory.recycle) {
+            stateRecycle.run(creep);
         } else if(creep.memory.role == 'harvester') {
             roleHarvester.run(creep);
         } else if(creep.memory.role == 'builder') {
