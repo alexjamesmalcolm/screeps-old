@@ -43,5 +43,5 @@ module.exports.loop = function () {
             var creep = Game.creeps[name];
             creep.cycle();
         }
-    };
+    });
 }
