@@ -5,6 +5,7 @@ var roleFighter = require('role.fighter');
 var roleCourier = require('role.courier');
 var stateDying = require('state.dying');
 var stateRecycle = require('state.recycle');
+Creep.prototype.cycle = require('Creep.cycle');
 Creep.prototype.collect = require('Creep.collect');
 Creep.prototype.passiveRepair = require('Creep.passiveRepair');
 var creepCount = {
@@ -54,6 +55,8 @@ module.exports.loop = function () {
 
     for(var name in Game.creeps) {
         var creep = Game.creeps[name];
+        creep.cycle();
+        /*
         var sick = _.filter(Game.creeps, (creep) => creep.memory.sick);
         if(!creep.memory.sick) {
             if(sick < creepCount.sick) {
@@ -79,5 +82,6 @@ module.exports.loop = function () {
         } else if(creep.memory.role == 'courier') {
             roleCourier.run(creep);
         }
+        */
     }
 }
