@@ -6,7 +6,7 @@ var roleUpgrader = {
         if(creep.memory.upgrading && creep.carry.energy == 0) {
             creep.memory.upgrading = false;
             creep.say('Harvesting');
-	    }
+        }
         if(!creep.memory.upgrading && creep.carry.energy == creep.carryCapacity) {
             creep.memory.upgrading = true;
             creep.say('Upgrading');
@@ -18,6 +18,12 @@ var roleUpgrader = {
             }
         }
         else {
+            creep.collect({
+                resource: RESOURCE_ENERGY,
+                amount: 50,
+                structures:[STRUCTURE_CONTAINER, STRUCTURE_STORAGE, STRUCTURE_SPAWN]
+            });
+            /*
             var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: function(structure) {
                     if(structure.structureType == STRUCTURE_SPAWN) {
@@ -34,6 +40,7 @@ var roleUpgrader = {
             if(creep.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(target, {visualizePathStyle: {stroke: '#ffaa00'}});
             }
+            */
         }
         
         var repairTargets = creep.pos.findInRange(FIND_STRUCTURES, 1, {
