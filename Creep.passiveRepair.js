@@ -2,8 +2,12 @@ var CreepPassiveRepair = function() {
     var creep = this;
     var repairTargets = creep.pos.findInRange(FIND_STRUCTURES, 1, {
         filter: function(structure) {
-            return structure.hits < structure.hitsMax
-            && structure.hitsMax - structure.hits > REPAIR_POWER * creep.getActiveBodyparts(WORK);
+            if(structure.structureType == STRUCTURE_RAMPART) {
+                return false;
+            } else {
+                return structure.hits < structure.hitsMax
+                && structure.hitsMax - structure.hits > REPAIR_POWER * creep.getActiveBodyparts(WORK);
+            }
         }
     });
     repairTargets.sort(function(a, b) {
