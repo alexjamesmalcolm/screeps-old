@@ -24,10 +24,6 @@ module.exports.loop = function () {
             var room = Game.rooms[name];
             room.cycle();
         }
-        for(var name in Game.spawns) {
-            var spawn = Game.spawns[name];
-            spawn.cycle();
-        }
         for(var name in Game.creeps) {
             var creep = Game.creeps[name];
             creep.cycle();
