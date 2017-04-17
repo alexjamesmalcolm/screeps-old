@@ -18,7 +18,8 @@ var roleCourier = {
                 structures:[STRUCTURE_CONTAINER, STRUCTURE_STORAGE]
             });
         } else {
-            var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
+            var target;
+            var closestStructure = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: function(structure) {
                     if(structure.structureType == STRUCTURE_EXTENSION) {
                         return structure.energy < structure.energyCapacity;
@@ -27,6 +28,21 @@ var roleCourier = {
                     }
                 }
             });
+            var closestCreep = creep.pos.findClosestByRange(FIND_CREEPS, {
+                filter: function(creep) {
+                    if(creep.memory.needEnergy) {
+                        return true;
+                    }
+                }
+            });
+            //console.log(closestCreep);
+            var closestStructureDistance = creep.pos.getRangeTo(closestStructure);
+            var closestCreepDistance = creep.pos.getRangeTo(closestCreep);
+            if(closestCreepDistance <= closestStructureDistance) {
+                target = closestCreep;
+            } else {
+                target = closestStructure
+            }
             if(target) {
                 if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(target);
