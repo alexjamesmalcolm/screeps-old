@@ -48,19 +48,6 @@ var roleHarvester = {
             if(target) {
                 if(creep.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(target);
-                                        /*
-	    	        if(creep.memory.path == false) {
-                        creep.memory.path = creep.room.findPath(creep.pos, target.pos);
-                    }
-                    creep.moveByPath(creep.memory.path);
-                    if(creep.moveByPath(creep.memory.path) == ERR_NOT_FOUND) {
-                        creep.memory.path = false;
-                        creep.say('Pausing');
-                    }
-                } else {
-                    creep.memory.path = false;
-                    creep.say('Pausing');
-                    */
                 }
             }
             var repairTargets = creep.pos.findInRange(FIND_STRUCTURES, 1, {
@@ -76,8 +63,7 @@ var roleHarvester = {
                 creep.repair(repairTargets[0]);
             }
         }
-        
-        creep.memory.lastPos = creep.pos;
+        //creep.memory.lastPos = creep.pos;
     }
 };
 
