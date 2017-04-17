@@ -1,15 +1,12 @@
-var CreepActiveRepair = function(input) {
-    var creep = this;
+var CreepBuild = function(input) {
+    var structures = input.structures;
     var constructionSite = this.pos.findClosestByRange(FIND_CONSTRUCTION_SITES);
+    var creep = this;
     var repairTarget = this.pos.findClosestByRange(FIND_STRUCTURES, {
         filter: function(structure) {
             if(structure.hits < structure.hitsMax) {
                 if(structure.hitsMax - structure.hits > REPAIR_POWER * creep.getActiveBodyparts(WORK)) {
-                    if(structure.structureType == STRUCTURE_RAMPART) {
-                        return false;
-                    } else if(structure.structureType == STRUCTURE_CONTAINER) {
-                        return true;
-                    } else if(structure.structureType == STRUCTURE_STORAGE) {
+                    if(structures.indexOf(structure.structureType) != -1) {
                         return true;
                     }
                 }
@@ -36,4 +33,4 @@ var CreepActiveRepair = function(input) {
     }
 };
 
-module.exports = CreepActiveRepair;
+module.exports = CreepBuild;

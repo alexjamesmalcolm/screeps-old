@@ -10,41 +10,13 @@ var roleBuilder = function() {
         this.say('Building');
     }
     if(this.memory.building) {
-        var creep = this;
-        var target;
-        var constructionSite = this.pos.findClosestByRange(FIND_CONSTRUCTION_SITES);
-        var repairTarget = this.pos.findClosestByRange(FIND_STRUCTURES, {
-            filter: function(structure) {
-                if(structure.hits < structure.hitsMax) {
-                    if(structure.hitsMax - structure.hits > REPAIR_POWER * creep.getActiveBodyparts(WORK)) {
-                        if(structure.structureType == STRUCTURE_RAMPART) {
-                            return false;
-                        } else if(structure.structureType == STRUCTURE_CONTAINER) {
-                            return true;
-                        } else if(structure.structureType == STRUCTURE_STORAGE) {
-                            return true;
-                        }
-                    }
-                }
-            }
+        this.build({
+            activeRepair: true,
+            structures: [
+                STRUCTURE_CONTAINER,
+                STRUCTURE_STORAGE
+            ]
         });
-        var closestConstructionSiteDistance = this.pos.getRangeTo(constructionSite);
-        var closestRepairTargetDistance = this.pos.getRangeTo(repairTarget);
-        if (closestConstructionSiteDistance <= closestRepairTargetDistance) {
-            target = constructionSite;
-            if(target) {
-                if(this.build(target) == ERR_NOT_IN_RANGE) {
-                    this.moveTo(target);
-                }
-            }
-        } else {
-            target = repairTarget;
-            if(target) {
-                if(this.repair(target) == ERR_NOT_IN_RANGE) {
-                    this.moveTo(target);
-                }
-            }
-        }
         this.passiveRepair();
     } else {
         this.collect({
