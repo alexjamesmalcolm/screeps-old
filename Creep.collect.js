@@ -21,7 +21,7 @@ var CreepCollect = function(input) {
             this.moveTo(target);
         }
     } else {
-        this.say("Can't collect");
+        this.say("No energy");
     }
 };
 
