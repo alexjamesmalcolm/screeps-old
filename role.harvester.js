@@ -17,19 +17,6 @@ var roleHarvester = {
             if(creep.harvest(source) == ERR_NOT_IN_RANGE) {
                 creep.moveTo(source);
             }
-            /*
-                if(creep.memory.path == false) {
-                    creep.memory.path = creep.room.findPath(creep.pos, source.pos);
-                    creep.say('Pathing');
-                }
-                if(creep.moveByPath(creep.memory.path) == ERR_NOT_FOUND) {
-                    creep.memory.path = false;
-                    creep.say('Pausing');
-                }
-            } else {
-                creep.memory.path = false;
-                creep.say('Pausing');
-                */
         } else {
             var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: function(structure) {
@@ -50,6 +37,8 @@ var roleHarvester = {
                     creep.moveTo(target);
                 }
             }
+            creep.passiveRepair
+            /*
             var repairTargets = creep.pos.findInRange(FIND_STRUCTURES, 1, {
                 filter: function(object) {
                     return object.hits < object.hitsMax
@@ -62,6 +51,7 @@ var roleHarvester = {
             if(repairTargets.length > 0) {
                 creep.repair(repairTargets[0]);
             }
+            */
         }
         //creep.memory.lastPos = creep.pos;
     }

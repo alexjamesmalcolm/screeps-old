@@ -6,6 +6,7 @@ var roleCourier = require('role.courier');
 var stateDying = require('state.dying');
 var stateRecycle = require('state.recycle');
 Creep.prototype.collect = require('Creep.collect');
+Creep.prototype.passiveRepair = require('Creep.passiveRepair');
 var creepCount = {
     harvesters: 6,
     upgraders: 6,
