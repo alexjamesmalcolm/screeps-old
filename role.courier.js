@@ -13,6 +13,12 @@ var roleCourier = {
             }
         }
         if(creep.memory.collecting) {
+            creep.collect({
+                resource: RESOURCE_ENERGY,
+                amount: creep.carryCapacity,
+                structures:[STRUCTURE_CONTAINER, STRUCTURE_STORAGE]
+            });
+            /*
             var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: function(structure) {
                     if(structure.structureType == STRUCTURE_CONTAINER) {
@@ -27,6 +33,7 @@ var roleCourier = {
                     creep.moveTo(target);
                 }
             }
+            */
         } else {
             var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: function(structure) {
