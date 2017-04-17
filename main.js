@@ -21,7 +21,7 @@ module.exports.loop = function () {
             var builders = _.filter(Game.creeps, (creep) => creep.memory.role == 'builder');
             var fighters = _.filter(Game.creeps, (creep) => creep.memory.role == 'fighter');
             var sick = _.filter(Game.creeps, (creep) => creep.memory.sick);
-            console.log("There are "+harvesters.length+" harvesters, "+upgraders.length+" upgraders, "+builders.length+" builders, "+fighters.length+" fighters, and "+sick.length+" sick");
+            //console.log("There are "+harvesters.length+" harvesters, "+upgraders.length+" upgraders, "+builders.length+" builders, "+fighters.length+" fighters, and "+sick.length+" sick");
             if(harvesters.length < creepCount['harvesters']) {
                 var newName = spawn.createCreep([WORK,WORK,CARRY,MOVE], undefined, {role: 'harvester'});
                 //console.log('Spawning new harvester: ' + newName);
