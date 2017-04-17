@@ -1,5 +1,4 @@
 var CreepCollect = function(input) {
-    this.say('Collecting');
     var resource = input.resource;
     var amount = input.amount;
     var structures = input.structures;
@@ -21,6 +20,8 @@ var CreepCollect = function(input) {
         if(this.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
             this.moveTo(target);
         }
+    } else {
+        this.say("Can't collect");
     }
 };
 
