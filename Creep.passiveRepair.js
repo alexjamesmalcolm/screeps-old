@@ -2,8 +2,8 @@ var CreepPassiveRepair = function() {
     var creep = this;
     var repairTargets = creep.pos.findInRange(FIND_STRUCTURES, 1, {
         filter: function(structure) {
-            return structure.hits < object.hitsMax
-            && object.hitsMax - object.hits > REPAIR_POWER * creep.getActiveBodyparts(WORK);
+            return structure.hits < structure.hitsMax
+            && structure.hitsMax - structure.hits > REPAIR_POWER * creep.getActiveBodyparts(WORK);
         }
     });
     repairTargets.sort(function(a, b) {
