@@ -1,5 +1,6 @@
 var CreepBuild = function(input) {
-    console.log(input);
+    console.log(input.activeRepair);
+    console.log(input.structures);
     var constructionSite = this.pos.findClosestByRange(FIND_CONSTRUCTION_SITES);
     var creep = this;
     if(input.activeRepair) {
