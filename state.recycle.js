@@ -1,7 +1,10 @@
 var stateRecycle = {
     run: function(creep) {
+        var spawn = Game.spawns['Spawn1'] //creep.pos.findClosestByRange(STRUCTURE_SPAWN);
+        console.log(creep.pos.findClosestByRange(STRUCTURE_SPAWN));
+        console.log(creep);
         if(creep.memory.recycle) {
-            var spawn = creep.memory.nearestSpawn;
+            //var spawn = creep.memory.nearestSpawn;
             if(creep.carry.energy > 0) {
                 var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                     filter: function(structure) {
@@ -22,6 +25,7 @@ var stateRecycle = {
                     }
                 }
             } else {
+                console.log(spawn.recycleCreep(creep));
                 if(spawn.recycleCreep(creep) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(spawn);
                     creep.say('Recycling');
@@ -29,7 +33,7 @@ var stateRecycle = {
             }
         } else {
             creep.memory.recycle = true;
-            creep.memory.nearestSpawn = creep.pos.findClosestByPath(STRUCTURE_SPAWN);
+            //creep.memory.nearestSpawn = creep.pos.findClosestByPath(STRUCTURE_SPAWN);
         }
     }
 };
