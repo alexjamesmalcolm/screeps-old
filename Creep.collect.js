@@ -18,7 +18,7 @@ var CreepCollect = function(input) {
     var droppedEnergy = this.pos.findClosestByRange(FIND_DROPPED_ENERGY);
     if(droppedEnergy) {
         if(this.pickup(droppedEnergy) == ERR_NOT_IN_RANGE) {
-            this.moveTo(target);
+            this.moveTo(droppedEnergy);
         }
     } else if(target) {
         if(this.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
