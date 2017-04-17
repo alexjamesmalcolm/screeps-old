@@ -1,6 +1,6 @@
 var CreepCollect = function(input) {
     var resource = input.resource;
-    var amount = input.amount;
+    var amount = this.carryCapacity - _.sum(this.carry);
     var structures = input.structures;
     var target = this.pos.findClosestByRange(FIND_STRUCTURES, {
         filter: function(structure) {
