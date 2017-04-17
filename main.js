@@ -8,7 +8,7 @@ var stateRecycle = require('state.recycle');
 Creep.prototype.cycle = require('Creep.cycle');
 Creep.prototype.collect = require('Creep.collect');
 Creep.prototype.passiveRepair = require('Creep.passiveRepair');
-var creepCount = {
+Creep.prototype.creepCount = {
     harvesters: 6,
     upgraders: 6,
     builders: 1,
@@ -56,32 +56,5 @@ module.exports.loop = function () {
     for(var name in Game.creeps) {
         var creep = Game.creeps[name];
         creep.cycle();
-        /*
-        var sick = _.filter(Game.creeps, (creep) => creep.memory.sick);
-        if(!creep.memory.sick) {
-            if(sick < creepCount.sick) {
-                if(creep.ticksToLive < 500) {
-                    creep.memory.sick = true;
-                }
-            } else {
-                creep.memory.sick = false;
-            }
-        }
-        if(creep.memory.sick) {
-            stateDying.run(creep);
-        } else if(creep.memory.recycle) {
-            stateRecycle.run(creep);
-        } else if(creep.memory.role == 'harvester') {
-            roleHarvester.run(creep);
-        } else if(creep.memory.role == 'builder') {
-            roleBuilder.run(creep);
-        } else if(creep.memory.role == 'upgrader') {
-            roleUpgrader.run(creep);
-        } else if(creep.memory.role == 'fighter') {
-            roleFighter.run(creep);
-        } else if(creep.memory.role == 'courier') {
-            roleCourier.run(creep);
-        }
-        */
     }
 }
