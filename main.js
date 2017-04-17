@@ -4,7 +4,6 @@ Creep.prototype.collect = require('Creep.collect');
 Creep.prototype.passiveRepair = require('Creep.passiveRepair');
 
 module.exports.loop = function () {
-    
     for(var name in Memory.creeps) {
         if(!Game.creeps[name]) {
             delete Memory.creeps[name];
@@ -38,7 +37,6 @@ module.exports.loop = function () {
         }
     }
     
-
     for(var name in Game.creeps) {
         var creep = Game.creeps[name];
         creep.cycle();
