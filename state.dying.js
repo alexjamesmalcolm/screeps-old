@@ -5,7 +5,6 @@ var stateDying = {
         }
         creep.memory.sick = true;
         var spawn = creep.pos.findClosestByRange(FIND_MY_SPAWNS);
-        console.log(spawn.renewCreep(creep));
         if(spawn.renewCreep(creep) == ERR_FULL) {
             creep.memory.sick = false;
         }
