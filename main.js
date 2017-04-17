@@ -1,14 +1,3 @@
-/*
-var role = {
-    harvester: require('role.harvester'),
-    builder: require('role.builder'),
-    upgrader: require('role.upgrader'),
-    fighter: require('role.fighter'),
-    courier: require('role.courier')
-};
-var stateDying = require('state.dying');
-var stateRecycle = require('state.recycle');
-*/
 var creepCount = {
     harvesters: 6,
     upgraders: 6,
