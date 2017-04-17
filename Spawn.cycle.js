@@ -1,3 +1,4 @@
+var creepCount = require('creepCount');
 var SpawnCycle = function() {
     var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
     var couriers = _.filter(Game.creeps, (creep) => creep.memory.role == 'courier');
