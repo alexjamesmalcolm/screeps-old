@@ -4,7 +4,7 @@ var creepCount = {
     builders: 2,
     fighters: 0,
     sick: 2,
-    couriers: 2
+    couriers: 1
 };
 
 module.exports = creepCount;
