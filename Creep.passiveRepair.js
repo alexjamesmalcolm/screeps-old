@@ -1,12 +1,11 @@
 var CreepPassiveRepair = function() {
-    var creep = this;
-    var repairTargets = creep.pos.findInRange(FIND_STRUCTURES, 1, {
+    var repairTargets = this.pos.findInRange(FIND_STRUCTURES, 1, {
         filter: function(structure) {
             if(structure.structureType == STRUCTURE_RAMPART) {
                 return false;
             } else {
                 return structure.hits < structure.hitsMax
-                && structure.hitsMax - structure.hits > REPAIR_POWER * creep.getActiveBodyparts(WORK);
+                && structure.hitsMax - structure.hits > REPAIR_POWER * this.getActiveBodyparts(WORK);
             }
         }
     });
@@ -14,7 +13,7 @@ var CreepPassiveRepair = function() {
         return (a.hits / a.hitsMax) - (b.hits / b.hitsMax);
     });
     if(repairTargets.length > 0) {
-        creep.repair(repairTargets[0]);
+        this.repair(repairTargets[0]);
     }
 };
 
