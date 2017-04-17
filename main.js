@@ -1,8 +1,10 @@
-var roleHarvester = require('role.harvester');
-var roleBuilder = require('role.builder');
-var roleUpgrader = require('role.upgrader');
-var roleFighter = require('role.fighter');
-var roleCourier = require('role.courier');
+var role = {
+    harvester: require('role.harvester'),
+    builder: require('role.builder'),
+    upgrader: require('role.upgrader'),
+    fighter: require('role.fighter'),
+    courier: require('role.courier')
+};
 var stateDying = require('state.dying');
 var stateRecycle = require('state.recycle');
 Creep.prototype.cycle = require('Creep.cycle');
