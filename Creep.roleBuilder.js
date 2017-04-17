@@ -31,12 +31,17 @@ var roleBuilder = function() {
         var closestRepairTargetDistance = this.pos.getRangeTo(repairTarget);
         if (closestConstructionSiteDistance <= closestRepairTargetDistance) {
             target = constructionSite;
+            if(target) {
+                if(this.build(target) == ERR_NOT_IN_RANGE) {
+                    this.moveTo(target);
+                }
+            }
         } else {
             target = repairTarget;
-        }
-        if(target) {
-            if(this.build(target) == ERR_NOT_IN_RANGE) {
-                this.moveTo(target);
+            if(target) {
+                if(this.repair(target) == ERR_NOT_IN_RANGE) {
+                    this.moveTo(target);
+                }
             }
         }
         this.passiveRepair();
