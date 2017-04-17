@@ -4,6 +4,7 @@ var roleUpgrader = require('role.upgrader');
 var roleFighter = require('role.fighter');
 var roleCourier = require('role.courier');
 var stateDying = require('state.dying');
+var stateRecycle = require('state.recycle');
 var creepCount = {
     harvesters: 6,
     upgraders: 6,
@@ -63,6 +64,8 @@ module.exports.loop = function () {
         }
         if(creep.memory.sick) {
             stateDying.run(creep);
+        } else if(creep.memory.recycle) {
+            stateRecycle.run(creep);
         } else if(creep.memory.role == 'harvester') {
             roleHarvester.run(creep);
         } else if(creep.memory.role == 'builder') {
