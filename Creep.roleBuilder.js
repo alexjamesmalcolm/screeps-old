@@ -10,10 +10,13 @@ var roleBuilder = function() {
         this.say('Building');
     }
     if(this.memory.building) {
-        this.activeRepair({structures: [
-            STRUCTURE_CONTAINER,
-            STRUCTURE_STORAGE
-        ]});
+        this.build({
+            activeRepair: true,
+            structures: [
+                STRUCTURE_CONTAINER,
+                STRUCTURE_STORAGE
+            ]
+        });
         this.passiveRepair();
     } else {
         this.collect({
