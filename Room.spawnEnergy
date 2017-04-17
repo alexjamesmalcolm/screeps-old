@@ -1,3 +1,0 @@
-var RoomSpawnEnergy = function() {};
-
-module.exports = RoomSpawnEnergy;
