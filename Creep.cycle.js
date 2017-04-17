@@ -8,6 +8,14 @@ var CreepCycle = function(creepCount) {
     };
     var stateDying = require('state.dying');
     var stateRecycle = require('state.recycle');
+    var creepCount = {
+        harvesters: 6,
+        upgraders: 6,
+        builders: 1,
+        fighters: 0,
+        sick: 2,
+        couriers: 3
+    };
     var sick = _.filter(Game.creeps, (creep) => creep.memory.sick);
     if(!this.memory.sick) {
         if(sick < creepCount.sick) {
