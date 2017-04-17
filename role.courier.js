@@ -1,6 +1,5 @@
 var roleCourier = {
     run: function(creep) {
-        /*It's got to find storage and containers*/
         if(creep.memory.collecting) {
             if(creep.carry.energy == creep.carryCapacity) {
                 creep.memory.collecting = false;
@@ -18,22 +17,6 @@ var roleCourier = {
                 amount: creep.carryCapacity,
                 structures:[STRUCTURE_CONTAINER, STRUCTURE_STORAGE]
             });
-            /*
-            var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
-                filter: function(structure) {
-                    if(structure.structureType == STRUCTURE_CONTAINER) {
-                        return _.sum(structure.store) > 0;
-                    } else if(structure.structureType == STRUCTURE_STORAGE) {
-                        return _.sum(structure.store) > 0;
-                    }
-                }
-            });
-            if(target) {
-                if(creep.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-                    creep.moveTo(target);
-                }
-            }
-            */
         } else {
             var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: function(structure) {
@@ -50,7 +33,6 @@ var roleCourier = {
                 }
             } else {
                 creep.moveTo(Game.flags.Flag1);
-                //creep.move(Math.floor(Math.random()*8+1));
             }
         }
     }
