@@ -1,4 +1,13 @@
 var CreepCycle = function(creepCount) {
+    var role = {
+        harvester: require('role.harvester'),
+        builder: require('role.builder'),
+        upgrader: require('role.upgrader'),
+        fighter: require('role.fighter'),
+        courier: require('role.courier')
+    };
+    var stateDying = require('state.dying');
+    var stateRecycle = require('state.recycle');
     var sick = _.filter(Game.creeps, (creep) => creep.memory.sick);
     if(!this.memory.sick) {
         if(sick < creepCount.sick) {
@@ -14,15 +23,15 @@ var CreepCycle = function(creepCount) {
     } else if(this.memory.recycle) {
         stateRecycle.run(this);
     } else if(this.memory.role == 'harvester') {
-        roleHarvester.run(this);
+        role.harvester.run(this);
     } else if(this.memory.role == 'builder') {
-        roleBuilder.run(this);
+        role.builder.run(this);
     } else if(this.memory.role == 'upgrader') {
-        roleUpgrader.run(this);
+        role.upgrader.run(this);
     } else if(this.memory.role == 'fighter') {
-        roleFighter.run(this);
+        role.fighter.run(this);
     } else if(this.memory.role == 'courier') {
-        roleCourier.run(this);
+        role.courier.run(this);
     }
 };
 
