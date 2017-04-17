@@ -13,4 +13,4 @@ var CreepPassiveRepair = function() {
     }
 };
 
-module.exports = CreepRepair;
+module.exports = CreepPassiveRepair;
