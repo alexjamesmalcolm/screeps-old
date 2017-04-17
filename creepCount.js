@@ -1,5 +1,5 @@
 var creepCount = {
-    harvesters: 2,
+    harvesters: 5,
     upgraders: 1,
     builders: 2,
     fighters: 0,
