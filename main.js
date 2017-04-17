@@ -9,6 +9,7 @@ Creep.prototype.roleFighter = require('Creep.roleFighter');
 Creep.prototype.roleHarvester = require('Creep.roleHarvester');
 Creep.prototype.roleUpgrader = require('Creep.roleUpgrader');
 Spawn.prototype.cycle = require('Spawn.cycle');
+Room.prototype.cycle = require('Room.cycle');
 const profiler = require('screeps-profiler');
 profiler.enable();
 module.exports.loop = function () {
@@ -18,6 +19,10 @@ module.exports.loop = function () {
                 delete Memory.creeps[name];
                 console.log('Clearing non-existing creep memory:', name);
             }
+        }
+        for(var name in Game.rooms) {
+            var room = Game.rooms[name];
+            room.cycle();
         }
         for(var name in Game.spawns) {
             var spawn = Game.spawns[name];
