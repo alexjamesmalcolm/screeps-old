@@ -1,3 +1,4 @@
+/*
 var role = {
     harvester: require('role.harvester'),
     builder: require('role.builder'),
@@ -7,17 +8,10 @@ var role = {
 };
 var stateDying = require('state.dying');
 var stateRecycle = require('state.recycle');
+*/
 Creep.prototype.cycle = require('Creep.cycle');
 Creep.prototype.collect = require('Creep.collect');
 Creep.prototype.passiveRepair = require('Creep.passiveRepair');
-var creepCount = {
-    harvesters: 6,
-    upgraders: 6,
-    builders: 1,
-    fighters: 0,
-    sick: 2,
-    couriers: 3
-};
 
 module.exports.loop = function () {
     
@@ -57,6 +51,6 @@ module.exports.loop = function () {
 
     for(var name in Game.creeps) {
         var creep = Game.creeps[name];
-        creep.cycle(role, creepCount);
+        creep.cycle();
     }
 }
