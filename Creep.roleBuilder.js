@@ -10,12 +10,13 @@ var roleBuilder = function() {
         this.say('Building');
     }
     if(this.memory.building) {
+        var creep = this;
         var target;
         var constructionSite = this.pos.findClosestByRange(FIND_CONSTRUCTION_SITES);
         var repairTarget = this.pos.findClosestByRange(FIND_STRUCTURES, {
             filter: function(structure) {
                 if(structure.hits < structure.hitsMax) {
-                    if(structure.hitsMax - structure.hits > REPAIR_POWER * this.getActiveBodyparts(WORK)) {
+                    if(structure.hitsMax - structure.hits > REPAIR_POWER * creep.getActiveBodyparts(WORK)) {
                         if(structure.structureType == STRUCTURE_RAMPART) {
                             return false;
                         } else if(structure.structureType == STRUCTURE_CONTAINER) {
