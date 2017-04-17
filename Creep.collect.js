@@ -1,4 +1,5 @@
 var CreepCollect = function(input) {
+    this.say('Collecting');
     var resource = input.resource;
     var amount = input.amount;
     var structures = input.structures;
