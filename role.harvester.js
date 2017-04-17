@@ -20,7 +20,6 @@ var roleHarvester = {
         } else {
             var target = creep.pos.findClosestByRange(FIND_STRUCTURES, {
                 filter: function(structure) {
-                    //console.log(structure.structureType);
                     if(structure.structureType == STRUCTURE_EXTENSION) {
                         return structure.energy < structure.energyCapacity;
                     } else if(structure.structureType == STRUCTURE_SPAWN) {
@@ -38,20 +37,6 @@ var roleHarvester = {
                 }
             }
             creep.passiveRepair
-            /*
-            var repairTargets = creep.pos.findInRange(FIND_STRUCTURES, 1, {
-                filter: function(object) {
-                    return object.hits < object.hitsMax
-                    && object.hitsMax - object.hits > REPAIR_POWER;
-                }
-            });
-            repairTargets.sort(function (a,b) {
-                return ((a.hits / a.hitsMax) - (b.hits / b.hitsMax))
-            });
-            if(repairTargets.length > 0) {
-                creep.repair(repairTargets[0]);
-            }
-            */
         }
         //creep.memory.lastPos = creep.pos;
     }
