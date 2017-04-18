@@ -12,7 +12,7 @@ var optimalCourier = function(room) {
     return {
         bodyparts: bodyparts,
         moveBodyparts: moveBodyparts,
-        carryBodyparts: carryBodyparts
+        carryBodyparts: carryBodyparts,
     };
 };
 var RoomCourierSpawn = function() {
@@ -37,49 +37,27 @@ var RoomCourierSpawn = function() {
             }
         });
         couriers.sort(function(a, b){
-            return Math.ceil(a.weight() / a.getActiveBodyparts[MOVE]) > Math.ceil(b.weight() / b.getActiveBodyparts[MOVE]);
+            var a_movementTime = Math.ceil(a.weight() / a.getActiveBodyparts[MOVE]);
+            var b_movementTime = Math.ceil(b.weight() / b.getActiveBodyparts[MOVE]);
+            var a_carry = a.getActiveBodyparts(CARRY);
+            var b_carry = b.getActiveBodyparts(CARRY);
+            if(a_movementTime == b_movementTime) {
+                return a_carry < b_carry;
+            } else {
+                return  a_movementTime > b_movementTime;
+            }
         });
         console.log(couriers);
+        if(optimalCourier(room).carryBodyparts > couriers[0].getActiveBodyparts[MOVE]) {
+            if(Math.ceil(couriers[0].weight() / couriers[0].getActiveBodyparts[MOVE]) > 1) {
+                couriers[0].memory.recycle = true;
+                spawns[0].createCreep(optimalCourier(room).bodyparts, undefined, {role: 'courier'});
+            }
+        } else if(couriers.length < sources.length) {
+            spawns[0].createCreep(optimalCourier(room).bodyparts, undefined, {role: 'courier'});
+        } else if(couriers.length > sources.length) {
+            couriers[0].memory.recycle = true;
+        }
     }
 };
 module.exports = RoomCourierSpawn;
-/*
-var RoomHarvesterSpawn = function() {
-    var spawns = this.find(FIND_MY_SPAWNS, {
-        filter: function(spawn) {
-            if(spawn.spawning) {
-                return false;
-            } else {
-                return true;
-            }
-        }
-    });
-    if(spawns.length > 0) {
-        var sources = this.find(FIND_SOURCES);
-        room = Game.rooms['W93S6'];
-        var harvesters = this.find(FIND_MY_CREEPS, {
-            filter: function(creep) {
-                if(creep.memory.recycle) {
-                    return false;
-                } else if(creep.memory.role == 'harvester') {
-                    return true;
-                }
-            }
-        });
-        harvesters.sort(function(a, b) {
-            return a.getActiveBodyparts(WORK) > b.getActiveBodyparts(WORK);
-        });
-        if(harvesters.length > sources.length) {
-            harvesters[0].memory.recycle = true;
-        } else if(optimalHarvester.workBodyparts > harvesters[0].getActiveBodyparts(WORK)) {
-            harvesters[0].memory.recycle = true;
-            spawns[0].createCreep(optimalHarvester.bodyparts, undefined, {role: 'harvester'});
-        } else if(harvesters.length < sources.length) {
-            spawns[0].createCreep(optimalHarvester(room).bodyparts, undefined, {role: 'harvester'});
-        }
-    }
-};
-
-module.exports = RoomHarvesterSpawn;
-
-*/
