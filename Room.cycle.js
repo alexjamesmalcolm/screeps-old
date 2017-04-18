@@ -41,8 +41,6 @@ var harvesterSpawn = function(room) {
             for(var i = 0; i < moveBodyParts; i++) {
                 bodyparts.push(MOVE);
             }
-            console.log(bodyparts);
-            console.log(harvesters);
             if(harvesters.length > sources.length) {
                 harvesters[0].memory.recycle = true;
             } else if(workBodyParts > harvesters[0].getActiveBodyparts(WORK)) {
