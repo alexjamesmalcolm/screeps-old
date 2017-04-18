@@ -53,7 +53,7 @@ var RoomHarvesterSpawn = function() {
             harvesters[0].memory.recycle = true;
             spawns[0].createCreep(optimalHarvester.bodyparts, undefined, {role: 'harvester'});
         } else if(harvesters.length < sources.length) {
-            spawns[0].createCreep(optimalHarvester.bodyparts, undefined, {role: 'harvester'});
+            spawns[0].createCreep(optimalHarvester(room).bodyparts, undefined, {role: 'harvester'});
         }
     }
 };
