@@ -1,31 +1,48 @@
-var optimalCourier = function(room) {};
-var RoomCourierSpawn = function() {}
-module.exports = RoomCourierSpawn;
-/*
-var optimalHarvester = function(room) {
-    var workBodyparts = Math.floor(-(BODYPART_COST[CARRY] + BODYPART_COST[MOVE] - room.energyAvailable) / BODYPART_COST[WORK]);
-    if(workBodyparts > 6) {
-        workBodyparts = 6;
-    }
-    var moveBodyparts = Math.floor((room.energyAvailable - BODYPART_COST[WORK] * workBodyparts - BODYPART_COST[CARRY]) / BODYPART_COST[MOVE]);
-    if(moveBodyparts > workBodyparts / 3) {
-        moveBodyparts = workBodyparts / 3;
-    }
-    var creepCost = moveBodyparts * BODYPART_COST[MOVE] + BODYPART_COST[CARRY] + workBodyparts * BODYPART_COST[WORK];
-    var bodyparts = [CARRY];
-    for(var i = 0; i < workBodyparts; i++) {
-        bodyparts.push(WORK);
-    }
+var optimalCourier = function(room) {
+    var moveBodyparts = room.energyAvailable / (BODYPART_COST[MOVE] + BODYPART_COST[CARRY]);
+    var carryBodyparts = room.energyAvailable / (BODYPART_COST[MOVE] + BODYPART_COST[CARRY]);
+    var creepCost = moveBodyparts * BODYPART_COST[MOVE] + carryBodyparts * BODYPART_COST[CARRY];
+    var bodyparts = [];
     for(var i = 0; i < moveBodyparts; i++) {
         bodyparts.push(MOVE);
+    }
+    for(var i = 0; i < carryBodyparts; i++) {
+        bodyparts.push(CARRY);
     }
     return {
         bodyparts: bodyparts,
         moveBodyparts: moveBodyparts,
-        workBodyparts: workBodyparts
+        carryBodyparts: carryBodyparts
     };
 };
-
+var RoomCourierSpawn = function() {
+    var spawns = this.find(FIND_MY_SPAWNS, {
+        filter: function(spawn) {
+            if(spawn.spawning) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    });
+    if(spawns.length > 0) {
+        var sources = this.find(FIND_SOURCES);
+        var couriers = this.find(FIND_MY_CREEPS, {
+            filter: function(creep) {
+                if(creep.memory.recycle) {
+                    return false;
+                } else if(creep.memory.role == 'courier') {
+                    return true;
+                }
+            }
+        });
+        couriers.sort(function(a, b){
+            
+        });
+    }
+};
+module.exports = RoomCourierSpawn;
+/*
 var RoomHarvesterSpawn = function() {
     var spawns = this.find(FIND_MY_SPAWNS, {
         filter: function(spawn) {
