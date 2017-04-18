@@ -44,10 +44,8 @@ var harvesterSpawn = function(room) {
             if(harvesters.length > sources.length) {
                 harvesters[0].memory.recycle = true;
             } else if(workBodyParts > harvesters[0].getActiveBodyparts(WORK)) {
-                if(spawn) {
-                    harvesters[0].memory.recycle = true;
-                    spawns[0].createCreep(bodyparts, undefined, {role: 'harvester'});
-                }
+                harvesters[0].memory.recycle = true;
+                spawns[0].createCreep(bodyparts, undefined, {role: 'harvester'});
             }
         } else {
             var workBodyParts = Math.floor(-(BODYPART_COST[CARRY] + BODYPART_COST[MOVE] - room.energyAvailable) / BODYPART_COST[WORK]);
