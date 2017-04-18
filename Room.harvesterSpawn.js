@@ -1,3 +1,27 @@
+var optimalHarvester = function(room) {
+    var workBodyparts = Math.floor(-(BODYPART_COST[CARRY] + BODYPART_COST[MOVE] - room.energyAvailable) / BODYPART_COST[WORK]);
+    if(workBodyparts > 6) {
+        workBodyparts = 6;
+    }
+    var moveBodyparts = Math.floor((room.energyAvailable - BODYPART_COST[WORK] * workBodyparts - BODYPART_COST[CARRY]) / BODYPART_COST[MOVE]);
+    if(moveBodyparts > workBodyparts / 3) {
+        moveBodyparts = workBodyparts / 3;
+    }
+    var creepCost = moveBodyparts * BODYPART_COST[MOVE] + BODYPART_COST[CARRY] + workBodyparts * BODYPART_COST[WORK];
+    var bodyparts = [CARRY];
+    for(var i = 0; i < workBodyparts; i++) {
+        bodyparts.push(WORK);
+    }
+    for(var i = 0; i < moveBodyparts; i++) {
+        bodyparts.push(MOVE);
+    }
+    return {
+        bodyparts: bodyparts,
+        moveBodyparts: moveBodyparts,
+        workBodyparts: workBodyparts
+    };
+}
+
 var RoomHarvesterSpawn = function() {
     var spawns = this.find(FIND_MY_SPAWNS, {
         filter: function(spawn) {
@@ -24,46 +48,14 @@ var RoomHarvesterSpawn = function() {
             harvesters.sort(function(a, b) {
                 return a.getActiveBodyparts(WORK) > b.getActiveBodyparts(WORK);
             });
-            var workBodyParts = Math.floor(-(BODYPART_COST[CARRY] + BODYPART_COST[MOVE] - this.energyAvailable) / BODYPART_COST[WORK]);
-            if(workBodyParts > 6) {
-                workBodyParts = 6;
-            }
-            var moveBodyParts = Math.floor((this.energyAvailable - BODYPART_COST[WORK] * workBodyParts - BODYPART_COST[CARRY]) / BODYPART_COST[MOVE]);
-            if(moveBodyParts > workBodyParts / 3) {
-                moveBodyParts = workBodyParts / 3;
-            }
-            var creepCost = moveBodyParts * BODYPART_COST[MOVE] + BODYPART_COST[CARRY] + workBodyParts * BODYPART_COST[WORK];
-            var bodyparts = [CARRY];
-            for(var i = 0; i < workBodyParts; i++) {
-                bodyparts.push(WORK);
-            }
-            for(var i = 0; i < moveBodyParts; i++) {
-                bodyparts.push(MOVE);
-            }
             if(harvesters.length > sources.length) {
                 harvesters[0].memory.recycle = true;
-            } else if(workBodyParts > harvesters[0].getActiveBodyparts(WORK)) {
+            } else if(optimalHarvester.workBodyparts > harvesters[0].getActiveBodyparts(WORK)) {
                 harvesters[0].memory.recycle = true;
-                spawns[0].createCreep(bodyparts, undefined, {role: 'harvester'});
+                spawns[0].createCreep(optimalHarvester.bodyparts, undefined, {role: 'harvester'});
             }
         } else {
-            var workBodyParts = Math.floor(-(BODYPART_COST[CARRY] + BODYPART_COST[MOVE] - this.energyAvailable) / BODYPART_COST[WORK]);
-            if(workBodyParts > 6) {
-                workBodyParts = 6;
-            }
-            var moveBodyParts = Math.floor((this.energyAvailable - BODYPART_COST[WORK] * workBodyParts - BODYPART_COST[CARRY]) / BODYPART_COST[MOVE]);
-            if(moveBodyParts > workBodyParts / 3) {
-                moveBodyParts = workBodyParts / 3;
-            }
-            var creepCost = moveBodyParts * BODYPART_COST[MOVE] + BODYPART_COST[CARRY] + workBodyParts * BODYPART_COST[WORK];
-            var bodyparts = [CARRY];
-            for(var i = 0; i < workBodyParts; i++) {
-                bodyparts.push(WORK);
-            }
-            for(var i = 0; i < moveBodyParts; i++) {
-                bodyparts.push(MOVE);
-            }
-            spawns[0].createCreep(bodyparts, undefined, {role: 'harvester'});
+            spawns[0].createCreep(optimalHarvester.bodyparts, undefined, {role: 'harvester'});
         }
     }
 };
