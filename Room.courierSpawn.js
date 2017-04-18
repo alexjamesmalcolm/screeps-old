@@ -37,8 +37,9 @@ var RoomCourierSpawn = function() {
             }
         });
         couriers.sort(function(a, b){
-            
+            return Math.ceil(a.weight() / a.getActiveBodyparts[MOVE]) < Math.ceil(b.weight() / b.getActiveBodyparts[MOVE]);
         });
+        console.log(couriers);
     }
 };
 module.exports = RoomCourierSpawn;
