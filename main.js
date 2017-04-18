@@ -10,6 +10,7 @@ Creep.prototype.roleFighter = require('Creep.roleFighter');
 Creep.prototype.roleHarvester = require('Creep.roleHarvester');
 Creep.prototype.roleUpgrader = require('Creep.roleUpgrader');
 Room.prototype.cycle = require('Room.cycle');
+Room.prototype.harvesterSpawn = require('Room.harvesterSpawn');
 Spawn.prototype.cycle = require('Spawn.cycle');
 const profiler = require('screeps-profiler');
 profiler.enable();
