@@ -49,10 +49,10 @@ var RoomCourierSpawn = function() {
         });
         console.log(couriers);
         var courier = optimalCourier(this);
-        if(courier.carryBodyparts > couriers[0].getActiveBodyparts[CARRY]) {
+        if(courier.carryBodyparts > couriers[0].getActiveBodyparts(CARRY)) {
             console.log('couriers[0] has less carry parts than the optimal courier');
             console.log(couriers[0]);
-            if(Math.ceil(couriers[0].weight() / couriers[0].getActiveBodyparts[MOVE]) > 1) {
+            if(Math.ceil(couriers[0].weight() / couriers[0].getActiveBodyparts(MOVE)) > 1) {
                 couriers[0].memory.recycle = true;
                 spawns[0].createCreep(courier.bodyparts, undefined, {role: 'courier'});
             }
