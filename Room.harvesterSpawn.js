@@ -1,13 +1,9 @@
 var optimalHarvester = function(room) {
-    var workBodyparts = Math.floor(-(BODYPART_COST[CARRY] + BODYPART_COST[MOVE] - room.energyAvailable) / BODYPART_COST[WORK]);
-    if(workBodyparts > 6) {
-        workBodyparts = 6;
-    }
-    var moveBodyparts = Math.floor((room.energyAvailable - BODYPART_COST[WORK] * workBodyparts - BODYPART_COST[CARRY]) / BODYPART_COST[MOVE]);
-    if(moveBodyparts > workBodyparts / 3) {
-        moveBodyparts = workBodyparts / 3;
-    }
-    var creepCost = moveBodyparts * BODYPART_COST[MOVE] + BODYPART_COST[CARRY] + workBodyparts * BODYPART_COST[WORK];
+    var workBodyparts = Math.floor(-(2 * BODYPART_COST[CARRY] + BODYPART_COST[MOVE] - 2 * room.energyAvailable) / (BODYPART_COST[MOVE] + 2 * BODYPART_COST[WORK]));
+    //-(2 c + m - 2 t)/(m + 2 w)
+    var moveBodyparts = Math.floor((workBodyparts + 1) / 2);
+    //(b + 1) * 0.5
+    var creepCost = moveBodyparts * BODYPART_COST[MOVE] + BODYPART_COST[CARRY] + workBodyparts * BODYPART_COST[WORK]; // t = a * m + c + b * w
     var bodyparts = [CARRY];
     for(var i = 0; i < workBodyparts; i++) {
         bodyparts.push(WORK);
