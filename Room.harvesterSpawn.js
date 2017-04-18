@@ -49,9 +49,9 @@ var RoomHarvesterSpawn = function() {
         });
         if(harvesters.length > sources.length) {
             harvesters[0].memory.recycle = true;
-        } else if(optimalHarvester.workBodyparts > harvesters[0].getActiveBodyparts(WORK)) {
+        } else if(optimalHarvester(room).workBodyparts > harvesters[0].getActiveBodyparts(WORK)) {
             harvesters[0].memory.recycle = true;
-            spawns[0].createCreep(optimalHarvester.bodyparts, undefined, {role: 'harvester'});
+            spawns[0].createCreep(optimalHarvester(room).bodyparts, undefined, {role: 'harvester'});
         } else if(harvesters.length < sources.length) {
             spawns[0].createCreep(optimalHarvester(room).bodyparts, undefined, {role: 'harvester'});
         }
