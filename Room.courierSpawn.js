@@ -16,16 +16,7 @@ var optimalCourier = function(room) {
     };
 };
 var RoomCourierSpawn = function() {
-    var spawns = this.find(FIND_MY_SPAWNS, {
-        filter: function(spawn) {
-            if(spawn.spawning) {
-                return false;
-            } else {
-                return true;
-            }
-        }
-    });
-    if(spawns.length > 0) {
+    if(this.spawns.length > 0) {
         var sources = this.find(FIND_SOURCES);
         var couriers = this.find(FIND_MY_CREEPS, {
             filter: function(creep) {
@@ -55,10 +46,10 @@ var RoomCourierSpawn = function() {
         if(courier.carryBodyparts > couriers[0].getActiveBodyparts(CARRY)) {
             if(Math.ceil(couriers[0].weight() / couriers[0].getActiveBodyparts(MOVE)) >= 1) {
                 couriers[0].memory.recycle = true;
-                spawns[0].createCreep(courier.bodyparts, undefined, {role: 'courier'});
+                this.spawns[0].createCreep(courier.bodyparts, undefined, {role: 'courier'});
             }
         } else if(totalCarry < 4000) {
-            spawns[0].createCreep(courier.bodyparts, undefined, {role: 'courier'});
+            this.spawns[0].createCreep(courier.bodyparts, undefined, {role: 'courier'});
         } else if(totalCarry > 4000) {
             couriers[0].memory.recycle = true;
         }
