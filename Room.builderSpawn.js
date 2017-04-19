@@ -10,9 +10,13 @@ var RoomBuilderSpawn = function() {
         aProgressTotal = aProgressTotal + constructionProject.progressTotal;
         aProgress = aProgress + constructionProject.progress;
     });
-    var upgraders = this.find(FIND_MY_CREEPS, {
+    var builders = this.find(FIND_MY_CREEPS, {
         filter: function(creep) {
-            
+            if(creep.memory.recycle) {
+                return false;
+            } else if(creep.memory.role == 'builder') {
+                return true;
+            }
         }
     });
 };
