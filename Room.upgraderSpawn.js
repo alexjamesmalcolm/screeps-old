@@ -41,21 +41,30 @@ var RoomUpgraderSpawn = function() {
                 }
             }
         });
-        upgraders.sort(function(a, b) {});
+        upgraders.sort(function(a, b) {
+            var a_work = a.getActiveBodyparts(WORK);
+            var b_work = b.getActiveBodyparts(WORK);
+            return a_work < b_work;
+        });
+        var upgrader = optimalUpgrader(this);
+        var upgradePerTick = 0;
+        upgraders.forEach(function(creep) {
+            upgradePerTick = upgradePerTick + creep.getActiveBodyparts(WORK);
+        });
+        //console.log(upgradePerTick);
+        if(upgrader.workBodyparts > upgraders[0].getActiveBodyparts(WORK)) {
+            upgraders[0].memory.recycle = true;
+            spawns[0].createCreep(upgrader.bodyparts, undefined, {role: 'upgrader'});
+        } else if(upgradePerTick < 10) {
+            spawns[0].createCreep(upgrader.bodyparts, undefined, {role: 'upgrader'});
+        } else if(upgradePerTick > 20) {
+            upgraders[0].memory.recycle = true;
+        }
     }
 };
 module.exports = RoomUpgraderSpawn;
 /*
 var RoomCourierSpawn = function() {
-    var spawns = this.find(FIND_MY_SPAWNS, {
-        filter: function(spawn) {
-            if(spawn.spawning) {
-                return false;
-            } else {
-                return true;
-            }
-        }
-    });
     if(spawns.length > 0) {
         var sources = this.find(FIND_SOURCES);
         var couriers = this.find(FIND_MY_CREEPS, {
