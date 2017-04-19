@@ -7,7 +7,7 @@ var optimalBuilder = function(room, constructionProject) {
         moveBodyparts: moveBodyparts,
         creepCost: creepCost,
         bodyparts: bodyparts,
-        progressPerTick
+        progressPerTick: progressPerTick
     };
 };
 var RoomBuilderSpawn = function() {
