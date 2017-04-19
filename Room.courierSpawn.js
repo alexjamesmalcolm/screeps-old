@@ -43,15 +43,15 @@ var RoomCourierSpawn = function() {
         couriers.forEach(function(creep) {
             totalCarry = totalCarry + 50 * creep.getActiveBodyparts(CARRY);
         });
-        if(courier.carryBodyparts > couriers[0].getActiveBodyparts(CARRY)) {
+        if(totalCarry > 2000) {
+            couriers[0].memory.recycle = true;
+        } else if(totalCarry < 2000) {
+            this.memory.spawns[0].createCreep(courier.bodyparts, undefined, {role: 'courier'});
+        } else if(courier.carryBodyparts > couriers[0].getActiveBodyparts(CARRY)) {
             if(Math.ceil(couriers[0].weight() / couriers[0].getActiveBodyparts(MOVE)) >= 1) {
                 couriers[0].memory.recycle = true;
                 this.memory.spawns[0].createCreep(courier.bodyparts, undefined, {role: 'courier'});
             }
-        } else if(totalCarry < 2000) {
-            this.memory.spawns[0].createCreep(courier.bodyparts, undefined, {role: 'courier'});
-        } else if(totalCarry > 2000) {
-            couriers[0].memory.recycle = true;
         }
     }
 };
