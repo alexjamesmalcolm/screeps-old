@@ -1,6 +1,14 @@
 var optimalBuilder = function(room, constructionProject) {
-    var carryBodyparts, workBodyparts, moveBodyparts, creepCost, bodyparts;
+    var carryBodyparts, workBodyparts, moveBodyparts, creepCost, bodyparts, progressPerTick;
     bodyparts = [];
+    return {
+        carryBodyparts: carryBodyparts,
+        workBodyparts: workBodyparts,
+        moveBodyparts: moveBodyparts,
+        creepCost: creepCost,
+        bodyparts: bodyparts,
+        progressPerTick
+    };
 };
 var RoomBuilderSpawn = function() {
     var constructionProjects = this.find(FIND_CONSTRUCTION_SITES);
@@ -19,6 +27,11 @@ var RoomBuilderSpawn = function() {
             }
         }
     });
+    var cProgressPerTick = 0;
+    builders.forEach(function(creep) {
+        cProgressPerTick = cProgressPerTick + UPGRADE_CONTROLLER_POWER * creep.getActiveBodyparts(WORK);
+    });
+    
 };
 
 module.exports = RoomBuilderSpawn;
