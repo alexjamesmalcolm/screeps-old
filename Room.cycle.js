@@ -13,13 +13,11 @@ var RoomCycle = function() {
         }
     });
     this.memory.spawns = spawns;
-    /*
-    var spawns = this.find(FIND_MY_SPAWNS);
+    spawns = this.find(FIND_MY_SPAWNS);
     for(var name in spawns) {
         var spawn = spawns[name];
         //spawn.cycle();
     }
-    */
     var creeps = this.find(FIND_MY_CREEPS);
     for(var name in creeps) {
         var creep = creeps[name];
