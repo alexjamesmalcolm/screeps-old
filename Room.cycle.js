@@ -1,8 +1,5 @@
 var creepCount = require('creepCount');
 var RoomCycle = function() {
-    this.harvesterSpawn();
-    this.courierSpawn();
-    this.upgraderSpawn();
     var spawns = this.find(FIND_MY_SPAWNS, {
         filter: function(spawn) {
             if(spawn.spawning) {
@@ -15,6 +12,9 @@ var RoomCycle = function() {
     console.log(spawns);
     if(spawns.length == 0) {}
     this.memory.spawns = spawns;
+    this.harvesterSpawn();
+    this.courierSpawn();
+    this.upgraderSpawn();
     spawns = this.find(FIND_MY_SPAWNS);
     for(var name in spawns) {
         var spawn = spawns[name];
