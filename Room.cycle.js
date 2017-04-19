@@ -12,6 +12,8 @@ var RoomCycle = function() {
             }
         }
     });
+    console.log(spawns);
+    if(spawns.length == 0) {}
     this.memory.spawns = spawns;
     spawns = this.find(FIND_MY_SPAWNS);
     for(var name in spawns) {
