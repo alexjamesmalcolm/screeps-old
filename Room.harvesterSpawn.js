@@ -19,16 +19,7 @@ var optimalHarvester = function(room) {
 }
 
 var RoomHarvesterSpawn = function() {
-    var spawns = this.find(FIND_MY_SPAWNS, {
-        filter: function(spawn) {
-            if(spawn.spawning) {
-                return false;
-            } else {
-                return true;
-            }
-        }
-    });
-    if(spawns.length > 0) {
+    if(this.memory.spawns.length > 0) {
         var sources = this.find(FIND_SOURCES);
         room = Game.rooms['W93S6'];
         var harvesters = this.find(FIND_MY_CREEPS, {
@@ -48,9 +39,9 @@ var RoomHarvesterSpawn = function() {
             harvesters[0].memory.recycle = true;
         } else if(harvester.workBodyparts > harvesters[0].getActiveBodyparts(WORK)) {
             harvesters[0].memory.recycle = true;
-            spawns[0].createCreep(harvester.bodyparts, undefined, {role: 'harvester'});
+            this.memory.spawns[0].createCreep(harvester.bodyparts, undefined, {role: 'harvester'});
         } else if(harvesters.length < sources.length) {
-            spawns[0].createCreep(harvester.bodyparts, undefined, {role: 'harvester'});
+            this.memory.spawns[0].createCreep(harvester.bodyparts, undefined, {role: 'harvester'});
         }
     }
 };
