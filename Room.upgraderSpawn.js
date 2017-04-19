@@ -13,6 +13,7 @@ var optimalUpgrader = function(room) {
     for(var i = 0; i < carryBodyparts; i++) {
         bodyparts.push(CARRY);
     }
+    console.log(bodyparts);
     return {
         bodyparts: bodyparts,
         workBodyparts: workBodyparts,
