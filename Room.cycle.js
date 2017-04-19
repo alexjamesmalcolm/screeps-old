@@ -9,9 +9,12 @@ var RoomCycle = function() {
             }
         }
     });
-    console.log(spawns);
-    if(spawns.length == 0) {}
-    this.memory.spawns = spawns;
+    if(!spawns.length) {
+        console.log('Empty spawns array');
+        this.memory.spawns = [];
+    } else {
+        this.memory.spawns = spawns;
+    }
     this.harvesterSpawn();
     this.courierSpawn();
     this.upgraderSpawn();
