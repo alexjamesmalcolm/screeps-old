@@ -10,7 +10,6 @@ var RoomCycle = function() {
         }
     });
     if(!spawns.length) {
-        console.log('Empty spawns array');
         this.memory.spawns = [];
     } else {
         this.memory.spawns = spawns;
