@@ -48,14 +48,18 @@ var RoomCourierSpawn = function() {
             }
         });
         var courier = optimalCourier(this);
+        var totalCarry = 0;
+        couriers.forEach(function(creep) {
+            totalCarry = totalCarry + 50 * creep.getActiveBodyparts(CARRY);
+        });
         if(courier.carryBodyparts > couriers[0].getActiveBodyparts(CARRY)) {
             if(Math.ceil(couriers[0].weight() / couriers[0].getActiveBodyparts(MOVE)) >= 1) {
                 couriers[0].memory.recycle = true;
                 spawns[0].createCreep(courier.bodyparts, undefined, {role: 'courier'});
             }
-        } else if(couriers.length < sources.length) {
+        } else if(totalCarry < 4000) {
             spawns[0].createCreep(courier.bodyparts, undefined, {role: 'courier'});
-        } else if(couriers.length > sources.length) {
+        } else if(totalCarry > 4000) {
             couriers[0].memory.recycle = true;
         }
     }
