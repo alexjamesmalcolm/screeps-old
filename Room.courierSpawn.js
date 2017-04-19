@@ -48,9 +48,9 @@ var RoomCourierSpawn = function() {
                 couriers[0].memory.recycle = true;
                 this.memory.spawns[0].createCreep(courier.bodyparts, undefined, {role: 'courier'});
             }
-        } else if(totalCarry < 4000) {
+        } else if(totalCarry < 2000) {
             this.memory.spawns[0].createCreep(courier.bodyparts, undefined, {role: 'courier'});
-        } else if(totalCarry > 4000) {
+        } else if(totalCarry > 2000) {
             couriers[0].memory.recycle = true;
         }
     }
