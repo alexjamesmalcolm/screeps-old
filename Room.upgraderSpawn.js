@@ -1,31 +1,51 @@
-var optimalUpgrader = function(room) {};
-var RoomUpgraderSpawn = function() {
-    var spawns = this.find(FIND_MY_SPAWNS, {
-        filter: function(spawn) {
-        }
-    });
-};
-
-module.exports = RoomUpgraderSpawn;
-
-/*
-var optimalCourier = function(room) {
-    var moveBodyparts = room.energyAvailable / (BODYPART_COST[MOVE] + BODYPART_COST[CARRY]);
-    var carryBodyparts = room.energyAvailable / (BODYPART_COST[MOVE] + BODYPART_COST[CARRY]);
-    var creepCost = moveBodyparts * BODYPART_COST[MOVE] + carryBodyparts * BODYPART_COST[CARRY];
+var optimalUpgrader = function(room) {
+    var moveBodyparts;
+    var carryBodyparts;
+    var workBodyparts;
+    var creepCost = moveBodyparts * BODYPART_COST[MOVE] + carryBodyparts * BODYPART_COST[CARRY] + workBodyparts * BODYPART_COST[WORK];
     var bodyparts = [];
     for(var i = 0; i < moveBodyparts; i++) {
         bodyparts.push(MOVE);
+    }
+    for(var i = 0; i < workBodyparts; i++) {
+        bodyparts.push(WORK);
     }
     for(var i = 0; i < carryBodyparts; i++) {
         bodyparts.push(CARRY);
     }
     return {
         bodyparts: bodyparts,
+        workBodyparts: workBodyparts,
         moveBodyparts: moveBodyparts,
-        carryBodyparts: carryBodyparts,
+        carryBodyparts: carryBodyparts
     };
 };
+var RoomUpgraderSpawn = function() {
+    var spawns = this.find(FIND_MY_SPAWNS, {
+        filter: function(spawn) {
+            if(spawn.spawning) {
+                return false;
+            } else {
+                return true;
+            }
+        }
+    });
+    if(spawns.length) {
+        var sources = this.find(FIND_SOURCES);
+        var upgraders = this.find(FIND_MY_CREEPS, {
+            filter: function(creep) {
+                if(creep.memory.recycle) {
+                    return false;
+                } else if(creep.memory.role == 'upgrader') {
+                    return true;
+                }
+            }
+        });
+        upgraders.sort(function(a, b) {});
+    }
+};
+module.exports = RoomUpgraderSpawn;
+/*
 var RoomCourierSpawn = function() {
     var spawns = this.find(FIND_MY_SPAWNS, {
         filter: function(spawn) {
