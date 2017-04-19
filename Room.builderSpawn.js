@@ -1,7 +1,14 @@
 var optimalBuilder = function(room, constructionProject) {
     var carryBodyparts, workBodyparts, moveBodyparts, creepCost, bodyparts;
+    bodyparts = [];
 };
 var RoomBuilderSpawn = function() {
+    var sources = this.find(FIND_SOURCES);
+    var upgraders = this.find(FIND_MY_CREEPS, {
+        filter: function(creep) {
+            
+        }
+    });
 };
 
 module.exports = RoomBuilderSpawn;
