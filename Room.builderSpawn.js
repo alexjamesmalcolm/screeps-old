@@ -3,6 +3,8 @@ var optimalBuilder = function(room, constructionProject) {
     bodyparts = [];
 };
 var RoomBuilderSpawn = function() {
+    var constructionProjects = this.find(FIND_CONSTRUCTION_SITES);
+    console.log(constructionProjects[0].progressTotal - constructionProjects[0].progress);
     var sources = this.find(FIND_SOURCES);
     var upgraders = this.find(FIND_MY_CREEPS, {
         filter: function(creep) {
