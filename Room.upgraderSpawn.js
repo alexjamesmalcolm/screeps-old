@@ -13,12 +13,14 @@ var optimalUpgrader = function(room) {
     for(var i = 0; i < carryBodyparts; i++) {
         bodyparts.push(CARRY);
     }
-    return {
-        bodyparts: bodyparts,
-        workBodyparts: workBodyparts,
-        moveBodyparts: moveBodyparts,
-        carryBodyparts: carryBodyparts
-    };
+    if(workBodyparts > 0 && moveBodyparts > 0) {
+        return {
+            bodyparts: bodyparts,
+            workBodyparts: workBodyparts,
+            moveBodyparts: moveBodyparts,
+            carryBodyparts: carryBodyparts
+        };
+    }
 };
 var RoomUpgraderSpawn = function() {
     if(this.memory.spawns.length) {
