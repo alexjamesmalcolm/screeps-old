@@ -1,5 +1,6 @@
 var optimalBuilder = function(room, constructionProject) {
     var carryBodyparts, workBodyparts, moveBodyparts, creepCost, bodyparts, progressPerTick;
+    creepCost = carryBodyparts * BODYPART_COST[CARRY] + workBodyparts * BODYPART_COST[WORK] + moveBodyparts * BODYPART_COST[MOVE];
     bodyparts = [];
     return {
         carryBodyparts: carryBodyparts,
@@ -10,6 +11,30 @@ var optimalBuilder = function(room, constructionProject) {
         progressPerTick: progressPerTick
     };
 };
+/*
+var optimalUpgrader = function(room) {
+    var carryBodyparts = 1;
+    var workBodyparts = Math.floor(-(BODYPART_COST[MOVE] - 2 * room.energyAvailable + 2 * carryBodyparts * BODYPART_COST[CARRY]) / (BODYPART_COST[MOVE] + 2 * BODYPART_COST[WORK]));
+    var moveBodyparts = Math.floor((workBodyparts + carryBodyparts) / 2);
+    var creepCost = moveBodyparts * BODYPART_COST[MOVE] + carryBodyparts * BODYPART_COST[CARRY] + workBodyparts * BODYPART_COST[WORK];
+    var bodyparts = [];
+    for(var i = 0; i < moveBodyparts; i++) {
+        bodyparts.push(MOVE);
+    }
+    for(var i = 0; i < workBodyparts; i++) {
+        bodyparts.push(WORK);
+    }
+    for(var i = 0; i < carryBodyparts; i++) {
+        bodyparts.push(CARRY);
+    }
+    return {
+        bodyparts: bodyparts,
+        workBodyparts: workBodyparts,
+        moveBodyparts: moveBodyparts,
+        carryBodyparts: carryBodyparts
+    };
+};
+*/
 var RoomBuilderSpawn = function() {
     var constructionProjects = this.find(FIND_CONSTRUCTION_SITES);
     var aProgressTotal = 0;
@@ -37,28 +62,6 @@ var RoomBuilderSpawn = function() {
 module.exports = RoomBuilderSpawn;
 
 /*
-var optimalUpgrader = function(room) {
-    var carryBodyparts = 1;
-    var workBodyparts = Math.floor(-(BODYPART_COST[MOVE] - 2 * room.energyAvailable + 2 * carryBodyparts * BODYPART_COST[CARRY]) / (BODYPART_COST[MOVE] + 2 * BODYPART_COST[WORK]));
-    var moveBodyparts = Math.floor((workBodyparts + carryBodyparts) / 2);
-    var creepCost = moveBodyparts * BODYPART_COST[MOVE] + carryBodyparts * BODYPART_COST[CARRY] + workBodyparts * BODYPART_COST[WORK];
-    var bodyparts = [];
-    for(var i = 0; i < moveBodyparts; i++) {
-        bodyparts.push(MOVE);
-    }
-    for(var i = 0; i < workBodyparts; i++) {
-        bodyparts.push(WORK);
-    }
-    for(var i = 0; i < carryBodyparts; i++) {
-        bodyparts.push(CARRY);
-    }
-    return {
-        bodyparts: bodyparts,
-        workBodyparts: workBodyparts,
-        moveBodyparts: moveBodyparts,
-        carryBodyparts: carryBodyparts
-    };
-};
 var RoomUpgraderSpawn = function() {
     if(this.memory.spawns.length) {
         var sources = this.find(FIND_SOURCES);
