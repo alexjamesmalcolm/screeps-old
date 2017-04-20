@@ -31,7 +31,7 @@ var RoomHarvesterSpawn = function() {
                 }
             }
         });
-        if(harvesters) {
+        if(harvesters.length > 0) {
             harvesters.sort(function(a, b) {
                 return a.getActiveBodyparts(WORK) > b.getActiveBodyparts(WORK);
             });
