@@ -1,5 +1,23 @@
-var CreepDeposit = function() {
-    
+var CreepDeposit = function(input) {
+    var creepDepositing = input.creepDepositing;
+    var structures = input.structures;
+    var amount = this.carry.energy;
+    var target;
+    var check = function(structure, structures, structureType) {
+        return structure.structureType == STRUCTURE_CONTAINER
+        && structures.indexOf(STRUCTURE_CONTAINER) != -1;
+    }
+    var closestStructure = this.pos.findClosestByRange(FIND_STRUCTURES, {
+        filter: function(structure) {
+            if(check(structure, structures, STRUCTURE_EXTENSION)) {
+                return structure.energyCapacity - structure.energy >= amount;
+            } else if(check(structure, structures, STRUCTURE_SPAWN)) {
+                return structure.energyCapacity - structure.energy >= amount;
+            } else if(check(structure, structures, STRUCTURE_STORAGE)) {
+                return _.sum(structure.store)
+            }
+        }
+    });
 };
 
 module.exports = CreepDeposit;
