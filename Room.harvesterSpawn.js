@@ -11,11 +11,13 @@ var optimalHarvester = function(room) {
     for(var i = 0; i < moveBodyparts; i++) {
         bodyparts.push(MOVE);
     }
-    return {
-        bodyparts: bodyparts,
-        moveBodyparts: moveBodyparts,
-        workBodyparts: workBodyparts
-    };
+    if(workBodyparts > 0 && moveBodyparts > 0) {
+        return {
+            bodyparts: bodyparts,
+            moveBodyparts: moveBodyparts,
+            workBodyparts: workBodyparts
+        };
+    }
 }
 
 var RoomHarvesterSpawn = function() {
