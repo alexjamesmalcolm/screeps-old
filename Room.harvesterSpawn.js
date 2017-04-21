@@ -47,11 +47,11 @@ var RoomHarvesterSpawn = function() {
             if(harvester.workBodyparts > harvesters[0].getActiveBodyparts(WORK)) {
                 harvesters[0].memory.recycle = true;
                 this.memory.spawns[0].createCreep(harvester.bodyparts, undefined, {role: 'harvester'});
-            } else if(harvestPerTick < sources.length * ENERGY_REGEN_AMOUNT / ENERGY_REGEN_TIME) {
+            } else if(harvestPerTick < sources.length * 3000 / 300) {
                 this.memory.spawns[0].createCreep(harvester.bodyparts, undefined, {role: 'harvester'});
             }
         }
-    } else if(harvestPerTick < sources.length * ENERGY_REGEN_AMOUNT / ENERGY_REGEN_TIME) {
+    } else if(harvestPerTick < sources.length * 3000 / 300) {
         this.memory.spawns[0].createCreep(harvester.bodyparts, undefined, {role: 'harvester'});
     }
     this.memory.harvestPerTick = harvestPerTick;
