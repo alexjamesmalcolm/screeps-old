@@ -39,7 +39,7 @@ var RoomHarvesterSpawn = function() {
             });
             var harvestPerTick = 0;
             harvesters.forEach(function(creep) {
-                harvestPerTick = harvestPerTick + HARVEST_POWER * creep.getActiveBodypart(WORK);
+                harvestPerTick = harvestPerTick + HARVEST_POWER * creep.getActiveBodyparts(WORK);
             });
             var harvester = optimalHarvester(this);
             if(harvester) {
