@@ -41,15 +41,14 @@ var RoomCourierSpawn = function() {
     var totalCarry = 0;
     var totalCarryWithoutLeastCreep = 0;
     couriers.forEach(function(creep, i) {
-        totalCarry = totalCarry + 50 * creep.getActiveBodyparts(CARRY);
+        totalCarry = totalCarry + CARRY_CAPACITY * creep.getActiveBodyparts(CARRY);
         if(i != 0) {
-            totalCarryWithoutLeastCreep = totalCarryWithoutLeastCreep + 50 * creep.getActiveBodyparts(CARRY);
+            totalCarryWithoutLeastCreep = totalCarryWithoutLeastCreep + CARRY_CAPACITY * creep.getActiveBodyparts(CARRY);
         }
     });
-    var totalCarryWithNewCreep = totalCarry + 50 * courier.carryBodyparts;
     if(totalCarryWithoutLeastCreep > this.energyCapacityAvailable - this.energyAvailable) {
         couriers[0].memory.recycle = true;
-    } else if(totalCarryWithNewCreep < this.energyCapacityAvailable - this.energyAvailable) {
+    } else if(totalCarry + CARRY_CAPACITY * courier.carryBodyparts < this.energyCapacityAvailable - this.energyAvailable) {
         if(this.memory.spawns.length > 0) {
             this.memory.spawns[0].createCreep(courier.bodyparts, undefined, {role: 'courier'});
         }
