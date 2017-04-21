@@ -17,6 +17,7 @@ var roleCourier = function() {
             structures: [STRUCTURE_CONTAINER, STRUCTURE_STORAGE]
         });
     } else {
+        /*
         var target;
         var closestStructure = this.pos.findClosestByRange(FIND_STRUCTURES, {
             filter: function(structure) {
@@ -48,6 +49,9 @@ var roleCourier = function() {
         } else {
             this.moveTo(Game.flags.Flag1);
         }
+        */
+        this.deposit({
+        });
     }
 };
 
