@@ -29,7 +29,7 @@ var CreepDeposit = function(input) {
                 }
             }
         });
-        console.log(closestStructure);
+        //console.log(closestStructure);
         var closestStructureDistance = this.pos.getRangeTo(closestStructure);
     }
     if(creepDepositing) {
@@ -40,7 +40,7 @@ var CreepDeposit = function(input) {
                 }
             }
         });
-        console.log(closestCreep);
+        //console.log(closestCreep);
         var closestCreepDistance = this.pos.getRangeTo(closestCreep);
     }
     if(closestCreepDistance <= closestStructureDistance) {
