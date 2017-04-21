@@ -21,37 +21,35 @@ var optimalHarvester = function(room) {
 }
 
 var RoomHarvesterSpawn = function() {
-    if(this.memory.spawns.length > 0) {
-        var sources = this.find(FIND_SOURCES);
-        room = Game.rooms['W93S6'];
-        var harvesters = this.find(FIND_MY_CREEPS, {
-            filter: function(creep) {
-                if(creep.memory.recycle) {
-                    return false;
-                } else if(creep.memory.role == 'harvester') {
-                    return true;
-                }
+    var sources = this.find(FIND_SOURCES);
+    room = Game.rooms['W93S6'];
+    var harvesters = this.find(FIND_MY_CREEPS, {
+        filter: function(creep) {
+            if(creep.memory.recycle) {
+                return false;
+            } else if(creep.memory.role == 'harvester') {
+                return true;
             }
+        }
+    });
+    var harvestPerTick = 0;
+    if(harvesters.length > 0) {
+        harvesters.sort(function(a, b) {
+            return a.getActiveBodyparts(WORK) > b.getActiveBodyparts(WORK);
         });
-        var harvestPerTick = 0;
-        if(harvesters.length > 0) {
-            harvesters.sort(function(a, b) {
-                return a.getActiveBodyparts(WORK) > b.getActiveBodyparts(WORK);
-            });
-            harvesters.forEach(function(creep) {
-                harvestPerTick = harvestPerTick + HARVEST_POWER * creep.getActiveBodyparts(WORK);
-            });
-            this.memory.harvestPerTick = harvestPerTick;
-            var harvester = optimalHarvester(this);
-            if(harvester) {
-                if(harvestPerTick > sources.length * ENERGY_REGEN_AMOUNT / ENERGY_REGEN_TIME) {
-                    harvesters[0].memory.recycle = true;
-                } else if(harvester.workBodyparts > harvesters[0].getActiveBodyparts(WORK)) {
-                    harvesters[0].memory.recycle = true;
-                    this.memory.spawns[0].createCreep(harvester.bodyparts, undefined, {role: 'harvester'});
-                } else if(harvestPerTick < sources.length * ENERGY_REGEN_AMOUNT / ENERGY_REGEN_TIME) {
-                    this.memory.spawns[0].createCreep(harvester.bodyparts, undefined, {role: 'harvester'});
-                }
+        harvesters.forEach(function(creep) {
+            harvestPerTick = harvestPerTick + HARVEST_POWER * creep.getActiveBodyparts(WORK);
+        });
+        this.memory.harvestPerTick = harvestPerTick;
+        var harvester = optimalHarvester(this);
+        if(harvestPerTick > sources.length * ENERGY_REGEN_AMOUNT / ENERGY_REGEN_TIME) {
+            harvesters[0].memory.recycle = true;
+        } else if(harvester && this.memory.spawns.length > 0) {
+            if(harvester.workBodyparts > harvesters[0].getActiveBodyparts(WORK)) {
+                harvesters[0].memory.recycle = true;
+                this.memory.spawns[0].createCreep(harvester.bodyparts, undefined, {role: 'harvester'});
+            } else if(harvestPerTick < sources.length * ENERGY_REGEN_AMOUNT / ENERGY_REGEN_TIME) {
+                this.memory.spawns[0].createCreep(harvester.bodyparts, undefined, {role: 'harvester'});
             }
         }
     }
