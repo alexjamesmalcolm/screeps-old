@@ -1,6 +1,6 @@
 var optimalCourier = function(room) {
-    var moveBodyparts = room.energyAvailable / (BODYPART_COST[MOVE] + BODYPART_COST[CARRY]);
-    var carryBodyparts = room.energyAvailable / (BODYPART_COST[MOVE] + BODYPART_COST[CARRY]);
+    var moveBodyparts = Math.floor(room.energyAvailable / (BODYPART_COST[MOVE] + BODYPART_COST[CARRY]));
+    var carryBodyparts = Math.floor(room.energyAvailable / (BODYPART_COST[MOVE] + BODYPART_COST[CARRY]));
     var creepCost = moveBodyparts * BODYPART_COST[MOVE] + carryBodyparts * BODYPART_COST[CARRY];
     var bodyparts = [];
     for(var i = 0; i < moveBodyparts; i++) {
@@ -13,6 +13,7 @@ var optimalCourier = function(room) {
         bodyparts: bodyparts,
         moveBodyparts: moveBodyparts,
         carryBodyparts: carryBodyparts,
+        creepCost: creepCost
     };
 };
 var RoomCourierSpawn = function() {
@@ -49,7 +50,6 @@ var RoomCourierSpawn = function() {
     if(this.memory.spawns.length > 0) {
         if(courier) {
             if(totalCarry + CARRY_CAPACITY * courier.carryBodyparts < droppedResources + this.energyCapacityAvailable - this.energyAvailable) { //This needs work
-                this.memory.spawns[0].createCreep(courier.bodyparts, undefined, {role: 'courier'});
             } else if(couriers.length > 0) {
                 if(totalCarry - CARRY_CAPACITY * couriers[0].getActiveBodyparts(CARRY) > droppedResources + this.energyCapacityAvailable - this.energyAvailable) { //This needs work
                     couriers[0].memory.recycle = true;
