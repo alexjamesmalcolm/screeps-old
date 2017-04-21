@@ -22,6 +22,17 @@ profiler.enable();
 module.exports.loop = function () {
     profiler.wrap(function() {
         for(var name in Memory.creeps) {
+            var creep = Game.creeps[name];
+            if(creep) {
+                if(creep.ticksToLive <= 1) {
+                    for(var resourceType in creep.carry) {
+                        creep.drop(resourceType);
+                    }
+                    creep.suicide();
+                    delete Memory.creeps[name];
+                    console.log('Clearing non-existing creep memory:', name);
+                }
+            }
             if(!Game.creeps[name]) {
                 delete Memory.creeps[name];
                 console.log('Clearing non-existing creep memory:', name);
