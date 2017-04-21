@@ -15,8 +15,21 @@ var RoomCycle = function() {
         this.memory.spawns = spawns;
     }
     var sources = this.find(FIND_SOURCES);
-    //this.memory.harvestPoints = 0;
-    
+    this.memory.harvestPoints = 0;
+    var room = this;
+    sources.forEach(function(source) {
+        for(var i = -1; i < 2; i++) {
+            for(var j = -1; j < 2; j++) {
+                if(i * j != i + j) {
+                    var pos = new RoomPosition(source.pos.x + i, source.pos.y + j, room.name);
+                    if(pos.lookFor(LOOK_TERRAIN) != 'wall') {
+                        room.memory.harvestPoints = room.memory.harvestPoints + 1;
+                    }
+                }
+            }
+        }
+    });
+    console.log(this.memory.harvestPoints);
     this.harvesterSpawn();
     this.courierSpawn();
     this.upgraderSpawn();
