@@ -20,16 +20,16 @@ var CreepDeposit = function(input) {
                         if(structure.structureType == structureType) {
                             switch(structureType) {
                                 case STRUCTURE_EXTENSION:
-                                    return structure.energyCapacity - structure.energy >= amount;
+                                    return structure.energyCapacity - structure.energy > 0;
                                     break;
                                 case STRUCTURE_SPAWN:
-                                    return structure.energyCapacity - structure.energy >= amount;
+                                    return structure.energyCapacity - structure.energy > 0;
                                     break;
                                 case STRUCTURE_STORAGE:
-                                    return structure.storeCapacity - _.sum(structure.store) >= amount;
+                                    return structure.storeCapacity - _.sum(structure.store) > 0;
                                     break;
                                 case STRUCTURE_CONTAINER:
-                                    return structure.storeCapacity - _.sum(structure.store) >= amount;
+                                    return structure.storeCapacity - _.sum(structure.store) > 0;
                             }
                         }
                     }
