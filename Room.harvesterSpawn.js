@@ -33,14 +33,15 @@ var RoomHarvesterSpawn = function() {
                 }
             }
         });
+        var harvestPerTick = 0;
         if(harvesters.length > 0) {
             harvesters.sort(function(a, b) {
                 return a.getActiveBodyparts(WORK) > b.getActiveBodyparts(WORK);
             });
-            var harvestPerTick = 0;
             harvesters.forEach(function(creep) {
                 harvestPerTick = harvestPerTick + HARVEST_POWER * creep.getActiveBodyparts(WORK);
             });
+            this.memory.harvestPerTick = harvestPerTick;
             var harvester = optimalHarvester(this);
             if(harvester) {
                 if(harvestPerTick > sources.length * ENERGY_REGEN_AMOUNT / ENERGY_REGEN_TIME) {
