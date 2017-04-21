@@ -10,6 +10,7 @@ Creep.prototype.roleFighter = require('Creep.roleFighter');
 Creep.prototype.roleHarvester = require('Creep.roleHarvester');
 Creep.prototype.roleUpgrader = require('Creep.roleUpgrader');
 Creep.prototype.weight = require('Creep.weight');
+Creep.prototype.sick = require('Creep.sick');
 Room.prototype.cycle = require('Room.cycle');
 Room.prototype.harvesterSpawn = require('Room.harvesterSpawn');
 Room.prototype.courierSpawn = require('Room.courierSpawn');
