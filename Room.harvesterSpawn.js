@@ -37,14 +37,18 @@ var RoomHarvesterSpawn = function() {
             harvesters.sort(function(a, b) {
                 return a.getActiveBodyparts(WORK) > b.getActiveBodyparts(WORK);
             });
+            var harvestPerTick = 0;
+            harvesters.forEach(function(creep) {
+                harvestPerTick = harvestPerTick + HARVEST_POWER * creep.getActiveBodypart(WORK);
+            });
             var harvester = optimalHarvester(this);
             if(harvester) {
-                if(harvesters.length > sources.length) {
+                if(harvestPerTick > sources.length * ENERGY_REGEN_AMOUNT / ENERGY_REGEN_TIME) {
                     harvesters[0].memory.recycle = true;
                 } else if(harvester.workBodyparts > harvesters[0].getActiveBodyparts(WORK)) {
                     harvesters[0].memory.recycle = true;
                     this.memory.spawns[0].createCreep(harvester.bodyparts, undefined, {role: 'harvester'});
-                } else if(harvesters.length < sources.length) {
+                } else if(harvestPerTick < sources.length * ENERGY_REGEN_AMOUNT / ENERGY_REGEN_TIME) {
                     this.memory.spawns[0].createCreep(harvester.bodyparts, undefined, {role: 'harvester'});
                 }
             }
