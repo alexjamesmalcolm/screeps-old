@@ -42,25 +42,16 @@ var RoomCourierSpawn = function() {
     couriers.forEach(function(creep, i) {
         totalCarry = totalCarry + CARRY_CAPACITY * creep.getActiveBodyparts(CARRY);
     });
-    if(couriers.length > 0) {
-        if(totalCarry - CARRY_CAPACITY * couriers[0].getActiveBodyparts(WORK) > this.memory.harvestPerTick * 10) {
-            if(this.memory.spawns.length > 0) {
-                this.memory.spawns[0].createCreep(courier.bodyparts, undefined, {role: 'courier'});
-            }
-        }
-    }
+    var droppedResources = 0;
+    this.find(FIND_DROPPED_RESOURCES).forEach(function(resource) {
+        droppedResources = droppedResources + resource.amount;
+    });
     if(this.memory.spawns.length > 0) {
         if(courier) {
-            /*
-            console.log(JSON.stringify(courier));
-            console.log(totalCarry);
-            console.log(CARRY_CAPACITY * courier.carryBodyparts);
-            console.log(this.memory.harvestPerTick * 10);
-            */
-            if(totalCarry + CARRY_CAPACITY * courier.carryBodyparts < this.memory.harvestPerTick * 10) { //This needs work
+            if(totalCarry + CARRY_CAPACITY * courier.carryBodyparts < droppedResources + this.energyCapacityAvailable - this.energyAvailable) { //This needs work
                 this.memory.spawns[0].createCreep(courier.bodyparts, undefined, {role: 'courier'});
             } else if(couriers.length > 0) {
-                if(totalCarry - CARRY_CAPACITY * couriers[0].getActiveBodyparts(CARRY) > this.memory.harvestPerTick * 10) { //This needs work
+                if(totalCarry - CARRY_CAPACITY * couriers[0].getActiveBodyparts(CARRY) > droppedResources + this.energyCapacityAvailable - this.energyAvailable) { //This needs work
                     couriers[0].memory.recycle = true;
                 } else if(courier.carryBodyparts > couriers[0].getActiveBodyparts(CARRY)) {
                     if(Math.ceil(couriers[0].weight() / couriers[0].getActiveBodyparts(MOVE)) >= 1) {
