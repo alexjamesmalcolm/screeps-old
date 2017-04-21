@@ -42,7 +42,7 @@ var RoomHarvesterSpawn = function() {
             harvestPerTick = harvestPerTick + HARVEST_POWER * creep.getActiveBodyparts(WORK);
         });
         //console.log(harvester);
-        if(harvestPerTick > sources.length * 3000 / 300) {
+        if(harvestPerTick > 2 * sources.length * 3000 / 300) {
             harvesters[0].memory.recycle = true;
         } else if(harvester && this.memory.spawns.length > 0) {
             if(harvester.workBodyparts > harvesters[0].getActiveBodyparts(WORK)) {
