@@ -47,13 +47,13 @@ var RoomUpgraderSpawn = function() {
                     upgradePerTick = upgradePerTick + creep.getActiveBodyparts(WORK);
                 });
                 //console.log(upgradePerTick);
-                if(upgrader.workBodyparts > upgraders[0].getActiveBodyparts(WORK)) {
+                if(upgradePerTick > 15) {
+                    upgraders[0].memory.recycle = true;
+                } else if(upgrader.workBodyparts > upgraders[0].getActiveBodyparts(WORK)) {
                     upgraders[0].memory.recycle = true;
                     this.memory.spawns[0].createCreep(upgrader.bodyparts, undefined, {role: 'upgrader'});
                 } else if(upgradePerTick < 15) {
                     this.memory.spawns[0].createCreep(upgrader.bodyparts, undefined, {role: 'upgrader'});
-                } else if(upgradePerTick > 20) {
-                    upgraders[0].memory.recycle = true;
                 }
             }
         }
