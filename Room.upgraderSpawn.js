@@ -50,9 +50,9 @@ var RoomUpgraderSpawn = function() {
                 if(upgrader.workBodyparts > upgraders[0].getActiveBodyparts(WORK)) {
                     upgraders[0].memory.recycle = true;
                     this.memory.spawns[0].createCreep(upgrader.bodyparts, undefined, {role: 'upgrader'});
-                } else if(upgradePerTick < 30) {
+                } else if(upgradePerTick < 15) {
                     this.memory.spawns[0].createCreep(upgrader.bodyparts, undefined, {role: 'upgrader'});
-                } else if(upgradePerTick > 35) {
+                } else if(upgradePerTick > 20) {
                     upgraders[0].memory.recycle = true;
                 }
             }
