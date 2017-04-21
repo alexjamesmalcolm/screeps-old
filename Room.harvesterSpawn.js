@@ -40,8 +40,6 @@ var RoomHarvesterSpawn = function() {
         harvesters.forEach(function(creep) {
             harvestPerTick = harvestPerTick + HARVEST_POWER * creep.getActiveBodyparts(WORK);
         });
-        this.memory.harvestPerTick = harvestPerTick;
-        console.log(this.memory.harvestPerTick);
         var harvester = optimalHarvester(this);
         if(harvestPerTick > sources.length * ENERGY_REGEN_AMOUNT / ENERGY_REGEN_TIME) {
             harvesters[0].memory.recycle = true;
@@ -54,6 +52,8 @@ var RoomHarvesterSpawn = function() {
             }
         }
     }
+    this.memory.harvestPerTick = harvestPerTick;
+    console.log(this.memory.harvestPerTick);
 };
 
 module.exports = RoomHarvesterSpawn;
