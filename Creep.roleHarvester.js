@@ -18,7 +18,7 @@ var roleHarvester = function() {
         }
     } else {
         this.deposit({
-            creepDepositing: false,
+            creepDepositing: true,
             structures: [STRUCTURE_CONTAINER, STRUCTURE_STORAGE]
         });
         this.passiveRepair
