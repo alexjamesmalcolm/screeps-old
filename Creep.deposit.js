@@ -16,6 +16,34 @@ var CreepDeposit = function(input) {
         && structures.indexOf(structureType) != -1;
     }
     if(structures.length > 0) {
+        var closestStructure;
+        for(var i = 0; i < structures.length; i++) {
+            var structureType = structures[i];
+            if(closestStructure) {
+                break;
+            } else {
+                closestStructure = this.pos.findClosestByRange(FIND_STRUCTURES, {
+                    filter: function(structure) {
+                        if(structure.structureType == structureType) {
+                            switch(structureType) {
+                                case STRUCTURE_EXTENSION:
+                                    return structure.energyCapacity - structure.energy >= amount;
+                                    break;
+                                case STRUCTURE_SPAWN:
+                                    return structure.energyCapacity - structure.energy >= amount;
+                                    break;
+                                case STRUCTURE_STORAGE:
+                                    return structure.storeCapacity - _.sum(structure.store) >= amount;
+                                    break;
+                                case STRUCTURE_CONTAINER:
+                                    return structure.storeCapacity - _.sum(structure.store) >= amount;
+                            }
+                        }
+                    }
+                });
+            }
+        }
+        /*
         var closestStructure = this.pos.findClosestByRange(FIND_STRUCTURES, {
             filter: function(structure) {
                 if(check(structure, structures, STRUCTURE_EXTENSION)) {
@@ -29,6 +57,7 @@ var CreepDeposit = function(input) {
                 }
             }
         });
+        */
         //console.log(closestStructure);
         var closestStructureDistance = this.pos.getRangeTo(closestStructure);
     }
