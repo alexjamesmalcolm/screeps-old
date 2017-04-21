@@ -46,9 +46,9 @@ var RoomCourierSpawn = function() {
             totalCarryWithoutLeastCreep = totalCarryWithoutLeastCreep + CARRY_CAPACITY * creep.getActiveBodyparts(CARRY);
         }
     });
-    if(totalCarryWithoutLeastCreep > this.energyCapacityAvailable - this.energyAvailable) {
+    if(totalCarryWithoutLeastCreep > this.memory.harvestPerTick * 10) {
         couriers[0].memory.recycle = true;
-    } else if(totalCarry + CARRY_CAPACITY * courier.carryBodyparts < this.energyCapacityAvailable - this.energyAvailable) {
+    } else if(totalCarry + CARRY_CAPACITY * courier.carryBodyparts < this.memory.harvestPerTick * 10) {
         if(this.memory.spawns.length > 0) {
             this.memory.spawns[0].createCreep(courier.bodyparts, undefined, {role: 'courier'});
         }
