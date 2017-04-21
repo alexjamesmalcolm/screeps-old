@@ -49,10 +49,12 @@ var RoomCourierSpawn = function() {
     });
     if(this.memory.spawns.length > 0) {
         if(courier) {
-            if(totalCarry + CARRY_CAPACITY * courier.carryBodyparts < droppedResources + this.energyCapacityAvailable - this.energyAvailable) { //This needs work
+            if(totalCarry + CARRY_CAPACITY * courier.carryBodyparts < droppedResources + this.energyCapacityAvailable - this.energyAvailable) {
             } else if(couriers.length > 0) {
-                if(totalCarry - CARRY_CAPACITY * couriers[0].getActiveBodyparts(CARRY) > droppedResources + this.energyCapacityAvailable - this.energyAvailable) { //This needs work
-                    couriers[0].memory.recycle = true;
+                if(totalCarry - CARRY_CAPACITY * couriers[0].getActiveBodyparts(CARRY) > droppedResources + this.energyCapacityAvailable - this.energyAvailable) {
+                    if(couriers.length > 1) {
+                        couriers[0].memory.recycle = true;
+                    }
                 } else if(courier.carryBodyparts > couriers[0].getActiveBodyparts(CARRY)) {
                     if(Math.ceil(couriers[0].weight() / couriers[0].getActiveBodyparts(MOVE)) >= 1) {
                         couriers[0].memory.recycle = true;
