@@ -17,20 +17,9 @@ var roleHarvester = function() {
             this.moveTo(source);
         }
     } else {
-        /*
         this.deposit({
             creepDepositing: true,
             structures: [STRUCTURE_CONTAINER, STRUCTURE_STORAGE, STRUCTURE_EXTENSION, STRUCTURE_SPAWN]
-        });
-        */
-        this.deposit({
-            creepDepositing:true,
-            structures: {
-                STRUCTURE_CONTAINER: 1,
-                STRUCTURE_STORAGE: 3,
-                STRUCTURE_EXTENSION: 2,
-                STRUCTURE_SPAWN: 2
-            }
         });
         this.passiveRepair
     }
