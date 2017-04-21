@@ -47,9 +47,9 @@ var RoomCourierSpawn = function() {
         }
     });
     var totalCarryWithNewCreep = totalCarry + 50 * courier.carryBodyparts;
-    if(totalCarryWithoutLeastCreep > 1000) {
+    if(totalCarryWithoutLeastCreep > this.energyCapacityAvailable - this.energyAvailable) {
         couriers[0].memory.recycle = true;
-    } else if(totalCarryWithNewCreep < 1000) {
+    } else if(totalCarryWithNewCreep < this.energyCapacityAvailable - this.energyAvailable) {
         if(this.memory.spawns.length > 0) {
             this.memory.spawns[0].createCreep(courier.bodyparts, undefined, {role: 'courier'});
         }
