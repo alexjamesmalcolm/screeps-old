@@ -32,6 +32,7 @@ var RoomHarvesterSpawn = function() {
             }
         }
     });
+    var harvester = optimalHarvester(this);
     var harvestPerTick = 0;
     if(harvesters.length > 0) {
         harvesters.sort(function(a, b) {
@@ -40,7 +41,7 @@ var RoomHarvesterSpawn = function() {
         harvesters.forEach(function(creep) {
             harvestPerTick = harvestPerTick + HARVEST_POWER * creep.getActiveBodyparts(WORK);
         });
-        var harvester = optimalHarvester(this);
+        //console.log(harvester);
         if(harvestPerTick > sources.length * 3000 / 300) {
             harvesters[0].memory.recycle = true;
         } else if(harvester && this.memory.spawns.length > 0) {
