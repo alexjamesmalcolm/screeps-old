@@ -5,13 +5,6 @@ var CreepDeposit = function(input) {
     var amount = this.carry.energy;
     var target;
     var check = function(structure, structures, structureType) {
-        /*
-        console.log(structure);
-        console.log(structures);
-        console.log(structureType);
-        console.log(structure.structureType == structureType
-        && structures.indexOf(structureType) != -1);
-        */
         return structure.structureType == structureType
         && structures.indexOf(structureType) != -1;
     }
@@ -43,21 +36,6 @@ var CreepDeposit = function(input) {
                 });
             }
         }
-        /*
-        var closestStructure = this.pos.findClosestByRange(FIND_STRUCTURES, {
-            filter: function(structure) {
-                if(check(structure, structures, STRUCTURE_EXTENSION)) {
-                    return structure.energyCapacity - structure.energy >= amount;
-                } else if(check(structure, structures, STRUCTURE_SPAWN)) {
-                    return structure.energyCapacity - structure.energy >= amount;
-                } else if(check(structure, structures, STRUCTURE_STORAGE)) {
-                    return structure.storeCapacity - _.sum(structure.store) >= amount;
-                } else if(check(structure, structures, STRUCTURE_CONTAINER)) {
-                    return structure.storeCapacity - _.sum(structure.store) >= amount;
-                }
-            }
-        });
-        */
         //console.log(closestStructure);
         var closestStructureDistance = this.pos.getRangeTo(closestStructure);
     }
@@ -79,7 +57,7 @@ var CreepDeposit = function(input) {
     } else {
         target = closestStructure;
     }
-    console.log(target);
+    //console.log(target);
     if(target) {
         if(this.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
             this.moveTo(target);
