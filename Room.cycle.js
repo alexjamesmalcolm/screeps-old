@@ -14,6 +14,9 @@ var RoomCycle = function() {
     } else {
         this.memory.spawns = spawns;
     }
+    var sources = this.find(FIND_SOURCES);
+    //this.memory.harvestPoints = 0;
+    
     this.harvesterSpawn();
     this.courierSpawn();
     this.upgraderSpawn();
