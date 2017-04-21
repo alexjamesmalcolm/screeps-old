@@ -1,10 +1,9 @@
 var CreepCycle = function(creepCount) {
-    var stateDying = require('state.dying');
     var stateRecycle = require('state.recycle');
     var creepCount = require('creepCount');
-    var sick = _.filter(Game.creeps, (creep) => creep.memory.sick);
+    var numberOfSick = _.filter(Game.creeps, (creep) => creep.memory.sick);
     if(!this.memory.sick) {
-        if(sick < creepCount.sick) {
+        if(numberOfSick < creepCount.sick) {
             if(this.ticksToLive < 500) {
                 this.memory.sick = true;
             }
@@ -13,7 +12,7 @@ var CreepCycle = function(creepCount) {
         }
     }
     if(this.memory.sick) {
-        stateDying.run(this);
+        this.sick();
     } else if(this.memory.recycle) {
         stateRecycle.run(this);
     } else if(this.memory.role == 'harvester') {
