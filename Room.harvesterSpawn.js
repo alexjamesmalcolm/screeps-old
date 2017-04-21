@@ -51,8 +51,12 @@ var RoomHarvesterSpawn = function() {
                 this.memory.spawns[0].createCreep(harvester.bodyparts, undefined, {role: 'harvester'});
             }
         }
-    } else if(harvestPerTick < sources.length * 3000 / 300) {
-        this.memory.spawns[0].createCreep(harvester.bodyparts, undefined, {role: 'harvester'});
+    } else if(harvester) {
+        if(this.memory.spawns.length > 0) {
+            if(harvestPerTick < sources.length * 3000 / 300) {
+                this.memory.spawns[0].createCreep(harvester.bodyparts, undefined, {role: 'harvester'});
+            }
+        }
     }
     this.memory.harvestPerTick = harvestPerTick;
     console.log(this.memory.harvestPerTick);
