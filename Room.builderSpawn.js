@@ -1,15 +1,25 @@
 var optimalBuilder = function(room, constructionProject) {
     var carryBodyparts, workBodyparts, moveBodyparts, creepCost, bodyparts, progressPerTick;
+    carryBodyparts = 1;
+    //x = 1
+    workBodyparts = Math.floor((2 * room.energyAvailable - (2 * BODYPART_COST[CARRY] + BODYPART_COST[MOVE]) * carryBodyparts) / (BODYPART_COST[MOVE] + 2 * BODYPART_COST[WORK]));
+    //y = (2 * t - (2 * c + m) * x) / (m + 2 * w);
+    moveBodyparts = Math.floor((carryBodyparts + workBodyparts) / 2);
+    //z = (x + y) / 2
+    //W = x + y
     creepCost = carryBodyparts * BODYPART_COST[CARRY] + workBodyparts * BODYPART_COST[WORK] + moveBodyparts * BODYPART_COST[MOVE];
+    //t = x * c + y * w + z * m
     bodyparts = [];
-    return {
-        carryBodyparts: carryBodyparts,
-        workBodyparts: workBodyparts,
-        moveBodyparts: moveBodyparts,
-        creepCost: creepCost,
-        bodyparts: bodyparts,
-        progressPerTick: progressPerTick
-    };
+    if(workBodyparts > 0 && moveBodyparts > 0 && carryBodyparts > 0) {
+        return {
+            carryBodyparts: carryBodyparts,
+            workBodyparts: workBodyparts,
+            moveBodyparts: moveBodyparts,
+            creepCost: creepCost,
+            bodyparts: bodyparts,
+            progressPerTick: progressPerTick
+        };
+    }
 };
 /*
 var optimalUpgrader = function(room) {
