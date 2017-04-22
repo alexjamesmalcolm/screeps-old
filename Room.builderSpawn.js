@@ -1,4 +1,4 @@
-var optimalBuilder = function(room, constructionProject) {
+var optimalBuilder = function(room) {
     var carryBodyparts, workBodyparts, moveBodyparts, creepCost, bodyparts, progressPerTick;
     carryBodyparts = 1;
     //x = 1
@@ -47,11 +47,28 @@ var RoomBuilderSpawn = function() {
             }
         }
     });
-    var cProgressPerTick = 0;
-    builders.forEach(function(creep) {
-        cProgressPerTick = cProgressPerTick + UPGRADE_CONTROLLER_POWER * creep.getActiveBodyparts(WORK);
+    builders.sort(function(a, b) {
+        var a_work = a.getActiveBodyparts(WORK);
+        var b_work = b.getActiveBodyparts(WORK);
+        return a_work < b_work;
     });
-    
+    var builder = optimalBuilder(this);
+    var buildPerTick = 0;
+    builders.forEach(function(creep) {
+        buildPerTick = buildPerTick + UPGRADE_CONTROLLER_POWER * creep.getActiveBodyparts(WORK);
+    });
+    if(builders.length > 0) {
+        if(builder) {
+            if(builder.workBodyparts > builders[0].getActiveBodyparts(WORK)) {
+                builders[0].memory.recycle = true;
+                this.memory.spawns[0].createCreep(builder.bodyparts, undefined, {role: 'builder'});
+            } else if(//) {this.memory.spawns[0].createCreep(builder.bodyparts, undefined, {role: 'builder'});}
+        }
+    } else {
+        if(builder) {
+            this.memory.spawns[0].createCreep(builder.bodyparts, undefined, {role: 'builder'});
+        }
+    }
 };
 
 module.exports = RoomBuilderSpawn;
