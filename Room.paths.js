@@ -38,6 +38,7 @@ var RoomPaths = function() {
     landmarks = landmarks.map(function(object) {
         return object.id;
     });
+    this.memory.landmarks = landmarks;
     paths = this.memory.paths;
     if(paths) {
         var pathDoesNotExist = false;
