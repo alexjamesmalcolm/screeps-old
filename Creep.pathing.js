@@ -1,7 +1,7 @@
 var CreepPathing = function(target) {
     var path, start, landmarks, landmarksById, end;
     if(this.memory.path) {
-        path = this.room.deserializePath(this.memory.path);
+        path = Room.deserializePath(this.memory.path);
         end = new RoomPosition(path[path.length-1].x, path[path.length-1].y, this.room.name);
         if(target.pos != end.pos) {
             delete this.memory.path;
