@@ -1,5 +1,6 @@
 var creepCount = require('creepCount');
 var RoomCycle = function() {
+    this.paths();
     var spawns = this.find(FIND_MY_SPAWNS, {
         filter: function(spawn) {
             if(spawn.spawning) {
