@@ -19,7 +19,7 @@ var RoomPaths = function() {
     landmarks = [];
     structures = this.find(FIND_MY_STRUCTURES, {
         filter: function(structure) {
-            console.log(structure);
+            //console.log(structure);
             return true;
         }
     });
