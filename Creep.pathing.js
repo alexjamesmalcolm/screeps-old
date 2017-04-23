@@ -7,7 +7,10 @@ var CreepPathing = function(target) {
             path = this.memory.path;
         }
         end = new RoomPosition(path[path.length-1].x, path[path.length-1].y, this.room.name);
-        if(target.pos != end.pos) {
+        if(target.pos.x != end.x || target.pos.y != end.y) {
+            for(var i = 0; i < path.length; i++) {
+                console.log(JSON.stringify(path[i]));
+            }
             delete this.memory.path;
         }
     }
