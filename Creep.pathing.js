@@ -1,5 +1,12 @@
 var CreepPathing = function(target) {
     var path, start, landmarks, landmarksById, end;
+    if(this.memory.path) {
+        path = this.room.deserializePath(this.memory.path);
+        end = new RoomPosition(path[path.length-1].x, path[path.length-1].y, this.room.name);
+        if(target.pos != end.pos) {
+            delete this.memory.path;
+        }
+    }
     if(!this.memory.path) {
         landmarksById = this.room.memory.landmarks;
         landmarks = landmarksById.forEach(function(id) {
@@ -16,13 +23,6 @@ var CreepPathing = function(target) {
             }
         }
         this.memory.path = path;
-    } else {
-        path = this.room.deserializePath(this.memory.path);
-        //end = path[path.length-1]
-        end = new RoomPosition(path[path.length-1].x, path[path.length-1].y, this.room.name);
-        if(target.pos != end.pos) {
-            //delete this.memory.path;
-        }
     }
     this.moveByPath(this.memory.path);
 };
