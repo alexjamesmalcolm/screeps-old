@@ -16,6 +16,7 @@ Room.prototype.harvesterSpawn = require('Room.harvesterSpawn');
 Room.prototype.courierSpawn = require('Room.courierSpawn');
 Room.prototype.upgraderSpawn = require('Room.upgraderSpawn');
 Room.prototype.builderSpawn = require('Room.builderSpawn');
+Room.prototype.paths = require('Room.paths');
 Spawn.prototype.cycle = require('Spawn.cycle');
 const profiler = require('screeps-profiler');
 profiler.enable();
