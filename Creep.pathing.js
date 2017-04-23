@@ -9,7 +9,7 @@ var CreepPathing = function(target) {
     }
     if(!this.memory.path) {
         landmarksById = this.room.memory.landmarks;
-        landmarks = landmarksById.forEach(function(id) {
+        landmarks = landmarksById.map(function(id) {
             return Game.getObjectById(id).pos;
         });
         start = this.pos.findClosestByRange(landmarks);
