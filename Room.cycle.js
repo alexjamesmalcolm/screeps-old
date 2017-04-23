@@ -30,7 +30,7 @@ var RoomCycle = function() {
             }
         }
     });
-    console.log(this.memory.harvestPoints);
+    //console.log(this.memory.harvestPoints);
     this.harvesterSpawn();
     this.courierSpawn();
     this.upgraderSpawn();
