@@ -63,7 +63,7 @@ var RoomHarvesterSpawn = function() {
         }
     }
     this.memory.harvestPerTick = harvestPerTick;
-    console.log(this.memory.harvestPerTick);
+    //console.log(this.memory.harvestPerTick);
 };
 
 module.exports = RoomHarvesterSpawn;
