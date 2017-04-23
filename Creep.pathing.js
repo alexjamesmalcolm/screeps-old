@@ -19,7 +19,7 @@ var CreepPathing = function(target) {
             if(this.pos.isNearTo(start)) {
                 path = this.room.memory.paths[start.id][target.id];
             } else {
-                path = 
+                path = this.pos.findPathTo(start);
             }
         }
         this.memory.path = path;
