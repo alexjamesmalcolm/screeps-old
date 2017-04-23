@@ -32,12 +32,13 @@ var optimalBuilder = function(room) {
 };
 var RoomBuilderSpawn = function() {
     var constructionProjects = this.find(FIND_CONSTRUCTION_SITES);
-    var aProgressTotal = 0;
-    var aProgress = 0;
+    var progressTotal = 0;
+    var progress = 0;
     constructionProjects.forEach(function(constructionProject) {
-        aProgressTotal = aProgressTotal + constructionProject.progressTotal;
-        aProgress = aProgress + constructionProject.progress;
+        progressTotal = progressTotal + constructionProject.progressTotal;
+        progress = progress + constructionProject.progress;
     });
+    var remainingProgress = progressTotal - progress;
     var builders = this.find(FIND_MY_CREEPS, {
         filter: function(creep) {
             if(creep.memory.recycle) {
@@ -57,6 +58,10 @@ var RoomBuilderSpawn = function() {
     builders.forEach(function(creep) {
         buildPerTick = buildPerTick + UPGRADE_CONTROLLER_POWER * creep.getActiveBodyparts(WORK);
     });
+    var timeToBuild;
+    if(buildPerTick > 0) {
+        timeToBuild = remainingProgress / buildPerTick;
+    }
     if(builders.length > 0) {
         if(builder) {
             if(builder.workBodyparts > builders[0].getActiveBodyparts(WORK)) {
