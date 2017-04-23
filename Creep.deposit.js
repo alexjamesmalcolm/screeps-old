@@ -60,7 +60,8 @@ var CreepDeposit = function(input) {
     //console.log(target);
     if(target) {
         if(this.transfer(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-            this.moveTo(target);
+            //this.moveTo(target);
+            this.pathing(target);
         }
     }
 };
