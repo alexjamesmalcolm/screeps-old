@@ -1,6 +1,6 @@
 var creepCount = require('creepCount');
 var RoomCycle = function() {
-    this.paths();
+    try {this.paths();} catch(err) {console.log(err+": Room.cycle.js this.paths()");}
     var spawns = this.find(FIND_MY_SPAWNS, {
         filter: function(spawn) {
             if(spawn.spawning) {
@@ -31,10 +31,10 @@ var RoomCycle = function() {
         }
     });
     //console.log(this.memory.harvestPoints);
-    this.harvesterSpawn();
-    this.courierSpawn();
-    this.upgraderSpawn();
-    this.builderSpawn();
+    try {this.harvesterSpawn();} catch(err) {console.log(err+": Room.cycle.js this.harvesterSpawn()");}
+    try {this.courierSpawn();} catch(err) {console.log(err+": Room.cycle.js this.courierSpawn()");}
+    try {this.upgraderSpawn();} catch(err) {console.log(err+": Room.cycle.js this.upgraderSpawn()");}
+    try {this.builderSpawn();} catch(err) {console.log(err+": Room.cycle.js this.builderSpawn()");}
     spawns = this.find(FIND_MY_SPAWNS);
     for(var name in spawns) {
         var spawn = spawns[name];
@@ -43,7 +43,7 @@ var RoomCycle = function() {
     var creeps = this.find(FIND_MY_CREEPS);
     for(var name in creeps) {
         var creep = creeps[name];
-        creep.cycle();
+        try {creep.cycle();} catch(err) {console.log(err+": Room.cycle.js creep.cycle()");}
     }
 };
 

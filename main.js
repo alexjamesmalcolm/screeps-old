@@ -25,7 +25,6 @@ const profiler = require('screeps-profiler');
 profiler.enable();
 module.exports.loop = function () {
     profiler.wrap(function() {
-        try {
             for(var name in Memory.creeps) {
                 var creep = Game.creeps[name];
                 if(creep) {
@@ -33,7 +32,7 @@ module.exports.loop = function () {
                         for(var resourceType in creep.carry) {
                             creep.drop(resourceType);
                         }
-                        creep.suicide();
+                        try {creep.suicide();} catch(err) {console.log(err+": main.js creep.suicide()");}
                         delete Memory.creeps[name];
                         console.log('Clearing non-existing creep memory:', name);
                     }
@@ -43,12 +42,9 @@ module.exports.loop = function () {
                     console.log('Clearing non-existing creep memory:', name);
                 }
             }
-        } catch(err) {console.log(err+": main.js 2");}
-        try {
-            for(var name in Game.rooms) {
-                var room = Game.rooms[name];
-                room.cycle();
-            }
-        } catch(err) {console.log(err+": main.js 3");}
+        for(var name in Game.rooms) {
+            var room = Game.rooms[name];
+            try {room.cycle();} catch(err) {console.log(err+": main.js room.cycle()");}
+        }
     });
 }
