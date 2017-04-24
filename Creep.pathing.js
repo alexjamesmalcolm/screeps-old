@@ -24,7 +24,7 @@ function PathingData(givenTarget, creep) {
     if(creepOnPath) {
         path = cachedPath;
     } else {
-        path = creep.pos.findPathTo(closestPointOnPath);
+        path = creep.pos.findPathTo(closestPointOnPath.x, closestPointOnPath.y);
     }
     this.creepOnPath = creepOnPath;
     this.midTarget = closestPointOnPath;
