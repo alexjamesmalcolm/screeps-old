@@ -1,15 +1,17 @@
 var isCreepOnPath = function(creep, path) {
+    var distance;
     var result = {};
     if(typeof path == 'string') {
         path = Room.deserializePath(path);
     }
     var closestPointOnPath = path[0];
     path.forEach(function(point) {
-        var distance = creep.pos.getRangeTo(point);
+        distance = creep.pos.getRangeTo(point);
         if(distance < creep.pos.getRangeTo(closestPointOnPath)) {
             closestPointOnPath = point;
         }
     });
+    console.log(distance);
     if(closestPointOnPath.x == creep.pos.x && closestPointOnPath.y == creep.pos.y) {
         result['creepOnPath'] = true;
     } else {
