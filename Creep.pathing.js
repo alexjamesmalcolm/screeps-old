@@ -21,10 +21,11 @@ function PathingData(givenTarget, creep) {
     } else {
         creepOnPath = false;
     }
+    closestPointOnPath = new RoomPosition(closestPointOnPath.x, closestPointOnPath.y, creep.room.name);
     if(creepOnPath) {
         path = cachedPath;
     } else {
-        path = creep.pos.findPathTo(closestPointOnPath.x, closestPointOnPath.y);
+        path = creep.pos.findPathTo(closestPointOnPath);
     }
     this.creepOnPath = creepOnPath;
     this.midTarget = closestPointOnPath;
