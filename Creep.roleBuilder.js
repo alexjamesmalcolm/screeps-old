@@ -14,7 +14,8 @@ var roleBuilder = function() {
             activeRepair: true,
             structures: [
                 STRUCTURE_CONTAINER,
-                STRUCTURE_STORAGE
+                STRUCTURE_STORAGE,
+                STRUCTURE_ROAD
             ]
         });
         this.passiveRepair();

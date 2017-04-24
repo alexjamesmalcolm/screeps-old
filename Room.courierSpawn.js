@@ -59,6 +59,7 @@ var RoomCourierSpawn = function() {
                     if(Math.ceil(couriers[0].weight() / couriers[0].getActiveBodyparts(MOVE)) >= 1) {
                         couriers[0].memory.recycle = true;
                         this.memory.spawns[0].createCreep(courier.bodyparts, undefined, {role: 'courier'});
+                        this.memory.spawns[0].memory.spawning = Game.time;
                     }
                 }
             }

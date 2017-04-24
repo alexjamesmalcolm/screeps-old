@@ -65,21 +65,27 @@ var RoomBuilderSpawn = function() {
     if(builders.length > 0) {
         if(builder) {
             if(builder.workBodyparts > builders[0].getActiveBodyparts(WORK)) {
-                builders[0].memory.recycle = true;
+                //builders[0].memory.recycle = true;
+                console.log(builder.bodyparts);
                 this.memory.spawns[0].createCreep(builder.bodyparts, undefined, {role: 'builder'});
+                this.memory.spawns[0].memory.spawning = Game.time;
             } else if(timeToBuild > 100) {
+                console.log(builder.bodyparts);
                 this.memory.spawns[0].createCreep(builder.bodyparts, undefined, {role: 'builder'});
+                this.memory.spawns[0].memory.spawning = Game.time;
             }
         }
-        if(timeToBuild - (remainingProgress / (UPGRADE_CONTROLLER_POWER * builders[0].getActiveBodyparts(WORK))) < 100) {
+        if(timeToBuild - (remainingProgress / (BUILD_POWER * builders[0].getActiveBodyparts(WORK))) < 100) {
             builders[0].memory.recycle = true;
         }
     } else {
         if(builder) {
             this.memory.spawns[0].createCreep(builder.bodyparts, undefined, {role: 'builder'});
+            this.memory.spawns[0].memory.spawning = Game.time;
         }
     }
     this.memory.buildPerTick = buildPerTick;
+    this.memory.remainingProgress = remainingProgress;
 };
 
 module.exports = RoomBuilderSpawn;

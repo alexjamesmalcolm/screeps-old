@@ -1,9 +1,8 @@
 var creepCount = require('creepCount');
-var RoomCycle = function() {
-    try {this.paths();} catch(err) {console.log(err+": Room.cycle.js this.paths()");}
-    var spawns = this.find(FIND_MY_SPAWNS, {
+var checkSpawns = function(room) {
+    var spawns = room.find(FIND_MY_SPAWNS, {
         filter: function(spawn) {
-            if(spawn.spawning) {
+            if(spawn.spawning || spawn.memory.spawning == Game.time) {
                 return false;
             } else {
                 return true;
@@ -11,10 +10,13 @@ var RoomCycle = function() {
         }
     });
     if(!spawns.length) {
-        this.memory.spawns = [];
+        room.memory.spawns = [];
     } else {
-        this.memory.spawns = spawns;
+        room.memory.spawns = spawns;
     }
+}
+var RoomCycle = function() {
+    try {this.paths();} catch(err) {console.log(err+": Room.cycle.js this.paths()");}
     var sources = this.find(FIND_SOURCES);
     this.memory.harvestPoints = 0;
     var room = this;
@@ -30,9 +32,13 @@ var RoomCycle = function() {
             }
         }
     });
+    checkSpawns(room);
     try {this.harvesterSpawn();} catch(err) {console.log(err+": Room.cycle.js this.harvesterSpawn()");}
+    checkSpawns(room);
     try {this.courierSpawn();} catch(err) {console.log(err+": Room.cycle.js this.courierSpawn()");}
+    checkSpawns(room);
     try {this.upgraderSpawn();} catch(err) {console.log(err+": Room.cycle.js this.upgraderSpawn()");}
+    checkSpawns(room);
     try {this.builderSpawn();} catch(err) {console.log(err+": Room.cycle.js this.builderSpawn()");}
     spawns = this.find(FIND_MY_SPAWNS);
     for(var name in spawns) {
@@ -44,7 +50,7 @@ var RoomCycle = function() {
         var creep = creeps[name];
         try {creep.cycle();} catch(err) {console.log(err+": Room.cycle.js creep.cycle()");}
     }
-    try {this.roadBuilder();} catch(err) {console.log(err+" Room.cycle.js this.roadBuilder()");}
+    //try {this.roadBuilder();} catch(err) {console.log(err+" Room.cycle.js this.roadBuilder()");}
 };
 
 module.exports = RoomCycle;

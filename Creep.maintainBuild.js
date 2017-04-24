@@ -16,15 +16,33 @@ var CreepBuild = function(input) {
     }
     var closestConstructionSiteDistance = this.pos.getRangeTo(constructionSite);
     var closestRepairTargetDistance = this.pos.getRangeTo(repairTarget);
+    //console.log(closestConstructionSiteDistance);
+    //console.log(closestRepairTargetDistance);
     var target;
-    if (closestConstructionSiteDistance <= closestRepairTargetDistance) {
+    if(closestConstructionSiteDistance >= 0 && closestRepairTargetDistance >= 0) {
+        if (closestConstructionSiteDistance <= closestRepairTargetDistance) {
+            target = constructionSite;
+            if(target) {
+                if(this.build(target) == ERR_NOT_IN_RANGE) {
+                    this.moveTo(target);
+                }
+            }
+        } else {
+            target = repairTarget;
+            if(target) {
+                if(this.repair(target) == ERR_NOT_IN_RANGE) {
+                    this.moveTo(target);
+                }
+            }
+        }
+    } else if(closestConstructionSiteDistance >= 0) {
         target = constructionSite;
         if(target) {
             if(this.build(target) == ERR_NOT_IN_RANGE) {
                 this.moveTo(target);
             }
         }
-    } else {
+    } else if(closestRepairTargetDistance >= 0) {
         target = repairTarget;
         if(target) {
             if(this.repair(target) == ERR_NOT_IN_RANGE) {
