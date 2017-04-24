@@ -15,10 +15,6 @@ function PathingData(givenTarget, creep) {
 var CreepPathing = function(givenTarget) {
     if(!this.memory.pathingData) {
         this.memory.pathingData = new PathingData(givenTarget, this);
-        this.memory.pathingData = {
-            target: givenTarget,
-            path:
-        };
     }
     /*
     try {
