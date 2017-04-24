@@ -72,7 +72,7 @@ var CreepPathing = function(givenTarget) {
             this.moveByPath(pathingData.midPath);
         }
     }
-    console.log(JSON.stringify(this.memory.pathingData));
+    //console.log(JSON.stringify(this.memory.pathingData));
 };
 
 module.exports = CreepPathing;
