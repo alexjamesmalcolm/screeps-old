@@ -4,14 +4,16 @@ var isCreepOnPath = function(creep, path) {
     if(typeof path == 'string') {
         path = Room.deserializePath(path);
     }
-    var closestPointOnPath = path[0];
+    var closestPointOnPath = new RoomPosition(path[0].x, path[0].y, creep.room.name);
     path.forEach(function(point) {
+        point = new RoomPosition(point.x, point.y, creep.room.name);
         distance = creep.pos.getRangeTo(point);
-        if(distance < creep.pos.getRangeTo(closestPointOnPath)) {
+        console.log(distance);
+        if(distance <= creep.pos.getRangeTo(closestPointOnPath)) {
+            console.log('Found closer point');
             closestPointOnPath = point;
         }
     });
-    console.log(distance);
     if(closestPointOnPath.x == creep.pos.x && closestPointOnPath.y == creep.pos.y) {
         result['creepOnPath'] = true;
     } else {
@@ -33,7 +35,6 @@ function PathingData(givenTarget, creep) {
     arrayPath = Room.deserializePath(cachedPath);
     creepOnPath = isCreepOnPath(creep, arrayPath).creepOnPath;
     closestPointOnPath = isCreepOnPath(creep, arrayPath).closestPointOnPath;
-    //Is the creep already on the correct path?
     if(creepOnPath) {
         path = cachedPath;
     } else {
@@ -76,3 +77,5 @@ var CreepPathing = function(givenTarget) {
 };
 
 module.exports = CreepPathing;
+//fuck you noodle
+//this is the only thing iknow how to do in java - Roscoe
