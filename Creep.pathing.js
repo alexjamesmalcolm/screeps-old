@@ -1,5 +1,8 @@
 var isCreepOnPath = function(creep, path) {
     var result = {};
+    if(typeof path == 'string') {
+        path = Room.deserializePath(path);
+    }
     var closestPointOnPath = path[0];
     path.forEach(function(point) {
         var distance = creep.pos.getRangeTo(point);
@@ -32,7 +35,7 @@ function PathingData(givenTarget, creep) {
     if(creepOnPath) {
         path = cachedPath;
     } else {
-        path = creep.pos.findPathTo(closestPointOnPath);
+        path = Room.serializePath(creep.pos.findPathTo(closestPointOnPath));
     }
     this.creepOnPath = creepOnPath;
     this.midTarget = closestPointOnPath;
@@ -55,8 +58,12 @@ var CreepPathing = function(givenTarget) {
         "midTarget":{"x":34,"y":21,"roomName":"sim"},
         "path":[{"x":34,"y":21,"dx":-1,"dy":0,"direction":7}],
         "target":"254ca3fefc0fe0a80b34672c",
-        "startingPos":{"x":35,"y":21,"roomName":"sim"}}
-    //if() {}
+        "startingPos":{"x":35,"y":21,"roomName":"sim"}
+    };
+    var pathingData = this.memory.pathingData;
+    if(pathingData.creepOnPath) {
+        this.moveByPath(pathingData.path);
+    }
     console.log(JSON.stringify(this.memory.pathingData));
 };
 
