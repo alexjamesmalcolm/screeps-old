@@ -37,84 +37,27 @@ function PathingData(givenTarget, creep) {
     this.creepOnPath = creepOnPath;
     this.midTarget = closestPointOnPath;
     this.path = path;
-    this.target = givenTarget.id;
+    this.targetId = givenTarget.id;
     this.startingPos = creep.pos;
 }
 
 var CreepPathing = function(givenTarget) {
     if(this.memory.pathingData) {
-        if(givenTarget != this.memory.pathingData.target) {
+        if(givenTarget.id != this.memory.pathingData.targetId) {
             delete this.memory.pathingData;
         }
     }
     if(!this.memory.pathingData) {
         this.memory.pathingData = new PathingData(givenTarget, this);
     }
+    var pathingData = {
+        "creepOnPath":false,
+        "midTarget":{"x":34,"y":21,"roomName":"sim"},
+        "path":[{"x":34,"y":21,"dx":-1,"dy":0,"direction":7}],
+        "target":"254ca3fefc0fe0a80b34672c",
+        "startingPos":{"x":35,"y":21,"roomName":"sim"}}
     //if() {}
     console.log(JSON.stringify(this.memory.pathingData));
-    /*
-    try {
-        var path, start, landmarks, landmarksById, moving, target, midTarget;
-        moving = false;
-        start = this.memory.start;
-        midTarget = this.memory.midTarget;
-        target = this.memory.target;
-        landmarksById = this.room.memory.landmarks;
-        landmarks = landmarksById.map(function(id) {
-            return Game.getObjectById(id);
-        });
-        if(this.memory.path) {
-            if(typeof this.memory.path == 'string') {
-                path = Room.deserializePath(this.memory.path);
-            } else {
-                path = this.memory.path;
-                this.memory.path = Room.serializePath(this.memory.path);
-            }
-        }
-    }
-    catch(err) {console.log("Issue with initializing variables in Creep.pathing.js: "+err);}
-    //Variables initialized
-    if(this.pos.isNearTo(givenTarget)) {
-        
-    }
-    
-    if(this.memory.path) {
-        if(typeof this.memory.path == 'string') {
-            path = Room.deserializePath(this.memory.path);
-        } else {
-            path = this.memory.path;
-        }
-        end = new RoomPosition(path[path.length-1].x, path[path.length-1].y, this.room.name);
-        if(target.pos.x != end.x || target.pos.y != end.y) {
-            delete this.memory.path;
-        }
-    }
-    if(!this.memory.path) {
-        landmarksById = this.room.memory.landmarks;
-        landmarks = landmarksById.map(function(id) {
-            return Game.getObjectById(id);
-        });
-        start = this.pos.findClosestByRange(landmarks);
-        if(start.pos == target.pos) {
-            path = this.pos.findPathTo(target);
-        } else {
-            if(this.pos.isNearTo(start)) {
-                path = this.room.memory.paths[start.id][target.id];
-                if(path[0].x != this.pos.x || path[0].y != this.pos.y) {
-                    this.moveTo(path[0].x, path[0].y);
-                    moving = true;
-                }
-            } else {
-                path = this.pos.findPathTo(start);
-            }
-        }
-        this.memory.path = path;
-    }
-    if(!moving) {
-        this.moveByPath(this.memory.path);
-    }
-    moving = true;
-    */
 };
 
 module.exports = CreepPathing;
