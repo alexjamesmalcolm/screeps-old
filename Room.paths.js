@@ -26,8 +26,8 @@ var RoomPaths = function() {
     sources = this.find(FIND_SOURCES);
     spawns = this.find(FIND_MY_SPAWNS);
     controller = [this.controller];
-    sites = this.find(FIND_CONSTRUCTION_SITES);
-    landmarks = landmarks.concat(structures, sources, spawns, controller, sites);
+    //sites = this.find(FIND_CONSTRUCTION_SITES);
+    landmarks = landmarks.concat(structures, sources, spawns, controller);
     landmarks = landmarks.map(function(object) {
         return object.id;
     });
