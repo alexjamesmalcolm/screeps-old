@@ -79,6 +79,7 @@ var RoomBuilderSpawn = function() {
             this.memory.spawns[0].createCreep(builder.bodyparts, undefined, {role: 'builder'});
         }
     }
+    this.memory.buildPerTick = buildPerTick;
 };
 
 module.exports = RoomBuilderSpawn;
