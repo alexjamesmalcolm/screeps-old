@@ -26,6 +26,7 @@ var isCreepOnPath = function(creep, path) {
 };
 
 function PathingData(givenTarget, creep) {
+    try {
     var closestLandmark, landmarksById, landmarks, cachedPath, arrayPath, creepOnPath, path, midPath, closestPointOnPath;
     landmarksById = creep.room.memory.landmarks;
     landmarks = landmarksById.map(function(id) {
@@ -34,8 +35,8 @@ function PathingData(givenTarget, creep) {
     closestLandmark = creep.pos.findClosestByRange(landmarks);
     cachedPath = creep.room.memory.paths[closestLandmark.id][givenTarget.id];
     arrayPath = Room.deserializePath(cachedPath);
-    creepOnPath = isCreepOnPath(creep, arrayPath).creepOnPath;
-    closestPointOnPath = isCreepOnPath(creep, arrayPath).closestPointOnPath;
+    try {creepOnPath = isCreepOnPath(creep, arrayPath).creepOnPath;} catch(err) {console.log(err+": Creep.pathing.js creepOnPath = isCreepOnPath()");}
+    try {closestPointOnPath = isCreepOnPath(creep, arrayPath).closestPointOnPath;} catch(err) {console.log(err+": Creep.pathing.js closestPointOnPath = isCreepOnPath()");}
     if(creepOnPath) {
         path = cachedPath;
     } else {
@@ -48,26 +49,35 @@ function PathingData(givenTarget, creep) {
     this.path = path;
     this.targetId = givenTarget.id;
     this.startingPos = creep.pos;
+    } catch(err) {
+        console.log('target');
+        console.log(givenTarget);
+        console.log('creep');
+        console.log(JSON.stringify(creep));
+        console.log(err+": PathingData");
+    }
 }
 
 var CreepPathing = function(givenTarget) {
     if(this.fatigue == 0) {
-        if(JSON.stringify(this.memory.lastPos) == JSON.stringify(this.pos)) {
-            this.memory.still = this.memory.still + 1;
-        } else {
-            this.memory.still = 0;
-            this.memory.lastPos = this.pos;
-        }
         if(this.pos.getRangeTo(givenTarget) < 4) {
             this.moveTo(givenTarget);
         } else {
+            if(JSON.stringify(this.memory.lastPos) == JSON.stringify(this.pos)) {
+                this.memory.still = this.memory.still + 1;
+            } else {
+                this.memory.still = 0;
+                this.memory.lastPos = this.pos;
+            }
             if(this.memory.pathingData) {
                 if(givenTarget.id != this.memory.pathingData.targetId) {
                     delete this.memory.pathingData;
                 }
             }
             if(!this.memory.pathingData) {
-                this.memory.pathingData = new PathingData(givenTarget, this);
+                var pathingData;
+                pathingData = new PathingData(givenTarget, this);
+                this.memory.pathingdata = pathingData;
             }
             var pathingData = this.memory.pathingData;
             //console.log(this.memory.still);
@@ -78,7 +88,8 @@ var CreepPathing = function(givenTarget) {
                 if(pathingData.creepOnPath) {
                     this.moveByPath(pathingData.path);
                 } else {
-                    if(isCreepOnPath(this, pathingData.path).creepOnPath) {
+                    try {var creepOnPath = isCreepOnPath(this, pathingData.path).creepOnPath;} catch(err) {console.log(err+": Creep.pathing.js creepOnPath = isCreepOnPath()");}
+                    if(creepOnPath) {
                         this.memory.pathingData.creepOnPath = true;
                         this.moveByPath(pathingData.path);
                     } else {
