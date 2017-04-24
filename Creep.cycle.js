@@ -12,19 +12,19 @@ var CreepCycle = function(creepCount) {
         }
     }
     if(this.memory.sick) {
-        this.sick();
+        try {this.sick();} catch(err) {console.log(err+": Creep.cycle.js this.sick()");}
     } else if(this.memory.recycle) {
-        stateRecycle.run(this);
+        try {stateRecycle.run(this);} catch(err) {console.log(err+": Creep.cycle.js stateRecycle.run(this)");}
     } else if(this.memory.role == 'harvester') {
-        this.roleHarvester();
+        try {this.roleHarvester();} catch(err) {console.log(err+": Creep.cycle.js this.roleHarvester()");}
     } else if(this.memory.role == 'builder') {
-        this.roleBuilder();
+        try {this.roleBuilder();} catch(err) {console.log(err+": Creep.cycle.js this.roleBuilder()");}
     } else if(this.memory.role == 'upgrader') {
-        this.roleUpgrader();
+        try {this.roleUpgrader();} catch(err) {console.log(err+": Creep.cycle.js this.roleUpgrader()");}
     } else if(this.memory.role == 'fighter') {
-        this.roleFighter();
+        try {this.roleFighter();} catch(err) {console.log(err+": Creep.cycle.js this.roleFighter()");}
     } else if(this.memory.role == 'courier') {
-        this.roleCourier();
+        try {this.roleCourier();} catch(err) {console.log(err+": Creep.cycle.js this.roleCourier()");}
     }
 };
 
