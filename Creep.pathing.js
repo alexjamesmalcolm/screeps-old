@@ -48,11 +48,18 @@ function PathingData(givenTarget, creep) {
     this.path = path;
     this.targetId = givenTarget.id;
     this.startingPos = creep.pos;
+    this.still = 0;
 }
 
 var CreepPathing = function(givenTarget) {
     if(this.fatigue == 0) {
-        if(this.pos.getRangeTo(givenTarget) < 2) {
+        if(JSON.stringify(this.memory.lastPos) == JSON.stringify(this.pos)) {
+            this.memory.still = this.memory.still + 1;
+        } else {
+            this.memory.still = 0;
+            this.memory.lastPos = this.pos;
+        }
+        if(this.pos.getRangeTo(givenTarget) < 4) {
             this.moveTo(givenTarget);
         } else {
             if(this.memory.pathingData) {
@@ -64,14 +71,19 @@ var CreepPathing = function(givenTarget) {
                 this.memory.pathingData = new PathingData(givenTarget, this);
             }
             var pathingData = this.memory.pathingData;
-            if(pathingData.creepOnPath) {
-                this.moveByPath(pathingData.path);
-            } else {
-                if(isCreepOnPath(this, pathingData.path).creepOnPath) {
-                    this.memory.pathingData.creepOnPath = true;
+            if(this.memory.still > 3) {
+                this.moveTo(givenTarget);
+                console.log('Creep.pathing.js was forced to use Creep.moveTo');
+            } else{
+                if(pathingData.creepOnPath) {
                     this.moveByPath(pathingData.path);
                 } else {
-                    this.moveByPath(pathingData.midPath);
+                    if(isCreepOnPath(this, pathingData.path).creepOnPath) {
+                        this.memory.pathingData.creepOnPath = true;
+                        this.moveByPath(pathingData.path);
+                    } else {
+                        this.moveByPath(pathingData.midPath);
+                    }
                 }
             }
         }
