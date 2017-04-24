@@ -1,5 +1,5 @@
 var creepCount = require('creepCount');
-try{
+try {
     Creep.prototype.collect = require('Creep.collect');
     Creep.prototype.cycle = require('Creep.cycle');
     Creep.prototype.deposit = require('Creep.deposit');
@@ -20,9 +20,7 @@ try{
     Room.prototype.builderSpawn = require('Room.builderSpawn');
     Room.prototype.paths = require('Room.paths');
     Spawn.prototype.cycle = require('Spawn.cycle');
-} catch(err) {
-    console.log(err+": initializing prototypes");
-}
+} catch(err) {console.log(err+": main.js 1");}
 const profiler = require('screeps-profiler');
 profiler.enable();
 module.exports.loop = function () {
@@ -45,12 +43,12 @@ module.exports.loop = function () {
                     console.log('Clearing non-existing creep memory:', name);
                 }
             }
-        } catch(err) {console.log(err+": main.js line 48");}
+        } catch(err) {console.log(err+": main.js 2");}
         try {
             for(var name in Game.rooms) {
                 var room = Game.rooms[name];
                 room.cycle();
             }
-        } catch(err) {console.log(err+": main.js line 54");}
+        } catch(err) {console.log(err+": main.js 3");}
     });
 }
