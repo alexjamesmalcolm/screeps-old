@@ -8,9 +8,7 @@ var isCreepOnPath = function(creep, path) {
     path.forEach(function(point) {
         point = new RoomPosition(point.x, point.y, creep.room.name);
         distance = creep.pos.getRangeTo(point);
-        console.log(distance);
         if(distance <= creep.pos.getRangeTo(closestPointOnPath)) {
-            console.log('Found closer point');
             closestPointOnPath = point;
         }
     });
