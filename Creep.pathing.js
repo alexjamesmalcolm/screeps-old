@@ -38,6 +38,7 @@ function PathingData(givenTarget, creep) {
         path = cachedPath;
         midPath = Room.serializePath(creep.pos.findPathTo(closestPointOnPath));
     }
+    this.midPath = midPath;
     this.creepOnPath = creepOnPath;
     this.midTarget = closestPointOnPath;
     this.path = path;
