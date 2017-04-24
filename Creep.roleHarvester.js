@@ -17,11 +17,11 @@ var roleHarvester = function() {
             this.moveTo(source);
         }
     } else {
-        this.deposit({
+        try {this.deposit({
             creepDepositing: true,
             structures: [STRUCTURE_CONTAINER, STRUCTURE_STORAGE, STRUCTURE_EXTENSION, STRUCTURE_SPAWN]
-        });
-        this.passiveRepair
+        });} catch(err) {console.log(err+": Creep.roleHarvester.js this.deposit()");}
+        try {this.passiveRepair();} catch(err) {console.log(err+": Creep.roleHarvester.js this.passiveRepair()");}
     }
     //this.memory.lastPos = this.pos;
 };
