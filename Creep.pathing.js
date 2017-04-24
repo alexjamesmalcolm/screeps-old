@@ -9,7 +9,10 @@ var isCreepOnPath = function(creep, path) {
         point = new RoomPosition(point.x, point.y, creep.room.name);
         distance = creep.pos.getRangeTo(point);
         if(distance <= creep.pos.getRangeTo(closestPointOnPath)) {
-            closestPointOnPath = point;
+            if(point.lookFor(LOOK_CREEPS).length == 0) {
+                closestPointOnPath = point;
+            }
+            
         }
     });
     if(closestPointOnPath.x == creep.pos.x && closestPointOnPath.y == creep.pos.y) {
@@ -48,30 +51,32 @@ function PathingData(givenTarget, creep) {
 }
 
 var CreepPathing = function(givenTarget) {
-    if(this.pos.getRangeTo(givenTarget) < 2) {
-        this.moveTo(givenTarget);
-    } else {
-        if(this.memory.pathingData) {
-            if(givenTarget.id != this.memory.pathingData.targetId) {
-                delete this.memory.pathingData;
-            }
-        }
-        if(!this.memory.pathingData) {
-            this.memory.pathingData = new PathingData(givenTarget, this);
-        }
-        var pathingData = this.memory.pathingData;
-        if(pathingData.creepOnPath) {
-            this.moveByPath(pathingData.path);
+    if(this.fatigue == 0) {
+        if(this.pos.getRangeTo(givenTarget) < 2) {
+            this.moveTo(givenTarget);
         } else {
-            if(isCreepOnPath(this, pathingData.path).creepOnPath) {
-                this.memory.pathingData.creepOnPath = true;
+            if(this.memory.pathingData) {
+                if(givenTarget.id != this.memory.pathingData.targetId) {
+                    delete this.memory.pathingData;
+                }
+            }
+            if(!this.memory.pathingData) {
+                this.memory.pathingData = new PathingData(givenTarget, this);
+            }
+            var pathingData = this.memory.pathingData;
+            if(pathingData.creepOnPath) {
                 this.moveByPath(pathingData.path);
             } else {
-                this.moveByPath(pathingData.midPath);
+                if(isCreepOnPath(this, pathingData.path).creepOnPath) {
+                    this.memory.pathingData.creepOnPath = true;
+                    this.moveByPath(pathingData.path);
+                } else {
+                    this.moveByPath(pathingData.midPath);
+                }
             }
         }
-    }
     //console.log(JSON.stringify(this.memory.pathingData));
+    }
 };
 
 module.exports = CreepPathing;
