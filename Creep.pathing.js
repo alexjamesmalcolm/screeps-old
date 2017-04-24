@@ -48,7 +48,6 @@ function PathingData(givenTarget, creep) {
     this.path = path;
     this.targetId = givenTarget.id;
     this.startingPos = creep.pos;
-    this.still = 0;
 }
 
 var CreepPathing = function(givenTarget) {
