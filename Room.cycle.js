@@ -30,7 +30,6 @@ var RoomCycle = function() {
             }
         }
     });
-    //console.log(this.memory.harvestPoints);
     try {this.harvesterSpawn();} catch(err) {console.log(err+": Room.cycle.js this.harvesterSpawn()");}
     try {this.courierSpawn();} catch(err) {console.log(err+": Room.cycle.js this.courierSpawn()");}
     try {this.upgraderSpawn();} catch(err) {console.log(err+": Room.cycle.js this.upgraderSpawn()");}
@@ -45,6 +44,7 @@ var RoomCycle = function() {
         var creep = creeps[name];
         try {creep.cycle();} catch(err) {console.log(err+": Room.cycle.js creep.cycle()");}
     }
+    try {this.roadBuilder();} catch(err) {console.log(err+" Room.cycle.js this.roadBuilder()");}
 };
 
 module.exports = RoomCycle;
