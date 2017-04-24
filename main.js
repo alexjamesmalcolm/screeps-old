@@ -27,26 +27,30 @@ const profiler = require('screeps-profiler');
 profiler.enable();
 module.exports.loop = function () {
     profiler.wrap(function() {
-        for(var name in Memory.creeps) {
-            var creep = Game.creeps[name];
-            if(creep) {
-                if(creep.ticksToLive <= 1) {
-                    for(var resourceType in creep.carry) {
-                        creep.drop(resourceType);
+        try {
+            for(var name in Memory.creeps) {
+                var creep = Game.creeps[name];
+                if(creep) {
+                    if(creep.ticksToLive <= 1) {
+                        for(var resourceType in creep.carry) {
+                            creep.drop(resourceType);
+                        }
+                        creep.suicide();
+                        delete Memory.creeps[name];
+                        console.log('Clearing non-existing creep memory:', name);
                     }
-                    creep.suicide();
+                }
+                if(!Game.creeps[name]) {
                     delete Memory.creeps[name];
                     console.log('Clearing non-existing creep memory:', name);
                 }
             }
-            if(!Game.creeps[name]) {
-                delete Memory.creeps[name];
-                console.log('Clearing non-existing creep memory:', name);
+        } catch(err) {console.log(err+": main.js line 48");}
+        try {
+            for(var name in Game.rooms) {
+                var room = Game.rooms[name];
+                room.cycle();
             }
-        }
-        for(var name in Game.rooms) {
-            var room = Game.rooms[name];
-            room.cycle();
-        }
+        } catch(err) {console.log(err+": main.js line 54");}
     });
 }
