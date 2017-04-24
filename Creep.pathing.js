@@ -1,18 +1,38 @@
 var getClosestPointOnPath = function(creep, path) {};
 function PathingData(givenTarget, creep) {
-    var closestLandmark, landmarksById, landmarks, cachedPath;
+    var closestLandmark, landmarksById, landmarks, cachedPath, arrayPath, creepOnPath, path, closestPointOnPath;
     landmarksById = creep.room.memory.landmarks;
     landmarks = landmarksById.map(function(id) {
         return Game.getObjectById(id);
     });
     closestLandmark = creep.pos.findClosestByRange(landmarks);
     cachedPath = creep.room.memory.paths[closestLandmark.id][givenTarget.id];
-    //this.path = path;
+    arrayPath = Room.deserialize(cachedPath);
+    //Is the creep already on the correct path?
+    closestPointOnPath = creep.pos.findClosestByRange(arrayPath);
+    if(closestPointOnPath.x == creep.pos.x && closestPointOnPath.y == creep.pos.y) {
+        creepOnPath = true;
+    } else {
+        creepOnPath = false;
+    }
+    if(creepOnPath) {
+        path = cachedPath;
+    } else {
+        path = creep.pos.findPathTo(closestPointOnPath);
+    }
+    this.creepOnPath = creepOnPath;
+    this.midTarget = closestPointOnPath;
+    this.path = path;
     this.target = givenTarget;
-    this.lastPos = creep.pos;
+    this.startingPos = creep.pos;
 }
 
 var CreepPathing = function(givenTarget) {
+    if(this.memory.pathingData) {
+        if(givenTarget != this.memory.pathingData.target) {
+            delete this.memory.pathingData;
+        }
+    }
     if(!this.memory.pathingData) {
         this.memory.pathingData = new PathingData(givenTarget, this);
     }
