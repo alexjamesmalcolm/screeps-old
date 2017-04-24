@@ -37,7 +37,7 @@ function PathingData(givenTarget, creep) {
     this.creepOnPath = creepOnPath;
     this.midTarget = closestPointOnPath;
     this.path = path;
-    this.target = givenTarget;
+    this.target = givenTarget.id;
     this.startingPos = creep.pos;
 }
 
@@ -50,7 +50,8 @@ var CreepPathing = function(givenTarget) {
     if(!this.memory.pathingData) {
         this.memory.pathingData = new PathingData(givenTarget, this);
     }
-    //console.log(JSON.stringify(this.memory.pathingData));
+    //if() {}
+    console.log(JSON.stringify(this.memory.pathingData));
     /*
     try {
         var path, start, landmarks, landmarksById, moving, target, midTarget;
