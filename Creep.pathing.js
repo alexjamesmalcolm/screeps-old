@@ -1,5 +1,20 @@
 var isCreepOnPath = function(creep, path) {
-    
+    var result = {};
+    var closestPointOnPath = path[0];
+    path.forEach(function(point) {
+        var distance = creep.pos.getRangeTo(point);
+        if(distance < creep.pos.getRangeTo(closestPointOnPath)) {
+            closestPointOnPath = point;
+        }
+    });
+    if(closestPointOnPath.x == creep.pos.x && closestPointOnPath.y == creep.pos.y) {
+        result['creepOnPath'] = true;
+    } else {
+        result['creepOnPath'] = false;
+    }
+    closestPointOnPath = new RoomPosition(closestPointOnPath.x, closestPointOnPath.y, creep.room.name);
+    result['closestPointOnPath'] = closestPointOnPath;
+    return result;
 };
 
 function PathingData(givenTarget, creep) {
@@ -11,21 +26,9 @@ function PathingData(givenTarget, creep) {
     closestLandmark = creep.pos.findClosestByRange(landmarks);
     cachedPath = creep.room.memory.paths[closestLandmark.id][givenTarget.id];
     arrayPath = Room.deserializePath(cachedPath);
-    creepOnPath = isCreepOnPath(creep, arrayPath);
+    creepOnPath = isCreepOnPath(creep, arrayPath).creepOnPath;
+    closestPointOnPath = isCreepOnPath(creep, arrayPath).closestPointOnPath;
     //Is the creep already on the correct path?
-    closestPointOnPath = arrayPath[0];
-    arrayPath.forEach(function(point) {
-        var distance = creep.pos.getRangeTo(point);
-        if(distance < creep.pos.getRangeTo(closestPointOnPath)) {
-            closestPointOnPath = point;
-        }
-    });
-    if(closestPointOnPath.x == creep.pos.x && closestPointOnPath.y == creep.pos.y) {
-        creepOnPath = true;
-    } else {
-        creepOnPath = false;
-    }
-    closestPointOnPath = new RoomPosition(closestPointOnPath.x, closestPointOnPath.y, creep.room.name);
     if(creepOnPath) {
         path = cachedPath;
     } else {
