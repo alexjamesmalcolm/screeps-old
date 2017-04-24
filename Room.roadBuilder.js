@@ -8,7 +8,7 @@ function dedupe(arr) {
         return p;
     }, { temp: [], out: [] }).out;
 }
-var RoomRoadBuilder = function() {
+var RoomRoadBuilder = function(start) {
     var numberOfConstructionSites = 0;
     for(var id in Game.constructionSites) {
         var site = Game.constructionSites[id];
@@ -21,7 +21,6 @@ var RoomRoadBuilder = function() {
             this.memory.bigPath = [];
         }
         var bigPath = this.memory.bigPath;
-        var start = this.controller.id;
         for(var end in paths) {
             var path = Room.deserializePath(paths[start][end]);
             for(var i = 0; i < path.length; i++) {
