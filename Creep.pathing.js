@@ -70,7 +70,8 @@ var CreepPathing = function(givenTarget) {
                 this.memory.pathingData = new PathingData(givenTarget, this);
             }
             var pathingData = this.memory.pathingData;
-            if(this.memory.still > 3) {
+            //console.log(this.memory.still);
+            if(this.memory.still > 0) {
                 this.moveTo(givenTarget);
                 console.log('Creep.pathing.js was forced to use Creep.moveTo');
             } else{
