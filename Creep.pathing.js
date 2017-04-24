@@ -65,7 +65,7 @@ var CreepPathing = function(givenTarget) {
     if(pathingData.creepOnPath) {
         this.moveByPath(pathingData.path);
     } else {
-        if(isCreepOnPath())
+        if(isCreepOnPath(creep, pathingData.path))
         this.moveByPath(pathingData.path);
     }
     console.log(JSON.stringify(this.memory.pathingData));
