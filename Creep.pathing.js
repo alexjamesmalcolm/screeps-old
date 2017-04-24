@@ -9,7 +9,13 @@ function PathingData(givenTarget, creep) {
     cachedPath = creep.room.memory.paths[closestLandmark.id][givenTarget.id];
     arrayPath = Room.deserializePath(cachedPath);
     //Is the creep already on the correct path?
-    closestPointOnPath = creep.pos.findClosestByRange(arrayPath);
+    closestPointOnPath = arrayPath[0];
+    arrayPath.forEach(function(point) {
+        var distance = creep.pos.getRangeTo(point);
+        if(distance < creep.pos.getRangeTo(closestPointOnPath)) {
+            closestPointOnPath = point;
+        }
+    });
     if(closestPointOnPath.x == creep.pos.x && closestPointOnPath.y == creep.pos.y) {
         creepOnPath = true;
     } else {
