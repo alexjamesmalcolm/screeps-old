@@ -50,6 +50,11 @@ var CreepBuild = function(input) {
             }
         }
     }
+    if(target) {
+        return OK;
+    } else {
+        return ERR_NOT_FOUND;
+    }
 };
 
 module.exports = CreepBuild;

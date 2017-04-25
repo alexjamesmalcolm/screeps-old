@@ -18,6 +18,9 @@ var roleBuilder = function() {
                 STRUCTURE_ROAD
             ]
         });
+        if(result == ERR_NOT_FOUND) {
+            this.memory.recycle = true;
+        }
         this.passiveRepair();
     } else {
         this.collect({
