@@ -46,6 +46,7 @@ var RoomBuilderSpawn = function() {
         hits = hits + structure.hits;
     });
     var remainingProgress = (progressTotal - progress) + (hitsTotal - hits);
+    console.log("remainingProgress: "+remainingProgress);
     var builders = this.find(FIND_MY_CREEPS, {
         filter: function(creep) {
             if(creep.memory.recycle) {
