@@ -56,7 +56,7 @@ var RoomBuilderSpawn = function() {
     var builder = optimalBuilder(this);
     var buildPerTick = 0;
     builders.forEach(function(creep) {
-        buildPerTick = buildPerTick + UPGRADE_CONTROLLER_POWER * creep.getActiveBodyparts(WORK);
+        buildPerTick = buildPerTick + BUILD_POWER * creep.getActiveBodyparts(WORK);
     });
     var timeToBuild;
     if(buildPerTick > 0) {
