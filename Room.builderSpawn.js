@@ -38,7 +38,14 @@ var RoomBuilderSpawn = function() {
         progressTotal = progressTotal + constructionProject.progressTotal;
         progress = progress + constructionProject.progress;
     });
-    var remainingProgress = progressTotal - progress;
+    var structures = this.find(FIND_MY_STRUCTURES);
+    var hitsTotal = 0;
+    var hits = 0;
+    structures.forEach(function(structure) {
+        hitsTotal = hitsTotal + structure.hitsMax;
+        hits = hits + structure.hits;
+    });
+    var remainingProgress = (progressTotal - progress) + (hitsTotal - hits);
     var builders = this.find(FIND_MY_CREEPS, {
         filter: function(creep) {
             if(creep.memory.recycle) {
