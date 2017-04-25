@@ -27,40 +27,45 @@ var RoomCourierSpawn = function() {
             }
         }
     });
-    couriers.sort(function(a, b){
-        var a_movementTime = Math.ceil(a.weight() / a.getActiveBodyparts[MOVE]);
-        var b_movementTime = Math.ceil(b.weight() / b.getActiveBodyparts[MOVE]);
-        var a_carry = a.getActiveBodyparts(CARRY);
-        var b_carry = b.getActiveBodyparts(CARRY);
-        if(a_movementTime == b_movementTime) {
-            return a_carry < b_carry;
-        } else {
-            return  a_movementTime > b_movementTime;
-        }
-    });
     var courier = optimalCourier(this);
-    var totalCarry = 0;
-    couriers.forEach(function(creep, i) {
-        totalCarry = totalCarry + CARRY_CAPACITY * creep.getActiveBodyparts(CARRY);
-    });
-    var droppedResources = 0;
-    this.find(FIND_DROPPED_RESOURCES).forEach(function(resource) {
-        droppedResources = droppedResources + resource.amount;
-    });
-    if(this.memory.spawns.length > 0) {
-        if(courier) {
-            if(totalCarry + CARRY_CAPACITY * courier.carryBodyparts < droppedResources + this.energyCapacityAvailable - this.energyAvailable) {
-            } else if(couriers.length > 0) {
-                if(totalCarry - CARRY_CAPACITY * couriers[0].getActiveBodyparts(CARRY) > droppedResources + this.energyCapacityAvailable - this.energyAvailable) {
-                    if(couriers.length > 1) {
-                        couriers[0].memory.recycle = true;
-                    }
-                } else if(courier.carryBodyparts > couriers[0].getActiveBodyparts(CARRY)) {
+    if(couriers.length > 0) {
+        couriers.sort(function(a, b){
+            var a_movementTime = Math.ceil(a.weight() / a.getActiveBodyparts[MOVE]);
+            var b_movementTime = Math.ceil(b.weight() / b.getActiveBodyparts[MOVE]);
+            var a_carry = a.getActiveBodyparts(CARRY);
+            var b_carry = b.getActiveBodyparts(CARRY);
+            if(a_movementTime == b_movementTime) {
+                return a_carry < b_carry;
+            } else {
+                return  a_movementTime > b_movementTime;
+            }
+        });
+        var totalCarry = 0;
+        couriers.forEach(function(creep, i) {
+            totalCarry = totalCarry + CARRY_CAPACITY * creep.getActiveBodyparts(CARRY);
+        });
+        var droppedResources = 0;
+        this.find(FIND_DROPPED_RESOURCES).forEach(function(resource) {
+            droppedResources = droppedResources + resource.amount;
+        });
+        var transitEnergy = droppedResources + this.energyCapacityAvailable - this.energyAvailable;
+        if(this.memory.spawns.length > 0) {
+            if(courier) {
+                if(courier.carryBodyparts > couriers[0].getActiveBodyparts(CARRY)) {
                     if(Math.ceil(couriers[0].weight() / couriers[0].getActiveBodyparts(MOVE)) >= 1) {
                         couriers[0].memory.recycle = true;
                         this.memory.spawns[0].createCreep(courier.bodyparts, undefined, {role: 'courier'});
                         this.memory.spawns[0].memory.spawning = Game.time;
                     }
+                }
+                if(totalCarry + CARRY_CAPACITY * courier.carryBodyparts < transitEnergy) {
+                    this.memory.spawns[0].createCreep(courier.bodyparts, undefined, {role: 'courier'});
+                    this.memory.spawns[0].memory.spawning = Game.time;
+                }
+            }
+            if(totalCarry > transitEnergy) {
+                if(couriers.length > 1) {
+                    couriers[0].memory.recycle = true;
                 }
             }
         }
