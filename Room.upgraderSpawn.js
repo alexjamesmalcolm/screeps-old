@@ -34,22 +34,20 @@ var RoomUpgraderSpawn = function() {
                 }
             }
         });
-        if(upgraders.length > 0) {
+        var upgrader = optimalUpgrader(this);
+        if(upgraders.length > 0) { //this shouldn't go here
             upgraders.sort(function(a, b) {
                 var a_work = a.getActiveBodyparts(WORK);
                 var b_work = b.getActiveBodyparts(WORK);
                 return a_work < b_work;
             });
-            var upgrader = optimalUpgrader(this);
             var upgradePerTick = 0;
             upgraders.forEach(function(creep) {
                 upgradePerTick = upgradePerTick + creep.getActiveBodyparts(WORK);
             });
-            //console.log(upgradePerTick);
+            console.log("upgradePerTick: "+upgradePerTick
             //console.log(JSON.stringify(this));
-            if(upgradePerTick > this.memory.harvestPerTick / 2) {
-                upgraders[0].memory.recycle = true;
-            } else if(upgrader) {
+            if(upgrader) {
                 if(upgrader.workBodyparts > upgraders[0].getActiveBodyparts(WORK)) {
                     upgraders[0].memory.recycle = true;
                     this.memory.spawns[0].createCreep(upgrader.bodyparts, undefined, {role: 'upgrader'});
@@ -58,6 +56,11 @@ var RoomUpgraderSpawn = function() {
                     this.memory.spawns[0].createCreep(upgrader.bodyparts, undefined, {role: 'upgrader'});
                     this.memory.spawns[0].memory.spawning = Game.time;
                 }
+            }
+        } else {
+            if(upgrader) {
+                this.memory.spawns[0].createCreep(upgrader.bodyparts, undefined, {role: 'upgrader'});
+                this.memory.spawns[0].memory.spawning = Game.time;
             }
         }
     }
