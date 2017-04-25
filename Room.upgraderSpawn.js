@@ -51,12 +51,12 @@ var RoomUpgraderSpawn = function() {
                     upgraders[0].memory.recycle = true;
                     this.memory.spawns[0].createCreep(upgrader.bodyparts, undefined, {role: 'upgrader'});
                     this.memory.spawns[0].memory.spawning = Game.time;
-                } else if(upgradePerTick + upgrader.workBodyparts < this.memory.harvestPerTick * 0.35) {
+                } else if(upgradePerTick + upgrader.workBodyparts < this.memory.harvestPerTick * 0.5) {
                     this.memory.spawns[0].createCreep(upgrader.bodyparts, undefined, {role: 'upgrader'});
                     this.memory.spawns[0].memory.spawning = Game.time;
                 }
             }
-            if(upgradePerTick > this.memory.harvestPerTick * 0.35) {
+            if(upgradePerTick > this.memory.harvestPerTick * 0.5) {
                 upgraders[0].memory.recycle = true;
             }
         } else {
