@@ -75,8 +75,14 @@ var RoomBuilderSpawn = function() {
                 this.memory.spawns[0].memory.spawning = Game.time;
             }
         }
+        console.log("timeToBuild - (remainingProgress / (BUILD_POWER * builders[0].getActiveBodyparts(WORK))) < 100");
+        console.log(timeToBuild - (remainingProgress / (BUILD_POWER * builders[0].getActiveBodyparts(WORK))) < 100);
+        console.log(timeToBuild);
+        console.log(remainingProgress);
+        console.log(BUILD_POWER);
+        console.log(builders[0].getActiveBodyparts(WORK));
         if(timeToBuild - (remainingProgress / (BUILD_POWER * builders[0].getActiveBodyparts(WORK))) < 100) {
-            builders[0].memory.recycle = true;
+            //builders[0].memory.recycle = true;
         }
     } else {
         if(builder) {
