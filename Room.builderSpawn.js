@@ -75,13 +75,14 @@ var RoomBuilderSpawn = function() {
                 this.memory.spawns[0].memory.spawning = Game.time;
             }
         }
-        console.log(buildPerTick);
         console.log("timeToBuild - (remainingProgress / (BUILD_POWER * builders[0].getActiveBodyparts(WORK))) < 100");
         console.log(timeToBuild - (remainingProgress / (BUILD_POWER * builders[0].getActiveBodyparts(WORK))) < 100);
-        console.log(timeToBuild);
-        console.log(remainingProgress);
-        console.log(BUILD_POWER);
-        console.log(builders[0].getActiveBodyparts(WORK));
+        console.log("buildPerTick: "+buildPerTick);
+        console.log("timeToBuild = remainingProgress / buildPerTick");
+        console.log("timeToBuild: "+timeToBuild);
+        console.log("remainingProgress: "+remainingProgress);
+        console.log("BUILD_POWER: "+BUILD_POWER);
+        console.log("builders[0].getActiveBodyparts(WORK): "+builders[0].getActiveBodyparts(WORK));
         if(timeToBuild - (remainingProgress / (BUILD_POWER * builders[0].getActiveBodyparts(WORK))) < 100) {
             //builders[0].memory.recycle = true;
         }
