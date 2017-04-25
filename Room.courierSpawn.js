@@ -64,6 +64,11 @@ var RoomCourierSpawn = function() {
                 }
             }
         }
+    } else {
+        if(courier) {
+            this.memory.spawns[0].createCreep(courier.bodyparts, undefined, {role: 'courier'});
+            this.memory.spawns[0].memory.spawning = Game.time;
+        }
     }
 };
 
