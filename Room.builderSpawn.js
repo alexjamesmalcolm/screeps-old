@@ -75,6 +75,7 @@ var RoomBuilderSpawn = function() {
                 this.memory.spawns[0].memory.spawning = Game.time;
             }
         }
+        console.log(buildPerTick);
         console.log("timeToBuild - (remainingProgress / (BUILD_POWER * builders[0].getActiveBodyparts(WORK))) < 100");
         console.log(timeToBuild - (remainingProgress / (BUILD_POWER * builders[0].getActiveBodyparts(WORK))) < 100);
         console.log(timeToBuild);
