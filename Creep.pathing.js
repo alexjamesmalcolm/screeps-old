@@ -83,17 +83,16 @@ var CreepPathing = function(givenTarget) {
             //console.log(this.memory.still);
             if(this.memory.still > 0) {
                 this.moveTo(givenTarget);
-                //console.log('Creep.pathing.js was forced to use Creep.moveTo');
-            } else{
+            } else {
                 if(pathingData.creepOnPath) {
-                    this.moveByPath(pathingData.path);
+                    console.log(this.moveByPath(pathingData.path));
                 } else {
                     try {var creepOnPath = isCreepOnPath(this, pathingData.path).creepOnPath;} catch(err) {console.log(err+": Creep.pathing.js creepOnPath = isCreepOnPath()");}
                     if(creepOnPath) {
                         this.memory.pathingData.creepOnPath = true;
-                        this.moveByPath(pathingData.path);
+                        console.log(this.moveByPath(pathingData.path));
                     } else {
-                        this.moveByPath(pathingData.midPath);
+                        console.log(this.moveByPath(pathingData.midPath));
                     }
                 }
             }
