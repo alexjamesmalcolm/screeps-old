@@ -38,15 +38,22 @@ var RoomBuilderSpawn = function() {
         progressTotal = progressTotal + constructionProject.progressTotal;
         progress = progress + constructionProject.progress;
     });
-    var structures = this.find(FIND_MY_STRUCTURES);
+    var remainingProgress = progressTotal - progress;
+    
+    var structures = this.find(FIND_STRUCTURES);
     var hitsTotal = 0;
     var hits = 0;
     structures.forEach(function(structure) {
-        hitsTotal = hitsTotal + structure.hitsMax;
-        hits = hits + structure.hits;
+        if(structure.hitsMax > 0 && structure.hits) {
+            hitsTotal = hitsTotal + structure.hitsMax;
+            hits = hits + structure.hits;
+        }
     });
-    var remainingProgress = (progressTotal - progress) + (hitsTotal - hits);
-    console.log("remainingProgress: "+remainingProgress);
+    var repairNeeded = hitsTotal - hits;
+    //console.log("hitsTotal: "+hitsTotal);
+    //console.log("hits: "+hits);
+    //REPAIR_POWER
+    //console.log("remainingProgress: "+remainingProgress);
     var builders = this.find(FIND_MY_CREEPS, {
         filter: function(creep) {
             if(creep.memory.recycle) {
@@ -63,36 +70,42 @@ var RoomBuilderSpawn = function() {
     });
     var builder = optimalBuilder(this);
     var buildPerTick = 0;
+    var repairPerTick = 0;
     builders.forEach(function(creep) {
         buildPerTick = buildPerTick + BUILD_POWER * creep.getActiveBodyparts(WORK);
+        repairPerTick = repairPerTick + REPAIR_POWER * creep.getActiveBodyparts(WORK);
     });
+    var timeToFinish;
     var timeToBuild;
     if(buildPerTick > 0) {
         timeToBuild = remainingProgress / buildPerTick;
     }
+    var timeToRepair;
+    if(repairPerTick > 0) {
+        timeToRepair = repairNeeded / repairPerTick;
+    }
+    if(buildPerTick > 0) {
+        if(repairPerTick > 0) {
+            timeToFinish = timeToBuild + timeToRepair;
+        } else {
+            timeToFinish = timeToBuild;
+        }
+    } else {
+        if(repairPerTick > 0) {
+            timeToFinish = timeToRepair;
+        }
+    }
     if(builders.length > 0) {
         if(builder) {
             if(builder.workBodyparts > builders[0].getActiveBodyparts(WORK)) {
-                //builders[0].memory.recycle = true;
-                console.log(builder.bodyparts);
+                builders[0].memory.recycle = true;
                 this.memory.spawns[0].createCreep(builder.bodyparts, undefined, {role: 'builder'});
                 this.memory.spawns[0].memory.spawning = Game.time;
-            } else if(timeToBuild > 100) {
+            } else if(timeToFinish > 100) {
                 console.log(builder.bodyparts);
                 this.memory.spawns[0].createCreep(builder.bodyparts, undefined, {role: 'builder'});
                 this.memory.spawns[0].memory.spawning = Game.time;
             }
-        }
-        console.log("timeToBuild - (remainingProgress / (BUILD_POWER * builders[0].getActiveBodyparts(WORK))) < 100");
-        console.log(timeToBuild - (remainingProgress / (BUILD_POWER * builders[0].getActiveBodyparts(WORK))) < 100);
-        console.log("buildPerTick: "+buildPerTick);
-        console.log("timeToBuild = remainingProgress / buildPerTick");
-        console.log("timeToBuild: "+timeToBuild);
-        console.log("remainingProgress: "+remainingProgress);
-        console.log("BUILD_POWER: "+BUILD_POWER);
-        console.log("builders[0].getActiveBodyparts(WORK): "+builders[0].getActiveBodyparts(WORK));
-        if(timeToBuild - (remainingProgress / (BUILD_POWER * builders[0].getActiveBodyparts(WORK))) < 100) {
-            //builders[0].memory.recycle = true;
         }
     } else {
         if(builder) {
