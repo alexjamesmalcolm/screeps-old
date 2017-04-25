@@ -13,8 +13,8 @@ var CreepCycle = function(creepCount) {
     }
     if(this.memory.sick) {
         try {this.sick();} catch(err) {console.log(err+": Creep.cycle.js this.sick()");}
-    /*} else if(this.memory.recycle) {
-        try {stateRecycle.run(this);} catch(err) {console.log(err+": Creep.cycle.js stateRecycle.run(this)");}*/
+    } else if(this.memory.recycle) {
+        try {stateRecycle.run(this);} catch(err) {console.log(err+": Creep.cycle.js stateRecycle.run(this)");}
     } else if(this.memory.role == 'harvester') {
         try {this.roleHarvester();} catch(err) {console.log(err+": Creep.cycle.js this.roleHarvester()");}
     } else if(this.memory.role == 'builder') {
