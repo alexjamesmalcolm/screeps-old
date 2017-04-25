@@ -10,7 +10,7 @@ var roleBuilder = function() {
         this.say('Building');
     }
     if(this.memory.building) {
-        var result = this.build({
+        var result = this.maintainBuild({
             activeRepair: true,
             structures: [
                 STRUCTURE_CONTAINER,
