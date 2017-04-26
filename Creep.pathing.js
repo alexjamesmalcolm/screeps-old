@@ -9,19 +9,19 @@ var isCreepOnPath = function(creep, path) {
         point = new RoomPosition(point.x, point.y, creep.room.name);
         distance = creep.pos.getRangeTo(point);
         if(distance <= creep.pos.getRangeTo(closestPointOnPath)) {
-            if(point.lookFor(LOOK_CREEPS).length == 0) {
+            if(point.lookFor(LOOK_CREEPS).length === 0) {
                 closestPointOnPath = point;
             }
             
         }
     });
     if(closestPointOnPath.x == creep.pos.x && closestPointOnPath.y == creep.pos.y) {
-        result['creepOnPath'] = true;
+        result.creepOnPath = true;
     } else {
-        result['creepOnPath'] = false;
+        result.creepOnPath = false;
     }
     closestPointOnPath = new RoomPosition(closestPointOnPath.x, closestPointOnPath.y, creep.room.name);
-    result['closestPointOnPath'] = closestPointOnPath;
+    result.closestPointOnPath = closestPointOnPath;
     return result;
 };
 
@@ -55,11 +55,12 @@ function PathingData(givenTarget, creep) {
         console.log('creep');
         console.log(JSON.stringify(creep));
         console.log(err+": PathingData");
-    } finally {delete creep.room.memory.paths}
+    } finally {delete creep.room.memory.paths;}
 }
 
 var CreepPathing = function(givenTarget) {
-    if(this.fatigue == 0) {
+  	var pathingData;
+    if(this.fatigue === 0) {
         if(this.pos.getRangeTo(givenTarget) < 4) {
             this.moveTo(givenTarget);
         } else {
@@ -75,11 +76,10 @@ var CreepPathing = function(givenTarget) {
                 }
             }
             if(!this.memory.pathingData) {
-                var pathingData;
                 pathingData = new PathingData(givenTarget, this);
                 this.memory.pathingdata = pathingData;
             }
-            var pathingData = this.memory.pathingData;
+            pathingData = this.memory.pathingData;
             //console.log(this.memory.still);
             if(this.memory.still > 0) {
                 this.moveTo(givenTarget);
@@ -87,7 +87,8 @@ var CreepPathing = function(givenTarget) {
                 if(pathingData.creepOnPath) {
                     console.log(this.moveByPath(pathingData.path));
                 } else {
-                    try {var creepOnPath = isCreepOnPath(this, pathingData.path).creepOnPath;} catch(err) {console.log(err+": Creep.pathing.js creepOnPath = isCreepOnPath()");}
+                  	var creepOnPath;
+                    try {creepOnPath = isCreepOnPath(this, pathingData.path).creepOnPath;} catch(err) {console.log(err+": Creep.pathing.js creepOnPath = isCreepOnPath()");}
                     if(creepOnPath) {
                         this.memory.pathingData.creepOnPath = true;
                         console.log(this.moveByPath(pathingData.path));
