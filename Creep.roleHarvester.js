@@ -12,7 +12,7 @@ var roleHarvester = function() {
     }
 
     if (this.memory.harvesting) {
-        var source = this.pos.findClosestByPath(FIND_SOURCES); //Inefficient
+        var source = this.pos.findClosestByPath(FIND_SOURCES_ACTIVE); //Inefficient
         if (this.harvest(source) == ERR_NOT_IN_RANGE) {
             this.moveTo(source);
         }
