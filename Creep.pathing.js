@@ -55,7 +55,7 @@ function PathingData(givenTarget, creep) {
         console.log('creep');
         console.log(JSON.stringify(creep));
         console.log(err+": PathingData");
-    }
+    } finally {delete creep.room.memory.paths}
 }
 
 var CreepPathing = function(givenTarget) {
