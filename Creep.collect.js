@@ -2,7 +2,7 @@ var CreepCollect = function(input) {
     var resource = input.resource;
     var amount = this.carryCapacity - _.sum(this.carry);
     var structures = input.structures;
-    var target = this.pos.findClosestByRange(FIND_STRUCTURES, {
+    var target = this.pos.findClosestByPath(FIND_STRUCTURES, {
         filter: function(structure) {
             if(structure.structureType == STRUCTURE_CONTAINER && structures.indexOf(STRUCTURE_CONTAINER) != -1) {
                 return _.sum(structure.store) >= amount;
