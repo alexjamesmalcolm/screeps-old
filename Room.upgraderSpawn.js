@@ -39,7 +39,7 @@ var RoomUpgraderSpawn = function() {
             upgraders.sort(function(a, b) {
                 var a_work = a.getActiveBodyparts(WORK);
                 var b_work = b.getActiveBodyparts(WORK);
-                return a_work < b_work;
+                return a_work - b_work;
             });
             var upgradePerTick = 0;
             upgraders.forEach(function(creep) {
