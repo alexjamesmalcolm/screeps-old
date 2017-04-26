@@ -35,7 +35,7 @@ var RoomHarvesterSpawn = function() {
     var harvestPerTick = 0;
     if(harvesters.length > 0) {
         harvesters.sort(function(a, b) {
-            return a.getActiveBodyparts(WORK) > b.getActiveBodyparts(WORK);
+            return a.getActiveBodyparts(WORK) - b.getActiveBodyparts(WORK);
         });
         harvesters.forEach(function(creep) {
             harvestPerTick = harvestPerTick + HARVEST_POWER * creep.getActiveBodyparts(WORK);
