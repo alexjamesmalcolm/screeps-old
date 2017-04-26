@@ -17,7 +17,7 @@ var roleUpgrader = function() {
         this.collect({
             resource: RESOURCE_ENERGY,
             amount: 50,
-            structures:[STRUCTURE_CONTAINER, STRUCTURE_STORAGE, STRUCTURE_SPAWN]
+            structures:[STRUCTURE_CONTAINER, STRUCTURE_STORAGE]
         });
     }
     this.passiveRepair();
