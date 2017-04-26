@@ -9,6 +9,8 @@ function dedupe(arr) {
     }, { temp: [], out: [] }).out;
 }
 var RoomRoadBuilder = function(start) {
+    delete this.memory.paths;
+    this.paths();
     var numberOfConstructionSites = 0;
     for(var id in Game.constructionSites) {
         var site = Game.constructionSites[id];
