@@ -35,9 +35,9 @@ var RoomCourierSpawn = function() {
             var a_carry = a.getActiveBodyparts(CARRY);
             var b_carry = b.getActiveBodyparts(CARRY);
             if(a_movementTime == b_movementTime) {
-                return a_carry < b_carry;
+                return a_carry - b_carry;
             } else {
-                return  a_movementTime > b_movementTime;
+                return  a_movementTime - b_movementTime;
             }
         });
         var totalCarry = 0;
