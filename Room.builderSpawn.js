@@ -66,7 +66,7 @@ var RoomBuilderSpawn = function() {
     builders.sort(function(a, b) {
         var a_work = a.getActiveBodyparts(WORK);
         var b_work = b.getActiveBodyparts(WORK);
-        return a_work < b_work;
+        return a_work - b_work;
     });
     var builder = optimalBuilder(this);
     var buildPerTick = 0;
