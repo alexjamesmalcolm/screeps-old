@@ -61,7 +61,7 @@ function PathingData(givenTarget, creep) {
 var CreepPathing = function(givenTarget) {
   	var pathingData;
     if(this.fatigue === 0) {
-        if(this.pos.getRangeTo(givenTarget) < 4) {
+        if(this.pos.getRangeTo(givenTarget) < 6) {
             this.moveTo(givenTarget);
         } else {
             if(JSON.stringify(this.memory.lastPos) == JSON.stringify(this.pos)) {
