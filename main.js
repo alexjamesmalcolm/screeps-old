@@ -20,6 +20,7 @@ try {
     Room.prototype.builderSpawn = require('Room.builderSpawn');
     Room.prototype.paths = require('Room.paths');
     Room.prototype.roadBuilder = require('Room.roadBuilder');
+    Room.prototype.towers = require('Room.towers');
     Spawn.prototype.cycle = require('Spawn.cycle');
 } catch(err) {console.log(err+": main.js 1");}
 const profiler = require('screeps-profiler');

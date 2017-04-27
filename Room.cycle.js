@@ -1,4 +1,3 @@
-//var creepCount = require('creepCount');
 var checkSpawns = function(room) {
     var spawns = room.find(FIND_MY_SPAWNS, {
         filter: function(spawn) {
@@ -16,11 +15,11 @@ var checkSpawns = function(room) {
     }
 };
 var RoomCycle = function() {
-    var name;
+    var name, room, sources, creeps, towers;
+    room = this;
     try {this.paths();} catch(err) {console.log(err+": Room.cycle.js this.paths()");}
-    var sources = this.find(FIND_SOURCES);
+    sources = this.find(FIND_SOURCES);
     this.memory.harvestPoints = 0;
-    var room = this;
     sources.forEach(function(source) {
         for(var i = -1; i < 2; i++) {
             for(var j = -1; j < 2; j++) {
@@ -41,19 +40,14 @@ var RoomCycle = function() {
     try {this.upgraderSpawn();} catch(err) {console.log(err+": Room.cycle.js this.upgraderSpawn()");}
     checkSpawns(room);
     try {this.builderSpawn();} catch(err) {console.log(err+": Room.cycle.js this.builderSpawn()");}
-    /*var spawns = this.find(FIND_MY_SPAWNS);
-    for(name in spawns) {
-        var spawn = spawns[name];
-        //spawn.cycle();
-    }*/
-    var creeps = this.find(FIND_MY_CREEPS);
+    try {this.towers();} catch(err) {console.log(err+": Room.cycle.js this.towers()");}
+    creeps = this.find(FIND_MY_CREEPS);
     for(name in creeps) {
         if(creeps[name]) {
             var creep = creeps[name];
             try {creep.cycle();} catch(err) {console.log(err+": Room.cycle.js creep.cycle()");}
         }
     }
-    //try {this.roadBuilder();} catch(err) {console.log(err+" Room.cycle.js this.roadBuilder()");}
 };
 
 module.exports = RoomCycle;
