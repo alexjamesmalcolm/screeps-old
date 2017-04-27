@@ -6,17 +6,17 @@ var CreepCollect = function(input) {
     var closestStructure = this.pos.findClosestByPath(FIND_STRUCTURES, {
         filter: function(structure) {
             if(structure.structureType == STRUCTURE_CONTAINER && structures.indexOf(STRUCTURE_CONTAINER) != -1) {
-                return true; //return _.sum(structure.store) >= amount;
+                return _.sum(structure.store) >= amount;
             } else if(structure.structureType == STRUCTURE_STORAGE && structures.indexOf(STRUCTURE_STORAGE) != -1) {
-                return true; //return _.sum(structure.store) >= amount;
+                return _.sum(structure.store) >= amount;
             } else if(structure.structureType == STRUCTURE_EXTENSION && structures.indexOf(STRUCTURE_EXTENSION) != -1) {
-                return true; //return structure.energy >= amount;
+                return structure.energy >= amount;
             } else if(structure.structureType == STRUCTURE_SPAWN && structures.indexOf(STRUCTURE_SPAWN) != -1) {
-                return true; //return structure.energy >= amount;
+                return structure.energy >= amount;
             }
         }
     });
-    var closestStructureDistance = this.pos.getRangeTo(target);
+    var closestStructureDistance = this.pos.getRangeTo(closestStructure);
     var droppedEnergy = this.pos.findClosestByRange(FIND_DROPPED_ENERGY);
     if(droppedEnergy) {
         if(this.pickup(droppedEnergy) == ERR_NOT_IN_RANGE) {
