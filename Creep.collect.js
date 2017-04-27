@@ -18,22 +18,24 @@ var CreepCollect = function(input) {
     });
     var closestStructureDistance = this.pos.getRangeTo(closestStructure);
     var droppedEnergy = this.pos.findClosestByRange(FIND_DROPPED_ENERGY);
+    var droppedEnergyDistance;
     if(droppedEnergy) {
         if(this.pickup(droppedEnergy) == ERR_NOT_IN_RANGE) {
             this.moveTo(droppedEnergy);
         }
-        var droppedEnergyDistance = this.pos.getRangeTo(droppedEnergy);
+        droppedEnergyDistance = this.pos.getRangeTo(droppedEnergy);
     }
     if(closestStructureDistance <= droppedEnergyDistance) {
         target = closestStructure;
     } else {
-        target = droppedEnergyDistance;
+        target = droppedEnergy;
     }
     if(target) {
         if(this.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
             this.moveTo(target);
         }
     } else {
+        console.log("target: "+target);
         this.say("No energy");
     }
 };
