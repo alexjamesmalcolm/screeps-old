@@ -1,5 +1,5 @@
 var optimalBuilder = function(room) {
-    var carryBodyparts, workBodyparts, moveBodyparts, creepCost, bodyparts, progressPerTick;
+    var carryBodyparts, workBodyparts, moveBodyparts, creepCost, bodyparts, progressPerTick, i;
     carryBodyparts = 1;
     //x = 1
     workBodyparts = Math.floor((2 * room.energyAvailable - (2 * BODYPART_COST[CARRY] + BODYPART_COST[MOVE]) * carryBodyparts) / (BODYPART_COST[MOVE] + 2 * BODYPART_COST[WORK]));
@@ -10,13 +10,13 @@ var optimalBuilder = function(room) {
     creepCost = carryBodyparts * BODYPART_COST[CARRY] + workBodyparts * BODYPART_COST[WORK] + moveBodyparts * BODYPART_COST[MOVE];
     //t = x * c + y * w + z * m
     bodyparts = [];
-    for(var i = 0; i < moveBodyparts; i++) {
+    for(i = 0; i < moveBodyparts; i++) {
         bodyparts.push(MOVE);
     }
-    for(var i = 0; i < workBodyparts; i++) {
+    for(i = 0; i < workBodyparts; i++) {
         bodyparts.push(WORK);
     }
-    for(var i = 0; i < carryBodyparts; i++) {
+    for(i = 0; i < carryBodyparts; i++) {
         bodyparts.push(CARRY);
     }
     if(workBodyparts > 0 && moveBodyparts > 0 && carryBodyparts > 0) {
@@ -98,19 +98,26 @@ var RoomBuilderSpawn = function() {
     if(builders.length > 0) {
         if(builder) {
             if(builder.workBodyparts > builders[0].getActiveBodyparts(WORK)) {
-                builders[0].memory.recycle = true;
-                this.memory.spawns[0].createCreep(builder.bodyparts, undefined, {role: 'builder'});
-                this.memory.spawns[0].memory.spawning = Game.time;
+                if(this.memory.spawns > 0) {
+                    builders[0].memory.recycle = true;
+                    this.memory.spawns[0].createCreep(builder.bodyparts, undefined, {role: 'builder'});
+                    this.memory.spawns[0].memory.spawning = Game.time;
+                }
             } else if(timeToFinish > 720) {
-                console.log(builder.bodyparts);
-                this.memory.spawns[0].createCreep(builder.bodyparts, undefined, {role: 'builder'});
-                this.memory.spawns[0].memory.spawning = Game.time;
+                if(this.memory.spawns > 0) { 
+                    if(this.memory.harvestPerTick < buildPerTick) {
+                        this.memory.spawns[0].createCreep(builder.bodyparts, undefined, {role: 'builder'});
+                        this.memory.spawns[0].memory.spawning = Game.time;
+                    }
+                }
             }
         }
     } else {
         if(builder) {
-            this.memory.spawns[0].createCreep(builder.bodyparts, undefined, {role: 'builder'});
-            this.memory.spawns[0].memory.spawning = Game.time;
+            if(this.memory.spawns > 0) {
+                this.memory.spawns[0].createCreep(builder.bodyparts, undefined, {role: 'builder'});
+                this.memory.spawns[0].memory.spawning = Game.time;
+            }
         }
     }
     this.memory.buildPerTick = buildPerTick;
