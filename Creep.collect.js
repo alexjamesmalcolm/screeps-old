@@ -25,10 +25,20 @@ var CreepCollect = function(input) {
         }
         droppedEnergyDistance = this.pos.getRangeTo(droppedEnergy);
     }
-    if(closestStructureDistance <= droppedEnergyDistance) {
-        target = closestStructure;
+    if(closestStructure) {
+        if(droppedEnergy) {
+            if(closestStructureDistance <= droppedEnergyDistance) {
+                target = closestStructure;
+            } else {
+                target = droppedEnergy;
+            }
+        } else {
+            target = closestStructure;
+        }
     } else {
-        target = droppedEnergy;
+        if(droppedEnergy) {
+            target = droppedEnergy;
+        }
     }
     if(target) {
         if(this.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
@@ -36,6 +46,8 @@ var CreepCollect = function(input) {
         }
     } else {
         console.log("target: "+target);
+        console.log("closestStructure: "+closestStructure);
+        console.log("droppedEnergy: "+droppedEnergy);
         this.say("No energy");
     }
 };
