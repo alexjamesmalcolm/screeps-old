@@ -16,7 +16,7 @@ var checkSpawns = function(room) {
     }
 };
 var RoomCycle = function() {
-  	var name;
+    var name;
     try {this.paths();} catch(err) {console.log(err+": Room.cycle.js this.paths()");}
     var sources = this.find(FIND_SOURCES);
     this.memory.harvestPoints = 0;
@@ -48,8 +48,10 @@ var RoomCycle = function() {
     }*/
     var creeps = this.find(FIND_MY_CREEPS);
     for(name in creeps) {
-        var creep = creeps[name];
-        try {creep.cycle();} catch(err) {console.log(err+": Room.cycle.js creep.cycle()");}
+        if(creeps[name]) {
+            var creep = creeps[name];
+            try {creep.cycle();} catch(err) {console.log(err+": Room.cycle.js creep.cycle()");}
+        }
     }
     //try {this.roadBuilder();} catch(err) {console.log(err+" Room.cycle.js this.roadBuilder()");}
 };
