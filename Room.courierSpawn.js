@@ -1,7 +1,12 @@
 var optimalCourier = function(room) {
-    var moveBodyparts = Math.floor(room.energyAvailable / (BODYPART_COST[MOVE] + BODYPART_COST[CARRY]));
-    var carryBodyparts = Math.floor(room.energyAvailable / (BODYPART_COST[MOVE] + BODYPART_COST[CARRY]));
+    //var carryBodyparts = Math.floor(room.energyAvailable / (BODYPART_COST[MOVE] + BODYPART_COST[CARRY]));
+    var carryBodyparts = Math.floor((2 * room.energyAvailable) / (2 * BODYPART_COST[CARRY] + BODYPART_COST[MOVE]));
+    //y = (2 * t) / (2 * c + m)
+    //var moveBodyparts = Math.floor(room.energyAvailable / (BODYPART_COST[MOVE] + BODYPART_COST[CARRY]));
+    var moveBodyparts = Math.floor(carryBodyparts / 2);
+    //x = y / 2
     var creepCost = moveBodyparts * BODYPART_COST[MOVE] + carryBodyparts * BODYPART_COST[CARRY];
+    //t = x * m + y * c
     var bodyparts = [];
     for(var i = 0; i < moveBodyparts; i++) {
         bodyparts.push(MOVE);
@@ -34,6 +39,7 @@ var RoomCourierSpawn = function() {
             var b_movementTime = Math.ceil(b.weight() / b.getActiveBodyparts[MOVE]);
             var a_carry = a.getActiveBodyparts(CARRY);
             var b_carry = b.getActiveBodyparts(CARRY);
+            return a_carry - b_carry; //Simplification made so that couriers optimized for the roads would be considered equal to unoptimized couriers
             if(a_movementTime == b_movementTime) {
                 return a_carry - b_carry;
             } else {
