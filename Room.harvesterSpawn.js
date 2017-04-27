@@ -41,7 +41,7 @@ var RoomHarvesterSpawn = function() {
             harvestPerTick = harvestPerTick + HARVEST_POWER * creep.getActiveBodyparts(WORK);
         });
         //console.log(harvester);
-        if(harvestPerTick > HARVEST_POWER * sources.length * 3000 / 300) {
+        if(harvestPerTick > 1.5 * HARVEST_POWER * sources.length * 3000 / 300) {
             //console.log('The computer was about to make a dumb decision: a');
             harvesters[0].memory.recycle = true;
         } else if(harvester && this.memory.spawns.length > 0) {
@@ -52,7 +52,7 @@ var RoomHarvesterSpawn = function() {
                     this.memory.spawns[0].createCreep(harvester.bodyparts, undefined, {role: 'harvester'});
                     this.memory.spawns[0].memory.spawning = Game.time;
                 }
-            } else if(harvestPerTick < sources.length * 3000 / 300) {
+            } else if(harvestPerTick < 1.5 * HARVEST_POWER * sources.length * 3000 / 300) {
                 if(harvesters.length < this.memory.harvestPoints) {
                     this.memory.spawns[0].createCreep(harvester.bodyparts, undefined, {role: 'harvester'});
                     this.memory.spawns[0].memory.spawning = Game.time;
@@ -61,7 +61,7 @@ var RoomHarvesterSpawn = function() {
         }
     } else if(harvester) {
         if(this.memory.spawns.length > 0) {
-            if(harvestPerTick < sources.length * 3000 / 300) {
+            if(harvestPerTick < 1.5 * HARVEST_POWER * sources.length * 3000 / 300) {
                 this.memory.spawns[0].createCreep(harvester.bodyparts, undefined, {role: 'harvester'});
                 this.memory.spawns[0].memory.spawning = Game.time;
             }
