@@ -15,7 +15,7 @@ var checkSpawns = function(room) {
     }
 };
 var RoomCycle = function() {
-    var name, room, sources, creeps, towers;
+    var name, room, sources, creeps;
     room = this;
     try {this.paths();} catch(err) {console.log(err+": Room.cycle.js this.paths()");}
     sources = this.find(FIND_SOURCES);
