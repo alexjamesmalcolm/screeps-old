@@ -1,11 +1,11 @@
 var roleHarvester = function() {
     if (this.memory.harvesting) {
-        if (this.carry.energy == this.carryCapacity) {
+        if (this.carry.energy === this.carryCapacity) {
             this.memory.harvesting = false;
             this.say('Carrying');
         }
     } else {
-        if (this.carry.energy == 0) {
+        if (this.carry.energy === 0) {
             this.memory.harvesting = true;
             this.say('Harvesting');
         }
