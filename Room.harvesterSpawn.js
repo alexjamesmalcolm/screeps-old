@@ -1,14 +1,15 @@
 var optimalHarvester = function(room) {
-    var workBodyparts = Math.floor(-(2 * BODYPART_COST[CARRY] + BODYPART_COST[MOVE] - 2 * room.energyAvailable) / (BODYPART_COST[MOVE] + 2 * BODYPART_COST[WORK]));
+    var workBodyparts, moveBodyparts, creepCost, bodyparts, i;
+    workBodyparts = Math.floor(-(2 * BODYPART_COST[CARRY] + BODYPART_COST[MOVE] - 2 * room.energyAvailable) / (BODYPART_COST[MOVE] + 2 * BODYPART_COST[WORK]));
     //-(2 c + m - 2 t)/(m + 2 w)
-    var moveBodyparts = Math.floor((workBodyparts + 1) / 2);
+    moveBodyparts = Math.floor((workBodyparts + 1) / 2);
     //(b + 1) * 0.5
-    var creepCost = moveBodyparts * BODYPART_COST[MOVE] + BODYPART_COST[CARRY] + workBodyparts * BODYPART_COST[WORK]; // t = a * m + c + b * w
-    var bodyparts = [CARRY];
-    for(var i = 0; i < workBodyparts; i++) {
+    creepCost = moveBodyparts * BODYPART_COST[MOVE] + BODYPART_COST[CARRY] + workBodyparts * BODYPART_COST[WORK]; // t = a * m + c + b * w
+    bodyparts = [CARRY];
+    for(i = 0; i < workBodyparts; i++) {
         bodyparts.push(WORK);
     }
-    for(var i = 0; i < moveBodyparts; i++) {
+    for(i = 0; i < moveBodyparts; i++) {
         bodyparts.push(MOVE);
     }
     if(workBodyparts > 0 && moveBodyparts > 0) {
@@ -18,7 +19,7 @@ var optimalHarvester = function(room) {
             workBodyparts: workBodyparts
         };
     }
-}
+};
 
 var RoomHarvesterSpawn = function() {
     var sources = this.find(FIND_SOURCES);
