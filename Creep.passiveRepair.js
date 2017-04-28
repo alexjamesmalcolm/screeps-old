@@ -5,8 +5,11 @@ var CreepPassiveRepair = function() {
             if(structure.structureType == STRUCTURE_RAMPART) {
                 return false;
             } else {
-                return structure.hits < structure.hitsMax
-                && structure.hitsMax - structure.hits > REPAIR_POWER * creep.getActiveBodyparts(WORK);
+                if(structure.hits < structure.hitsMax) {
+                    if(structure.hitsMax - structure.hits > REPAIR_POWER * creep.getActiveBodyparts(WORK)) {
+                        return true;
+                    }
+                }
             }
         }
     });
