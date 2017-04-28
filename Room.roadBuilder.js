@@ -9,32 +9,37 @@ function dedupe(arr) {
     }, { temp: [], out: [] }).out;
 }
 var RoomRoadBuilder = function(start) {
+    var numberOfConstructionSites, id, paths, room, bigPath, end, path, i, point, result;
     delete this.memory.paths;
     this.paths();
-    var numberOfConstructionSites = 0;
-    for(var id in Game.constructionSites) {
-        var site = Game.constructionSites[id];
-        numberOfConstructionSites = numberOfConstructionSites + 1;
+    numberOfConstructionSites = 0;
+    for(id in Game.constructionSites) {
+        if(Game.constructionSites[id]) {
+            //var site = Game.constructionSites[id];
+            numberOfConstructionSites = numberOfConstructionSites + 1;
+        }
     }
     if(numberOfConstructionSites < 100) {
-        var paths = this.memory.paths;
-        var room = this;
+        paths = this.memory.paths;
+        room = this;
         if(!this.memory.bigPath) {
             this.memory.bigPath = [];
         }
-        var bigPath = this.memory.bigPath;
-        for(var end in paths) {
-            var path = Room.deserializePath(paths[start][end]);
-            for(var i = 0; i < path.length; i++) {
-                var point = new RoomPosition(path[i].x, path[i].y, room.name);
-                this.memory.bigPath.push(point);
+        bigPath = this.memory.bigPath;
+        for(end in paths) {
+            if(paths[end]) {
+                path = Room.deserializePath(paths[start][end]);
+                for(i = 0; i < path.length; i++) {
+                    point = new RoomPosition(path[i].x, path[i].y, room.name);
+                    this.memory.bigPath.push(point);
+                }
             }
         }
         bigPath = dedupe(bigPath);
         if(bigPath.length != numberOfConstructionSites) {
-            for(var i = 0; i < bigPath.length; i++) {
-                var point = bigPath[i];
-                var result = new RoomPosition(point.x, point.y, this.name).createConstructionSite(STRUCTURE_ROAD);
+            for(i = 0; i < bigPath.length; i++) {
+                point = bigPath[i];
+                result = new RoomPosition(point.x, point.y, this.name).createConstructionSite(STRUCTURE_ROAD);
                 if(result == ERR_FULL) {
                     break;
                 }
