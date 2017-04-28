@@ -1,10 +1,10 @@
 var roleBuilder = function() {
-    if(this.memory.building && this.carry.energy == 0) {
+    if(this.memory.building && this.carry.energy === 0) {
         this.memory.building = false;
         this.memory.needEnergy = true;
         this.say('Need Energy');
     }
-    if(!this.memory.building && this.carry.energy == this.carryCapacity) {
+    if(!this.memory.building && this.carry.energy === this.carryCapacity) {
         this.memory.building = true;
         this.memory.needEnergy = false;
         this.say('Building');
