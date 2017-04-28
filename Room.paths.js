@@ -15,7 +15,7 @@ var createPaths = function(room, landmarks) {
     return paths;
 };
 var RoomPaths = function() {
-    var landmarks, structures, sources, spawns, controller, sites, paths, start, end, i, j;
+    var landmarks, structures, sources, spawns, controller, paths, start, i;
     landmarks = [];
     structures = this.find(FIND_MY_STRUCTURES, {
         filter: function(structure) {
