@@ -1,10 +1,10 @@
 var optimalUpgrader = function(room) {
-    var i;
-    var carryBodyparts = 1;
-    var workBodyparts = Math.floor(-(BODYPART_COST[MOVE] - 2 * room.energyAvailable + 2 * carryBodyparts * BODYPART_COST[CARRY]) / (BODYPART_COST[MOVE] + 2 * BODYPART_COST[WORK]));
-    var moveBodyparts = Math.floor((workBodyparts + carryBodyparts) / 2);
-    var creepCost = moveBodyparts * BODYPART_COST[MOVE] + carryBodyparts * BODYPART_COST[CARRY] + workBodyparts * BODYPART_COST[WORK];
-    var bodyparts = [];
+    var carryBodyparts, workBodyparts, moveBodyparts, creepCost, bodyparts, i;
+    carryBodyparts = 1;
+    workBodyparts = Math.floor(-(BODYPART_COST[MOVE] - 2 * room.energyAvailable + 2 * carryBodyparts * BODYPART_COST[CARRY]) / (BODYPART_COST[MOVE] + 2 * BODYPART_COST[WORK]));
+    moveBodyparts = Math.floor((workBodyparts + carryBodyparts) / 2);
+    creepCost = moveBodyparts * BODYPART_COST[MOVE] + carryBodyparts * BODYPART_COST[CARRY] + workBodyparts * BODYPART_COST[WORK];
+    bodyparts = [];
     for(i = 0; i < moveBodyparts; i++) {
         bodyparts.push(MOVE);
     }
