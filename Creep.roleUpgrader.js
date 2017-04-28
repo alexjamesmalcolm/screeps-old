@@ -1,13 +1,16 @@
 var roleUpgrader = function() {
-    if(this.memory.upgrading && this.carry.energy == 0) {
-        this.memory.upgrading = false;
-        this.memory.needEnergy = true;
-        this.say('Need Energy');
-    }
-    if(!this.memory.upgrading && this.carry.energy == this.carryCapacity) {
-        this.memory.upgrading = true;
-        this.memory.needEnergy = false;
-        this.say('Upgrading');
+    if(this.memory.upgrading) {
+        if(this.carry.energy === 0) {
+            this.memory.upgrading = false;
+            this.memory.needEnergy = true;
+            this.say('Need Energy');
+        }
+    } else {
+        if(this.carry.energy === this.carryCapacity) {
+            this.memory.upgrading = true;
+            this.memory.needEnergy = false;
+            this.say('Upgrading');
+        }
     }
     if(this.memory.upgrading) {
         if(this.upgradeController(this.room.controller) == ERR_NOT_IN_RANGE) {
