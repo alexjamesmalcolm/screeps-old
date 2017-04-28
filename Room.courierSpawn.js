@@ -15,12 +15,16 @@ var optimalCourier = function(room) {
     for(i = 0; i < carryBodyparts; i++) {
         bodyparts.push(CARRY);
     }
-    return {
-        bodyparts: bodyparts,
-        moveBodyparts: moveBodyparts,
-        carryBodyparts: carryBodyparts,
-        creepCost: creepCost
-    };
+    if(carryBodyparts > 0) {
+        if(moveBodyparts > 0) {
+            return {
+                bodyparts: bodyparts,
+                moveBodyparts: moveBodyparts,
+                carryBodyparts: carryBodyparts,
+                creepCost: creepCost
+            };
+        }
+    }
 };
 var RoomCourierSpawn = function() {
     var couriers = this.find(FIND_MY_CREEPS, {
