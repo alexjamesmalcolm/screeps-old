@@ -37,7 +37,7 @@ var createUpgrader = function(upgrader, room, recyclableCreep) {
 }
 
 var RoomUpgraderSpawn = function() {
-    if(this.memory.spawns.length) {
+    //if(this.memory.spawns.length) {
         var upgraders = this.find(FIND_MY_CREEPS, {
             filter: function(creep) {
                 if(creep.memory.recycle) {
@@ -69,6 +69,6 @@ var RoomUpgraderSpawn = function() {
         } else {
             createUpgrader(upgrader, this);
         }
-    }
+    //}
 };
 module.exports = RoomUpgraderSpawn;
