@@ -1,4 +1,4 @@
-var CreepCycle = function(creepCount) {
+var CreepCycle = function() {
     var stateRecycle = require('state.recycle');
     var creepCount = require('creepCount');
     var numberOfSick = _.filter(Game.creeps, (creep) => creep.memory.sick);
