@@ -1,12 +1,12 @@
 var CreepWeight = function() {
-    //var move = this.getActiveBodyparts(MOVE);
-    var work = this.getActiveBodyparts(WORK);
-    var carry = this.getActiveBodyparts(CARRY);
-    var attack = this.getActiveBodyparts(ATTACK);
-    var ranged_attack = this.getActiveBodyparts(RANGED_ATTACK);
-    var heal = this.getActiveBodyparts(HEAL);
-    var tough = this.getActiveBodyparts(TOUGH);
+    var work, carry, attack, ranged_attack, heal, tough;
+    work = this.getActiveBodyparts(WORK);
+    carry = this.getActiveBodyparts(CARRY);
+    attack = this.getActiveBodyparts(ATTACK);
+    ranged_attack = this.getActiveBodyparts(RANGED_ATTACK);
+    heal = this.getActiveBodyparts(HEAL);
+    tough = this.getActiveBodyparts(TOUGH);
     return work + carry + attack + ranged_attack + heal + tough;
 };
 
-module.exports = CreepWeight
+module.exports = CreepWeight;
