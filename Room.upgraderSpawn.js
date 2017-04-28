@@ -23,6 +23,19 @@ var optimalUpgrader = function(room) {
         };
     }
 };
+
+var createUpgrader = function(upgrader, room, recyclableCreep) {
+    if(upgrader) {
+        if(this.memory.spawns.length > 0) {
+            if(recyclableCreep) {
+                recyclableCreep.memory.recycle = true;
+            }
+            this.memory.spawns[0].createCreep(upgrader.bodyparts, undefined, {role: 'upgrader'});
+            this.memory.spawns[0].memory.spawning = Game.time;
+        }
+    }
+}
+
 var RoomUpgraderSpawn = function() {
     if(this.memory.spawns.length) {
         var upgraders = this.find(FIND_MY_CREEPS, {
@@ -35,35 +48,26 @@ var RoomUpgraderSpawn = function() {
             }
         });
         var upgrader = optimalUpgrader(this);
+        upgraders.sort(function(a, b) {
+            var a_work = a.getActiveBodyparts(WORK);
+            var b_work = b.getActiveBodyparts(WORK);
+            return a_work - b_work;
+        });
+        var upgradePerTick = 0;
+        upgraders.forEach(function(creep) {
+            upgradePerTick = upgradePerTick + creep.getActiveBodyparts(WORK);
+        });
         if(upgraders.length > 0) { //this shouldn't go here
-            upgraders.sort(function(a, b) {
-                var a_work = a.getActiveBodyparts(WORK);
-                var b_work = b.getActiveBodyparts(WORK);
-                return a_work - b_work;
-            });
-            var upgradePerTick = 0;
-            upgraders.forEach(function(creep) {
-                upgradePerTick = upgradePerTick + creep.getActiveBodyparts(WORK);
-            });
-            //console.log(JSON.stringify(this));
-            if(upgrader) {
-                if(upgrader.workBodyparts > upgraders[0].getActiveBodyparts(WORK)) {
-                    upgraders[0].memory.recycle = true;
-                    this.memory.spawns[0].createCreep(upgrader.bodyparts, undefined, {role: 'upgrader'});
-                    this.memory.spawns[0].memory.spawning = Game.time;
-                } else if(upgradePerTick + upgrader.workBodyparts < this.memory.harvestPerTick * 0.5) {
-                    this.memory.spawns[0].createCreep(upgrader.bodyparts, undefined, {role: 'upgrader'});
-                    this.memory.spawns[0].memory.spawning = Game.time;
-                }
+            if(upgrader.workBodyparts > upgraders[0].getActiveBodyparts(WORK)) {
+                createUpgrader(upgrader, this, upgraders[0]);
+            } else if(upgradePerTick + upgrader.workBodyparts < this.memory.harvestPerTick * 0.5) {
+                createUpgrader(upgrader, this);
             }
             if(upgradePerTick > this.memory.harvestPerTick * 0.5) {
                 upgraders[0].memory.recycle = true;
             }
         } else {
-            if(upgrader) {
-                this.memory.spawns[0].createCreep(upgrader.bodyparts, undefined, {role: 'upgrader'});
-                this.memory.spawns[0].memory.spawning = Game.time;
-            }
+            createUpgrader(upgrader, this);
         }
     }
 };
