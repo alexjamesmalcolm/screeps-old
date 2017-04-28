@@ -26,12 +26,12 @@ var optimalUpgrader = function(room) {
 
 var createUpgrader = function(upgrader, room, recyclableCreep) {
     if(upgrader) {
-        if(this.memory.spawns.length > 0) {
+        if(room.memory.spawns.length > 0) {
             if(recyclableCreep) {
                 recyclableCreep.memory.recycle = true;
             }
-            this.memory.spawns[0].createCreep(upgrader.bodyparts, undefined, {role: 'upgrader'});
-            this.memory.spawns[0].memory.spawning = Game.time;
+            room.memory.spawns[0].createCreep(upgrader.bodyparts, undefined, {role: 'upgrader'});
+            room.memory.spawns[0].memory.spawning = Game.time;
         }
     }
 }
