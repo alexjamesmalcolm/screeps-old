@@ -1,11 +1,11 @@
 var roleCourier = function() {
     if(this.memory.collecting) {
-        if(this.carry.energy == this.carryCapacity) {
+        if(this.carry.energy === this.carryCapacity) {
             this.memory.collecting = false;
             this.say('Delivering');
         }
     } else {
-        if(this.carry.energy == 0) {
+        if(this.carry.energy === 0) {
             this.memory.collecting = true;
             this.say('Collecting');
         }
