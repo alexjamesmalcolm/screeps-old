@@ -1,5 +1,15 @@
-var creepCount = require('creepCount');
+//var creepCount = require('creepCount');
 var SpawnCycle = function() {
+    var creepsInRange, creep;
+    creepsInRange = this.pos.findInRange(FIND_MY_CREEPS);
+    if(creepsInRange.length > 0) {
+        creepsInRange.sort(function(a, b) {
+            return a.ticksToLive - b.ticksToLive;
+        });
+        creep = creepsInRange[0];
+        this.renewCreep(creep);
+    }
+    /*
     var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
     var couriers = _.filter(Game.creeps, (creep) => creep.memory.role == 'courier');
     var upgraders = _.filter(Game.creeps, (creep) => creep.memory.role == 'upgrader');
@@ -21,7 +31,7 @@ var SpawnCycle = function() {
     } else if(fighters.length < creepCount['fighters']) {
         var newName = this.createCreep([MOVE,MOVE,RANGED_ATTACK,TOUGH,TOUGH,TOUGH,TOUGH,TOUGH], undefined, {role: 'fighter'});
         //console.log('Spawning new fighter: ' + newName);
-    }
+    }*/
 };
 
 module.exports = SpawnCycle;
