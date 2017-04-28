@@ -1,10 +1,10 @@
 var optimalUpgrader = function(room) {
-    var carryBodyparts, workBodyparts, moveBodyparts, creepCost, bodyparts, i;
-    carryBodyparts = 1;
-    workBodyparts = Math.floor(-(BODYPART_COST[MOVE] - 2 * room.energyAvailable + 2 * carryBodyparts * BODYPART_COST[CARRY]) / (BODYPART_COST[MOVE] + 2 * BODYPART_COST[WORK]));
-    moveBodyparts = Math.floor((workBodyparts + carryBodyparts) / 2);
-    creepCost = moveBodyparts * BODYPART_COST[MOVE] + carryBodyparts * BODYPART_COST[CARRY] + workBodyparts * BODYPART_COST[WORK];
-    bodyparts = [];
+    var i;
+    var carryBodyparts = 1;
+    var workBodyparts = Math.floor(-(BODYPART_COST[MOVE] - 2 * room.energyAvailable + 2 * carryBodyparts * BODYPART_COST[CARRY]) / (BODYPART_COST[MOVE] + 2 * BODYPART_COST[WORK]));
+    var moveBodyparts = Math.floor((workBodyparts + carryBodyparts) / 2);
+    var creepCost = moveBodyparts * BODYPART_COST[MOVE] + carryBodyparts * BODYPART_COST[CARRY] + workBodyparts * BODYPART_COST[WORK];
+    var bodyparts = [];
     for(i = 0; i < moveBodyparts; i++) {
         bodyparts.push(MOVE);
     }
@@ -23,21 +23,8 @@ var optimalUpgrader = function(room) {
         };
     }
 };
-
-var createUpgrader = function(upgrader, room, recyclableCreep) {
-    if(upgrader) {
-        if(room.memory.spawns.length > 0) {
-            if(recyclableCreep) {
-                recyclableCreep.memory.recycle = true;
-            }
-            room.memory.spawns[0].createCreep(upgrader.bodyparts, undefined, {role: 'upgrader'});
-            room.memory.spawns[0].memory.spawning = Game.time;
-        }
-    }
-}
-
 var RoomUpgraderSpawn = function() {
-    //if(this.memory.spawns.length) {
+    if(this.memory.spawns.length) {
         var upgraders = this.find(FIND_MY_CREEPS, {
             filter: function(creep) {
                 if(creep.memory.recycle) {
@@ -48,27 +35,36 @@ var RoomUpgraderSpawn = function() {
             }
         });
         var upgrader = optimalUpgrader(this);
-        upgraders.sort(function(a, b) {
-            var a_work = a.getActiveBodyparts(WORK);
-            var b_work = b.getActiveBodyparts(WORK);
-            return a_work - b_work;
-        });
-        var upgradePerTick = 0;
-        upgraders.forEach(function(creep) {
-            upgradePerTick = upgradePerTick + creep.getActiveBodyparts(WORK);
-        });
         if(upgraders.length > 0) { //this shouldn't go here
-            if(upgrader.workBodyparts > upgraders[0].getActiveBodyparts(WORK)) {
-                createUpgrader(upgrader, this, upgraders[0]);
-            } else if(upgradePerTick + upgrader.workBodyparts < this.memory.harvestPerTick * 0.5) {
-                createUpgrader(upgrader, this);
+            upgraders.sort(function(a, b) {
+                var a_work = a.getActiveBodyparts(WORK);
+                var b_work = b.getActiveBodyparts(WORK);
+                return a_work - b_work;
+            });
+            var upgradePerTick = 0;
+            upgraders.forEach(function(creep) {
+                upgradePerTick = upgradePerTick + creep.getActiveBodyparts(WORK);
+            });
+            //console.log(JSON.stringify(this));
+            if(upgrader) {
+                if(upgrader.workBodyparts > upgraders[0].getActiveBodyparts(WORK)) {
+                    upgraders[0].memory.recycle = true;
+                    this.memory.spawns[0].createCreep(upgrader.bodyparts, undefined, {role: 'upgrader'});
+                    this.memory.spawns[0].memory.spawning = Game.time;
+                } else if(upgradePerTick + upgrader.workBodyparts < this.memory.harvestPerTick * 0.5) {
+                    this.memory.spawns[0].createCreep(upgrader.bodyparts, undefined, {role: 'upgrader'});
+                    this.memory.spawns[0].memory.spawning = Game.time;
+                }
             }
             if(upgradePerTick > this.memory.harvestPerTick * 0.5) {
                 upgraders[0].memory.recycle = true;
             }
         } else {
-            createUpgrader(upgrader, this);
+            if(upgrader) {
+                this.memory.spawns[0].createCreep(upgrader.bodyparts, undefined, {role: 'upgrader'});
+                this.memory.spawns[0].memory.spawning = Game.time;
+            }
         }
-    //}
+    }
 };
 module.exports = RoomUpgraderSpawn;
