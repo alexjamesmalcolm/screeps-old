@@ -48,6 +48,13 @@ var RoomCycle = function() {
             try {creep.cycle();} catch(err) {console.log(err+": Room.cycle.js creep.cycle()");}
         }
     }
+    spawns = this.find(FIND_MY_SPAWNS);
+    for(name in spawns) {
+        if(spawns[name]) {
+            spawn = spawns[name];
+            try {spawn.cycle();} catch(err) {console.log(err+": Room.cycle.js spawn.cycle()");}
+        }
+    }
 };
 
 module.exports = RoomCycle;
