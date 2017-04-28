@@ -1,8 +1,9 @@
 var CreepBuild = function(input) {
-    var constructionSite = this.pos.findClosestByRange(FIND_CONSTRUCTION_SITES);
-    var creep = this;
+    var constructionSite, creep, repairTarget;
+    constructionSite = this.pos.findClosestByRange(FIND_CONSTRUCTION_SITES);
+    creep = this;
     if(input.activeRepair) {
-        var repairTarget = this.pos.findClosestByRange(FIND_STRUCTURES, {
+        repairTarget = this.pos.findClosestByRange(FIND_STRUCTURES, {
             filter: function(structure) {
                 if(structure.hits < structure.hitsMax) {
                     if(structure.hitsMax - structure.hits > REPAIR_POWER * creep.getActiveBodyparts(WORK)) {
