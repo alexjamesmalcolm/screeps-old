@@ -15,8 +15,9 @@ var checkSpawns = function(room) {
     }
 };
 var RoomCycle = function() {
-    var name, room, sources, creeps, spawns, spawn;
+    var name, room, sources, creeps, spawns, spawn, energyPercent;
     room = this;
+    energyPercent = this.energyAvailable / this.energyCapacityAvailable;
     try {this.paths();} catch(err) {console.log(err+": Room.cycle.js this.paths()");}
     sources = this.find(FIND_SOURCES);
     this.memory.harvestPoints = 0;
@@ -40,14 +41,16 @@ var RoomCycle = function() {
             try {spawn.cycle();} catch(err) {console.log(err+": Room.cycle.js spawn.cycle()");}
         }
     }
-    checkSpawns(room);
-    try {this.harvesterSpawn();} catch(err) {console.log(err+": Room.cycle.js this.harvesterSpawn()");}
-    checkSpawns(room);
-    try {this.courierSpawn();} catch(err) {console.log(err+": Room.cycle.js this.courierSpawn()");}
-    checkSpawns(room);
-    try {this.upgraderSpawn();} catch(err) {console.log(err+": Room.cycle.js this.upgraderSpawn()");}
-    checkSpawns(room);
-    try {this.builderSpawn();} catch(err) {console.log(err+": Room.cycle.js this.builderSpawn()");}
+    if(energyPercent >= 1) {
+        checkSpawns(room);
+        try {this.harvesterSpawn();} catch(err) {console.log(err+": Room.cycle.js this.harvesterSpawn()");}
+        checkSpawns(room);
+        try {this.courierSpawn();} catch(err) {console.log(err+": Room.cycle.js this.courierSpawn()");}
+        checkSpawns(room);
+        try {this.upgraderSpawn();} catch(err) {console.log(err+": Room.cycle.js this.upgraderSpawn()");}
+        checkSpawns(room);
+        try {this.builderSpawn();} catch(err) {console.log(err+": Room.cycle.js this.builderSpawn()");}
+    }
     try {this.towers();} catch(err) {console.log(err+": Room.cycle.js this.towers()");}
     creeps = this.find(FIND_MY_CREEPS);
     for(name in creeps) {
