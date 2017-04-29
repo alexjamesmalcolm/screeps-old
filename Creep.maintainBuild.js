@@ -8,7 +8,15 @@ var CreepBuild = function(input) {
                 if(structure.hits < structure.hitsMax) {
                     if(structure.hitsMax - structure.hits > REPAIR_POWER * workBodyparts) {
                         if(input.structures.indexOf(structure.structureType) != -1) {
-                            return true;
+                            if(structure.structureType === STRUCTURE_RAMPART) {
+                                if(structure.hits < 400000) {
+                                    return false;
+                                } else {
+                                    return true;
+                                }
+                            } else {
+                                return true;
+                            }
                         }
                     }
                 }
