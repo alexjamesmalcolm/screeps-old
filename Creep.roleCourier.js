@@ -19,7 +19,7 @@ var roleCourier = function() {
     } else {
         this.deposit({
             creepDepositing: false,
-            structures: [STRUCTURE_SPAWN, STRUCTURE_EXTENSION, STRUCTURE_TOWER, STRUCTURE_STORAGE]
+            structures: [STRUCTURE_SPAWN, STRUCTURE_TOWER, STRUCTURE_EXTENSION, STRUCTURE_STORAGE]
         });
     }
 };
