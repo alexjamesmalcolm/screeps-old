@@ -61,11 +61,13 @@ var RoomCourierSpawn = function() {
         var transitEnergy = droppedResources + this.energyCapacityAvailable;
         if(this.memory.spawns.length > 0) {
             if(courier) {
-                if(courier.carryBodyparts > couriers[0].getActiveBodyparts(CARRY)) {
-                    if(Math.ceil(couriers[0].weight() / couriers[0].getActiveBodyparts(MOVE)) >= 1) {
-                        couriers[0].memory.recycle = true;
-                        this.memory.spawns[0].createCreep(courier.bodyparts, undefined, {role: 'courier'});
-                        this.memory.spawns[0].memory.spawning = Game.time;
+                if(this.memory.energyPercent === 1) {
+                    if(courier.carryBodyparts > couriers[0].getActiveBodyparts(CARRY)) {
+                        if(Math.ceil(couriers[0].weight() / couriers[0].getActiveBodyparts(MOVE)) >= 1) {
+                            couriers[0].memory.recycle = true;
+                            this.memory.spawns[0].createCreep(courier.bodyparts, undefined, {role: 'courier'});
+                            this.memory.spawns[0].memory.spawning = Game.time;
+                        }
                     }
                 }
                 if(transitEnergy * 0.5 > totalCarry + CARRY_CAPACITY * courier.carryBodyparts) {
