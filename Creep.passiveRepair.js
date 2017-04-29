@@ -4,7 +4,15 @@ var CreepPassiveRepair = function() {
         filter: function(structure) {
             if(structure.hits < structure.hitsMax) {
                 if(structure.hitsMax - structure.hits > REPAIR_POWER * workBodyparts) {
-                    return true;
+                    if(structure.structureType === STRUCTURE_RAMPART) {
+                        if(structure.hits > 100000) {
+                            return false;
+                        } else {
+                            return true;
+                        }
+                    } else {
+                        return true;
+                    }
                 }
             }
         }
