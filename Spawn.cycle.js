@@ -3,13 +3,14 @@ var SpawnCycle = function() {
     var creepsInRange, creep;
     creepsInRange = this.pos.findInRange(FIND_MY_CREEPS, 1);
     if(creepsInRange.length > 0) {
-        this.memory.busy = Game.time;
         creepsInRange.sort(function(a, b) {
             return a.ticksToLive - b.ticksToLive;
         });
         creep = creepsInRange[0];
-        if(this.renewCreep(creep) === OK) {
-            this.renewCreep(creep);
+        if(creep.ticksToLive < 750) {
+            if(this.renewCreep(creep) === OK) {
+                this.memory.busy = Game.time;
+            }
         }
     }
     /*
