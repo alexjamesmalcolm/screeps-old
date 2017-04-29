@@ -46,8 +46,8 @@ var RoomHarvesterSpawn = function() {
             //console.log('The computer was about to make a dumb decision: a');
             harvesters[0].memory.recycle = true;
         } else if(harvester && this.memory.spawns.length > 0) {
-            if(harvester.workBodyparts > harvesters[0].getActiveBodyparts(WORK)) {
-                if(this.memory.energyPercent === 1) {
+            if(this.memory.energyPercent === 1) {
+                if(harvester.workBodyparts > harvesters[0].getActiveBodyparts(WORK)) {
                     //console.log('The computer was about to make a dumb decision: b');
                     harvesters[0].memory.recycle = true;
                     if(harvesters.length <= this.memory.harvestPoints) {
