@@ -51,12 +51,12 @@ var RoomHarvesterSpawn = function() {
                 harvesters[0].memory.recycle = true;
                 if(harvesters.length <= this.memory.harvestPoints) {
                     this.memory.spawns[0].createCreep(harvester.bodyparts, undefined, {role: 'harvester'});
-                    this.memory.spawns[0].memory.spawning = Game.time;
+                    this.memory.spawns[0].memory.busy = Game.time;
                 }
             } else if(harvestPerTick < 1.5 * HARVEST_POWER * sources.length * 3000 / 300) {
                 if(harvesters.length < this.memory.harvestPoints) {
                     this.memory.spawns[0].createCreep(harvester.bodyparts, undefined, {role: 'harvester'});
-                    this.memory.spawns[0].memory.spawning = Game.time;
+                    this.memory.spawns[0].memory.busy = Game.time;
                 }
             }
         }
@@ -64,7 +64,7 @@ var RoomHarvesterSpawn = function() {
         if(this.memory.spawns.length > 0) {
             if(harvestPerTick < 1.5 * HARVEST_POWER * sources.length * 3000 / 300) {
                 this.memory.spawns[0].createCreep(harvester.bodyparts, undefined, {role: 'harvester'});
-                this.memory.spawns[0].memory.spawning = Game.time;
+                this.memory.spawns[0].memory.busy = Game.time;
             }
         }
     }
