@@ -97,10 +97,12 @@ var RoomBuilderSpawn = function() {
     }
     if(builders.length > 0) {
         if(builder) {
-            if(builder.workBodyparts > builders[0].getActiveBodyparts(WORK)) {
-                builders[0].memory.recycle = true;
-                this.memory.spawns[0].createCreep(builder.bodyparts, undefined, {role: 'builder'});
-                this.memory.spawns[0].memory.busy = Game.time;
+            if(this.memory.energyPercent === 1) {
+                if(builder.workBodyparts > builders[0].getActiveBodyparts(WORK)) {
+                    builders[0].memory.recycle = true;
+                    this.memory.spawns[0].createCreep(builder.bodyparts, undefined, {role: 'builder'});
+                    this.memory.spawns[0].memory.busy = Game.time;
+                }
             } else if(timeToFinish > 720) {
                 console.log(builder.bodyparts);
                 this.memory.spawns[0].createCreep(builder.bodyparts, undefined, {role: 'builder'});
