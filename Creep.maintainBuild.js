@@ -9,7 +9,7 @@ var CreepBuild = function(input) {
                     if(structure.hitsMax - structure.hits > REPAIR_POWER * workBodyparts) {
                         if(input.structures.indexOf(structure.structureType) != -1) {
                             if(structure.structureType === STRUCTURE_RAMPART) {
-                                if(structure.hits > 500000) {
+                                if(structure.hits > 100000) {
                                     return false;
                                 } else {
                                     return true;
