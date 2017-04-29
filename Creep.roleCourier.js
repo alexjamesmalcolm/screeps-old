@@ -14,12 +14,12 @@ var roleCourier = function() {
         this.collect({
             resource: RESOURCE_ENERGY,
             amount: this.carryCapacity,
-            structures: [STRUCTURE_CONTAINER, STRUCTURE_STORAGE]
+            structures: [STRUCTURE_CONTAINER]
         });
     } else {
         this.deposit({
             creepDepositing: false,
-            structures: [STRUCTURE_EXTENSION, STRUCTURE_SPAWN, STRUCTURE_TOWER]
+            structures: [STRUCTURE_EXTENSION, STRUCTURE_SPAWN, STRUCTURE_TOWER, STRUCTURE_STORAGE]
         });
     }
 };
