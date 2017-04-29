@@ -24,7 +24,6 @@ var roleUpgrader = function() {
             structures:[STRUCTURE_CONTAINER, STRUCTURE_STORAGE]
         });
     }
-    this.passiveRepair();
 };
 
 module.exports = roleUpgrader;
