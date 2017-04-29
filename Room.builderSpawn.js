@@ -31,7 +31,7 @@ var optimalBuilder = function(room) {
     }
 };
 var RoomBuilderSpawn = function() {
-    var constructionProjects = this.find(FIND_CONSTRUCTION_SITES);
+    var constructionProjects = this.memory.constructionSites;
     var progressTotal = 0;
     var progress = 0;
     constructionProjects.forEach(function(constructionProject) {
@@ -40,7 +40,7 @@ var RoomBuilderSpawn = function() {
     });
     var remainingProgress = progressTotal - progress;
     
-    var structures = this.find(FIND_STRUCTURES);
+    var structures = this.memory.structures;
     var hitsTotal = 0;
     var hits = 0;
     structures.forEach(function(structure) {
