@@ -32,6 +32,7 @@ var RoomCycle = function() {
             }
         }
     });
+    checkSpawns(room);
     spawns = this.find(FIND_MY_SPAWNS);
     for(name in spawns) {
         if(spawns[name]) {
