@@ -18,6 +18,7 @@ var RoomCycle = function() {
     var name, room, sources, creeps, spawns, spawn, energyPercent;
     room = this;
     energyPercent = this.energyAvailable / this.energyCapacityAvailable;
+    this.memory.energyPercent = energyPercent;
     try {this.paths();} catch(err) {console.log(err+": Room.cycle.js this.paths()");}
     sources = this.find(FIND_SOURCES);
     this.memory.harvestPoints = 0;
