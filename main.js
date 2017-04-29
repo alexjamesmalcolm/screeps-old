@@ -1,4 +1,5 @@
 try {
+    Creep.prototype.roleSpawnKeeper = require('Creep.roleSpawnKeeper');
     Creep.prototype.collect = require('Creep.collect');
     Creep.prototype.cycle = require('Creep.cycle');
     Creep.prototype.deposit = require('Creep.deposit');
