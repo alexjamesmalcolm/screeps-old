@@ -55,7 +55,7 @@ var RoomCourierSpawn = function() {
             totalCarry = totalCarry + CARRY_CAPACITY * creep.getActiveBodyparts(CARRY);
         });
         var droppedResources = 0;
-        this.find(FIND_DROPPED_RESOURCES).forEach(function(resource) {
+        this.memory.droppedResources.forEach(function(resource) {
             droppedResources = droppedResources + resource.amount;
         });
         var transitEnergy = droppedResources + this.energyCapacityAvailable;
