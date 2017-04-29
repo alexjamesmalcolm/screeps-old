@@ -76,7 +76,7 @@ var RoomCourierSpawn = function() {
                 }
             }
             if(transitEnergy * 0.33 < totalCarry) {
-                if(couriers.length > 1) {
+                if(couriers.length > 2) {
                     couriers[0].memory.recycle = true;
                 }
             }
