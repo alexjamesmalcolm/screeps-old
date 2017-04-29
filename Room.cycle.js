@@ -1,7 +1,7 @@
 var checkSpawns = function(room) {
     var spawns = room.find(FIND_MY_SPAWNS, {
         filter: function(spawn) {
-            if(spawn.spawning || spawn.memory.spawning == Game.time) {
+            if(spawn.spawning || spawn.memory.busy == Game.time) {
                 return false;
             } else {
                 return true;
