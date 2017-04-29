@@ -69,10 +69,10 @@ var RoomCourierSpawn = function() {
                             this.memory.spawns[0].memory.spawning = Game.time;
                         }
                     }
-                    if(transitEnergy * 0.5 > totalCarry + CARRY_CAPACITY * courier.carryBodyparts) {
-                        this.memory.spawns[0].createCreep(courier.bodyparts, undefined, {role: 'courier'});
-                        this.memory.spawns[0].memory.spawning = Game.time;
-                    }
+                }
+                if(transitEnergy * 0.5 > totalCarry + CARRY_CAPACITY * courier.carryBodyparts) {
+                    this.memory.spawns[0].createCreep(courier.bodyparts, undefined, {role: 'courier'});
+                    this.memory.spawns[0].memory.spawning = Game.time;
                 }
             }
             if(transitEnergy * 0.5 < totalCarry) {
