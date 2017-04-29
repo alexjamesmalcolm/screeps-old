@@ -13,6 +13,8 @@ var CreepCollect = function(input) {
                 return structure.energy >= amount;
             } else if(structure.structureType == STRUCTURE_SPAWN && structures.indexOf(STRUCTURE_SPAWN) != -1) {
                 return structure.energy >= amount;
+            } else if(structure.structureType == STRUCTURE_TOWER && structures.indexOf(STRUCTURE_TOWER) != -1) {
+                return structure.energy >= amount;
             }
         }
     });
