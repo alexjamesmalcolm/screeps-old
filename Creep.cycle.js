@@ -4,7 +4,7 @@ var CreepCycle = function() {
     var numberOfSick = _.filter(Game.creeps, (creep) => creep.memory.sick);
     if(!this.memory.sick) {
         if(numberOfSick < creepCount.sick) {
-            if(this.ticksToLive < 500) {
+            if(this.ticksToLive < 100) {
                 this.memory.sick = true;
             }
         } else {
