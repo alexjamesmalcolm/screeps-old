@@ -2,13 +2,9 @@ var CreepPassiveRepair = function() {
     var workBodyparts = this.getActiveBodyparts(WORK);
     var repairTargets = this.pos.findInRange(FIND_STRUCTURES, 1, {
         filter: function(structure) {
-            if(structure.structureType == STRUCTURE_RAMPART) {
-                return false;
-            } else {
-                if(structure.hits < structure.hitsMax) {
-                    if(structure.hitsMax - structure.hits > REPAIR_POWER * workBodyparts) {
-                        return true;
-                    }
+            if(structure.hits < structure.hitsMax) {
+                if(structure.hitsMax - structure.hits > REPAIR_POWER * workBodyparts) {
+                    return true;
                 }
             }
         }
