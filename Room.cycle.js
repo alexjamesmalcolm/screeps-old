@@ -15,7 +15,7 @@ var checkSpawns = function(room) {
     }
 };
 var RoomCycle = function() {
-    var name, room, sources, creeps;
+    var name, room, sources, creeps, spawns, spawn;
     room = this;
     try {this.paths();} catch(err) {console.log(err+": Room.cycle.js this.paths()");}
     sources = this.find(FIND_SOURCES);
@@ -32,6 +32,13 @@ var RoomCycle = function() {
             }
         }
     });
+    spawns = this.find(FIND_MY_SPAWNS);
+    for(name in spawns) {
+        if(spawns[name]) {
+            spawn = spawns[name];
+            try {spawn.cycle();} catch(err) {console.log(err+": Room.cycle.js spawn.cycle()");}
+        }
+    }
     checkSpawns(room);
     try {this.harvesterSpawn();} catch(err) {console.log(err+": Room.cycle.js this.harvesterSpawn()");}
     checkSpawns(room);
@@ -46,13 +53,6 @@ var RoomCycle = function() {
         if(creeps[name]) {
             var creep = creeps[name];
             try {creep.cycle();} catch(err) {console.log(err+": Room.cycle.js creep.cycle()");}
-        }
-    }
-    spawns = this.find(FIND_MY_SPAWNS);
-    for(name in spawns) {
-        if(spawns[name]) {
-            spawn = spawns[name];
-            try {spawn.cycle();} catch(err) {console.log(err+": Room.cycle.js spawn.cycle()");}
         }
     }
 };
