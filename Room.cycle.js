@@ -15,11 +15,14 @@ var checkSpawns = function(room) {
     }
 };
 var RoomCycle = function() {
-    var name, room, sources, creeps, spawns, spawn, energyPercent;
-    room = this;
-    energyPercent = this.energyAvailable / this.energyCapacityAvailable;
+    this.memory.sources = this.find(FIND_SOURCES);
+    this.memory.droppedResources = this.find(FIND_DROPPED_RESOURCES);
+    this.memory.structures = this.find(FIND_STRUCTURES);
+    this.memory.constructionSites = this.find(FIND_CONSTRUCTION_SITES);
+    var sources = this.memory.sources;
+    var room = this;
+    var energyPercent = this.energyAvailable / this.energyCapacityAvailable;
     try {this.paths();} catch(err) {console.log(err+": Room.cycle.js this.paths()");}
-    sources = this.find(FIND_SOURCES);
     this.memory.harvestPoints = 0;
     sources.forEach(function(source) {
         for(var i = -1; i < 2; i++) {
@@ -34,7 +37,7 @@ var RoomCycle = function() {
         }
     });
     checkSpawns(room);
-    spawns = this.find(FIND_MY_SPAWNS);
+    var spawns = this.find(FIND_MY_SPAWNS);
     for(name in spawns) {
         if(spawns[name]) {
             spawn = spawns[name];
@@ -52,7 +55,7 @@ var RoomCycle = function() {
         try {this.builderSpawn();} catch(err) {console.log(err+": Room.cycle.js this.builderSpawn()");}
     }
     try {this.towers();} catch(err) {console.log(err+": Room.cycle.js this.towers()");}
-    creeps = this.find(FIND_MY_CREEPS);
+    var creeps = this.find(FIND_MY_CREEPS);
     for(name in creeps) {
         if(creeps[name]) {
             var creep = creeps[name];
