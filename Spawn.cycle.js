@@ -8,7 +8,9 @@ var SpawnCycle = function() {
             return a.ticksToLive - b.ticksToLive;
         });
         creep = creepsInRange[0];
-        this.renewCreep(creep);
+        if(this.renewCreep(creep) === OK) {
+            this.renewCreep(creep);
+        }
     }
     /*
     var harvesters = _.filter(Game.creeps, (creep) => creep.memory.role == 'harvester');
