@@ -1,11 +1,9 @@
 var optimalCourier = function(room) {
     var carryBodyparts, moveBodyparts, creepCost, bodyparts, i;
-    //var carryBodyparts = Math.floor(room.energyAvailable / (BODYPART_COST[MOVE] + BODYPART_COST[CARRY]));
-    carryBodyparts = Math.floor((2 * room.energyAvailable) / (2 * BODYPART_COST[CARRY] + BODYPART_COST[MOVE]));
-    //y = (2 * t) / (2 * c + m)
-    //var moveBodyparts = Math.floor(room.energyAvailable / (BODYPART_COST[MOVE] + BODYPART_COST[CARRY]));
-    moveBodyparts = Math.floor(carryBodyparts / 2);
-    //x = y / 2
+    moveBodyparts = Math.floor(room.energyAvailable / (2 * BODYPART_COST[CARRY] + BODYPART_COST[MOVE]));
+    //x = t / (2 * c + m)
+    carryBodyparts = Math.floor(2 * moveBodyparts);
+    //y = 2 * x
     creepCost = moveBodyparts * BODYPART_COST[MOVE] + carryBodyparts * BODYPART_COST[CARRY];
     //t = x * m + y * c
     bodyparts = [];
