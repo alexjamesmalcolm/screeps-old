@@ -45,9 +45,6 @@ var CreepCollect = function(input) {
             this.moveTo(target);
         }
     } else {
-        console.log("target: "+target);
-        console.log("closestStructure: "+closestStructure);
-        console.log("droppedEnergy: "+droppedEnergy);
         this.say("No energy");
     }
 };
