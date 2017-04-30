@@ -14,7 +14,13 @@ var RoomTowers = function() {
             //F = 2 * (W - M)
             var a_fatigue = 2 * (a.weight() - a.getActiveBodyparts(MOVE));
             var b_fatigue = 2 * (b.weight() - b.getActiveBodyparts(MOVE));
-            return a_fatigue - b_fatigue;
+            var a_healing = a.getActiveBodyparts(HEAL);
+            var b_healing = b.getActiveBodyparts(HEAL);
+            if(a_healing === b_healing) {
+                return a_fatigue - b_fatigue;
+            } else {
+                return b_healing - a_healing;
+            }
         });
     } else {
         hurtCreeps = this.find(FIND_MY_CREEPS, {
