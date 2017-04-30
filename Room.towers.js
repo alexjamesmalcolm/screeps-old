@@ -50,7 +50,11 @@ var RoomTowers = function() {
         } else {
             damagedStructures = this.find(FIND_STRUCTURES, {
                 filter: function(structure) {
-                    return structure.hitsMax - structure.hits > 0;
+                    if(structure.hitsmax - structure.hits > 0) {
+                        return true;
+                    } else {
+                        return false;
+                    }
                 }
             });
             if(damagedStructures.length > 0) {
@@ -72,8 +76,11 @@ var RoomTowers = function() {
         } else if(hurtCreeps.length > 0) {
             tower.heal(hurtCreeps[0]);
         } else if(damagedStructures.length > 0) {
-            if(energyPercent > 0.9) {
-                tower.repair(damagedStructures[0]);
+            for(var j = 0; j < damagedStructures.length; j++) {
+                if(tower.pos.inRangeTo(damagedStructures[j], 5)) {
+                    tower.repair(damagedStructures[j]);
+                    break;
+                }
             }
         }
     }
