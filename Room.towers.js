@@ -19,7 +19,8 @@ var RoomTowers = function() {
             var a_hitsRemaining = a.hitsMax - a.hits;
             var b_hitsRemaining = b.hitsMax - b.hits;
             return a_hitsRemaining - b_hitsRemaining;
-            if(a_healing === 0 && b_healing === 0) {
+            
+            /*if(a_healing === 0 && b_healing === 0) {
                 return a_fatigue - b_fatigue;
             } else if(a_healing) {
                 
@@ -32,7 +33,7 @@ var RoomTowers = function() {
                 return a_fatigue - b_fatigue;
             } else {
                 return b_healing - a_healing;
-            }
+            }*/
         });
     } else {
         hurtCreeps = this.find(FIND_MY_CREEPS, {
