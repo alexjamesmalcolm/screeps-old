@@ -16,6 +16,18 @@ var RoomTowers = function() {
             var b_fatigue = 2 * (b.weight() - b.getActiveBodyparts(MOVE));
             var a_healing = a.getActiveBodyparts(HEAL);
             var b_healing = b.getActiveBodyparts(HEAL);
+            var a_hitsRemaining = a.hitsMax - a.hits;
+            var b_hitsRemaining = b.hitsMax - b.hits;
+            return a_hitsRemaining - b_hitsRemaining;
+            if(a_healing === 0 && b_healing === 0) {
+                return a_fatigue - b_fatigue;
+            } else if(a_healing) {
+                
+            }
+            if(a_healing > 0) {
+                if(b_healing > 0) {
+                }
+            }
             if(a_healing === b_healing) {
                 return a_fatigue - b_fatigue;
             } else {
