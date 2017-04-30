@@ -1,4 +1,12 @@
 var CreepCollect = function(input) {
+    /*
+    methods:
+    grab from fullest of given structures
+    grab from least full of given structures
+    grab to even out given structures
+    grab from closest
+    grab from structures in a given priority
+    */
     var target;
     var resource = input.resource;
     //var amount = this.carryCapacity - _.sum(this.carry);
