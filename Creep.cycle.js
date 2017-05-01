@@ -25,6 +25,8 @@ var CreepCycle = function() {
         try {this.roleFighter();} catch(err) {console.log(err+": Creep.cycle.js this.roleFighter()");}
     } else if(this.memory.role == 'courier') {
         try {this.roleCourier();} catch(err) {console.log(err+": Creep.cycle.js this.roleCourier()");}
+    } else if(this.memory.role == 'spawnKeeper') {
+        try {this.roleSpawnKeeper();} catch(err) {console.log(err+ ": Creep.cycle.js this.roleSpawnKeeper()");}
     }
 };
 
