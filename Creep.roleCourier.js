@@ -17,10 +17,13 @@ var roleCourier = function() {
             structures: [STRUCTURE_CONTAINER]
         });
     } else {
-        this.deposit({
+        var result = this.deposit({
             creepDepositing: false,
             structures: [STRUCTURE_TOWER, STRUCTURE_STORAGE]
         });
+        if(result === ERR_NOT_FOUND) {
+            this.memory.collecting = false;
+        }
     }
 };
 
