@@ -1,4 +1,5 @@
 try {
+    Creep.prototype.roleSpawnKeeper = require('Creep.roleSpawnKeeper');
     Creep.prototype.collect = require('Creep.collect');
     Creep.prototype.cycle = require('Creep.cycle');
     Creep.prototype.deposit = require('Creep.deposit');
@@ -20,6 +21,7 @@ try {
     Room.prototype.roadBuilder = require('Room.roadBuilder');
     Room.prototype.towers = require('Room.towers');
     Room.prototype.upgraderSpawn = require('Room.upgraderSpawn');
+    Room.prototype.spawnKeeperSpawn = require('Room.spawnKeeperSpawn');
     Spawn.prototype.cycle = require('Spawn.cycle');
 } catch(err) {console.log(err+": main.js 1");}
 const profiler = require('screeps-profiler');
