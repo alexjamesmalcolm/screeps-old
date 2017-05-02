@@ -50,7 +50,7 @@ var RoomTowers = function() {
         } else {
             damagedStructures = this.find(FIND_STRUCTURES, {
                 filter: function(structure) {
-                    if(structure.hitsmax - structure.hits > 0) {
+                    if(structure.hitsMax - structure.hits > 0) {
                         return true;
                     } else {
                         return false;
