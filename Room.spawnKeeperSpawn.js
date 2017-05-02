@@ -60,7 +60,7 @@ var RoomSpawnKeeperSpawn = function() {
                     if(Math.ceil(spawnKeepers[0].weight() / spawnKeepers[0].getActiveBodyparts(MOVE)) >= 1) {
                         spawnKeepers[0].memory.recycle = true;
                         this.memory.spawns[0].createCreep(spawnKeeper.bodyparts, undefined, {role: 'spawnKeeper'});
-                        this.memory.spawns[0].memory.spawning = Game.time;
+                        this.memory.spawns[0].memory.busy = Game.time;
                     }
                 }
             }
@@ -69,7 +69,7 @@ var RoomSpawnKeeperSpawn = function() {
         if(this.memory.spawns.length > 0) {
             if(spawnKeeper) {
                 this.memory.spawns[0].createCreep(spawnKeeper.bodyparts, undefined, {role: 'spawnKeeper'});
-                this.memory.spawns[0].memory.spawning = Game.time;
+                this.memory.spawns[0].memory.busy = Game.time;
             }
         }
     }
