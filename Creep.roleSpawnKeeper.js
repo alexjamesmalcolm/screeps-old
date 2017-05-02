@@ -12,7 +12,7 @@ var CreepRoleSpawnKeeper = function() {
     }
     if(this.memory.collecting) {
         var droppedEnergy = this.room.find(FIND_DROPPED_ENERGY);
-        if(droppedEnergy.length > 0) {
+        if(droppedEnergy.length > 0 && droppedEnergy[0].amount > 50) {
             if(this.pickup(droppedEnergy[0]) === ERR_NOT_IN_RANGE) {
                 this.moveTo(droppedEnergy[0]);
             }
