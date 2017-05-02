@@ -66,9 +66,11 @@ var RoomSpawnKeeperSpawn = function() {
             }
         }
     } else {
-        if(spawnKeeper) {
-            this.memory.spawns[0].createCreep(spawnKeeper.bodyparts, undefined, {role: 'spawnKeeper'});
-            this.memory.spawns[0].memory.spawning = Game.time;
+        if(this.memory.spawns.length > 0) {
+            if(spawnKeeper) {
+                this.memory.spawns[0].createCreep(spawnKeeper.bodyparts, undefined, {role: 'spawnKeeper'});
+                this.memory.spawns[0].memory.spawning = Game.time;
+            }
         }
     }
 };
