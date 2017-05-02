@@ -58,7 +58,13 @@ var RoomCourierSpawn = function() {
         this.find(FIND_DROPPED_RESOURCES).forEach(function(resource) {
             droppedResources = droppedResources + resource.amount;
         });
-        var transitEnergy = droppedResources + this.energyCapacityAvailable;
+        var containerEnergy = 0;
+        this.find(FIND_STRUCTURES).forEach(function(structure) {
+            if(structure.structureType === STRUCTURE_CONTAINER) {
+                containerEnergy = containerEnergy + _.sum(container.store);
+            }
+        });
+        var transitEnergy = droppedResources + containerEnergy;
         if(this.memory.spawns.length > 0) {
             if(courier) {
                 if(this.memory.energyPercent === 1) {
@@ -70,12 +76,12 @@ var RoomCourierSpawn = function() {
                         }
                     }
                 }
-                if(transitEnergy * 0.5 > totalCarry + CARRY_CAPACITY * courier.carryBodyparts) {
+                if(transitEnergy * 1 > totalCarry + CARRY_CAPACITY * courier.carryBodyparts) {
                     this.memory.spawns[0].createCreep(courier.bodyparts, undefined, {role: 'courier'});
                     this.memory.spawns[0].memory.spawning = Game.time;
                 }
             }
-            if(transitEnergy * 0.5 < totalCarry) {
+            if(transitEnergy * 1 < totalCarry) {
                 if(couriers.length > 2) {
                     couriers[0].memory.recycle = true;
                 }
