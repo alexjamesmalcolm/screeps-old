@@ -61,7 +61,7 @@ var RoomCourierSpawn = function() {
         var containerEnergy = 0;
         this.find(FIND_STRUCTURES).forEach(function(structure) {
             if(structure.structureType === STRUCTURE_CONTAINER) {
-                containerEnergy = containerEnergy + _.sum(container.store);
+                containerEnergy = containerEnergy + _.sum(structure.store);
             }
         });
         var transitEnergy = droppedResources + containerEnergy;
