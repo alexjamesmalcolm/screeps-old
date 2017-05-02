@@ -34,7 +34,7 @@ var RoomSpawnKeeperSpawn = function() {
             }
         }
     });
-    var spawnKeeper = optimalCourier(this);
+    var spawnKeeper = optimalSpawnKeeper(this);
     if(spawnKeepers.length > 0) {
         spawnKeepers.sort(function(a, b){
             //var a_movementTime = Math.ceil(a.weight() / a.getActiveBodyparts[MOVE]);
