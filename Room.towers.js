@@ -80,6 +80,7 @@ var RoomTowers = function() {
                 var structure = damagedStructures[j];
                 if(tower.pos.inRangeTo(structure, 5)) {
                     tower.repair(structure);
+                    break;
                 }
             }
         }
