@@ -70,7 +70,7 @@ var RoomTowers = function() {
     }
     for(i = 0; i < towers.length; i++) {
         tower = towers[i];
-        var energyPercent = tower.energy / tower.energyCapicity;
+        var energyPercent = tower.energy / tower.energyCapacity;
         if(hostiles.length > 0) {
             tower.attack(hostiles[0]);
         } else if(hurtCreeps.length > 0) {
