@@ -21,7 +21,7 @@ var CreepRoleSpawnKeeper = function() {
             this.collect({
                 resource: RESOURCE_ENERGY,
                 amount: this.carryCapacity,
-                structures: [STRUCTURE_STORAGE, STRUCTURE_CONTAINER]
+                structures: [STRUCTURE_STORAGE]
             });
         }
     } else {
