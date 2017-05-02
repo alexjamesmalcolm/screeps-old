@@ -9,8 +9,6 @@ var stateRecycle = {
                     structures: [STRUCTURE_EXTENSION, STRUCTURE_SPAWN, STRUCTURE_CONTAINER, STRUCTURE_STORAGE]
                 });
             } else {
-                console.log(spawn);
-                console.log(creep.pos.findClosestByRange(FIND_MY_SPAWNS));
                 if(spawn.recycleCreep(creep) == ERR_NOT_IN_RANGE) {
                     creep.moveTo(spawn);
                     creep.say('Recycling');
