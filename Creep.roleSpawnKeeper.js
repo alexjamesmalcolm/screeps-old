@@ -18,9 +18,10 @@ var CreepRoleSpawnKeeper = function() {
                 this.room.visual.circle(droppedEnergy[0].pos, {fill: 'transparent', radius: 0.55, stroke: 'red'});
             }
         } else {
+            console.log(this.room.storage.pos);
             if(this.transfer(this.room.storage, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
                 this.moveTo(this.room.storage);
-                this.room.visual.circle(this.room.storage.pos,{fill: 'transparent', radius: 0.55, stroke: 'red'});
+                this.room.visual.circle(this.room.storage.pos, {fill: 'transparent', radius: 0.55, stroke: 'red'});
             }
         }
     } else {
