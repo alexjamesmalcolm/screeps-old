@@ -15,10 +15,12 @@ var CreepRoleSpawnKeeper = function() {
         if(droppedEnergy.length > 0 && droppedEnergy[0].amount > 50) {
             if(this.pickup(droppedEnergy[0]) === ERR_NOT_IN_RANGE) {
                 this.moveTo(droppedEnergy[0]);
+                this.room.visual.circle(droppedEnergy[0].pos, {fill: 'transparent', radius: 0.55, stroke: 'red'});
             }
         } else {
             if(this.transfer(this.room.storage, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
                 this.moveTo(this.room.storage);
+                this.room.visual.circle(this.room.storage.pos,{fill: 'transparent', radius: 0.55, stroke: 'red'});
             }
         }
     } else {
