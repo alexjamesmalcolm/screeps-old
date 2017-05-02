@@ -13,16 +13,13 @@ var CreepRoleSpawnKeeper = function() {
     if(this.memory.collecting) {
         var droppedEnergy = this.room.find(FIND_DROPPED_ENERGY);
         if(droppedEnergy.length > 0) {
-            this.pickup();
             if(this.pickup(droppedEnergy[0]) === ERR_NOT_IN_RANGE) {
                 this.moveTo(droppedEnergy[0]);
             }
         } else {
-            this.collect({
-                resource: RESOURCE_ENERGY,
-                amount: this.carryCapacity,
-                structures: [STRUCTURE_STORAGE]
-            });
+            if(this.transfer(this.room.storage, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
+                this.moveTo(this.room.storage);
+            }
         }
     } else {
         this.deposit({
