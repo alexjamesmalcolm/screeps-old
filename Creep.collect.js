@@ -6,6 +6,7 @@ var CreepCollect = function(input) {
     grab to even out given structures
     grab from closest
     grab from structures in a given priority
+    grab dropped energy first
     */
     var target;
     var resource = input.resource;
