@@ -12,7 +12,6 @@ var CreepRoleSpawnKeeper = function() {
         }
     }
     if(this.memory.collecting) {
-        console.log("Collecting");
         var target;
         var storage = this.pos.findClosestByRange(FIND_STRUCTURES, {
             filter: function(structure) {
@@ -23,27 +22,20 @@ var CreepRoleSpawnKeeper = function() {
                 }
             }
         });
-        console.log("storage: "+storage);
         var droppedEnergy = this.room.find(FIND_DROPPED_ENERGY);
         if(droppedEnergy.length > 0 && droppedEnergy[0].amount > 50) {
-            console.log("If");
             target = droppedEnergy[0];
             this.room.visual.circle(target.pos, {fill: 'transparent', radius: 0.55, stroke: 'red'});
             if(this.pickup(droppedEnergy[0]) === ERR_NOT_IN_RANGE) {
                 this.moveTo(target);
             }
         } else {
-            console.log("Else");
-            Game.creeps["Skyler"].pos.findClosestByRange(FIND_MY_STRUCTURES, {});
-            target = storage; //Game.getObjectById("5903f08c1fa9178039b33ca9");
-            console.log("target.pos: "+target.pos);
+            target = storage;
             this.room.visual.circle(target.pos, {fill: 'transparent', radius: 0.55, stroke: 'red'});
-            console.log(this.withdraw(target, RESOURCE_ENERGY));
             if(this.withdraw(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
                 this.moveTo(target);
             }
         }
-        console.log("target: "+target);
     } else {
         this.deposit({
             creepDepositing: false,
