@@ -19,7 +19,7 @@ var roleCourier = function() {
         var containers = this.room.find(FIND_STRUCTURES, {
             filter: function(structure) {
                 if(structure.structureType === STRUCTURE_CONTAINER) {
-                    var amount = _.sum(container.store);
+                    var amount = _.sum(structure.store);
                     if(amount > 0) {
                         return true;
                     } else {
@@ -35,6 +35,7 @@ var roleCourier = function() {
             var b_amount = _.sum(b.store);
             return b - a;
         });
+        console.log(containers[0].store);
         var result = this.withdraw(containers[0], RESOURCE_ENERGY);
         if(result === ERR_NOT_IN_RANGE) {
             this.moveTo(containers[0]);
