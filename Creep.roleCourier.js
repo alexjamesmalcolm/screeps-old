@@ -11,11 +11,6 @@ var roleCourier = function() {
         }
     }
     if(this.memory.collecting) {
-        /*this.collect({
-            resource: RESOURCE_ENERGY,
-            amount: this.carryCapacity,
-            structures: [STRUCTURE_CONTAINER]
-        });*/
         var containers = this.room.find(FIND_STRUCTURES, {
             filter: function(structure) {
                 if(structure.structureType === STRUCTURE_CONTAINER) {
@@ -35,7 +30,6 @@ var roleCourier = function() {
             var b_amount = _.sum(b.store);
             return b - a;
         });
-        console.log(containers[0].store);
         var result = this.withdraw(containers[0], RESOURCE_ENERGY);
         if(result === ERR_NOT_IN_RANGE) {
             this.moveTo(containers[0]);
@@ -45,7 +39,6 @@ var roleCourier = function() {
             creepDepositing: false,
             structures: [STRUCTURE_TOWER, STRUCTURE_STORAGE]
         });
-        console.log(result);
         if(result === ERR_NOT_FOUND) {
             this.memory.collecting = false;
         }
