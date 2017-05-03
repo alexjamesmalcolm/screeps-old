@@ -14,7 +14,7 @@ var CreepRoleSpawnKeeper = function() {
     if(this.memory.collecting) {
         console.log("Collecting");
         var target;
-        var storage = this.room.find(FIND_STRUCTURES, {
+        var storage = this.pos.findClosestByRange(FIND_STRUCTURES, {
             filter: function(structure) {
                 if(structure.structureType === STRUCTURE_STORAGE) {
                     return true;
@@ -34,8 +34,9 @@ var CreepRoleSpawnKeeper = function() {
             }
         } else {
             console.log("Else");
-            target = storage;
-            console.log(target.pos);
+            Game.creeps["Skyler"].pos.findClosestByRange(FIND_MY_STRUCTURES, {});
+            target = storage; //Game.getObjectById("5903f08c1fa9178039b33ca9");
+            console.log("target.pos: "+target.pos);
             this.room.visual.circle(target.pos, {fill: 'transparent', radius: 0.55, stroke: 'red'});
             console.log(this.withdraw(target, RESOURCE_ENERGY));
             if(this.withdraw(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
