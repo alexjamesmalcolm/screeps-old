@@ -11,16 +11,40 @@ var roleCourier = function() {
         }
     }
     if(this.memory.collecting) {
-        this.collect({
+        /*this.collect({
             resource: RESOURCE_ENERGY,
             amount: this.carryCapacity,
             structures: [STRUCTURE_CONTAINER]
+        });*/
+        var containers = this.room.find(FIND_STRUCTURES, {
+            filter: function(structure) {
+                if(structure.structureType === STRUCTURE_CONTAINER) {
+                    var amount = _.sum(container.store);
+                    if(amount > 0) {
+                        return true;
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            }
         });
+        containers.sort(function(a, b) {
+            var a_amount = _.sum(a.store);
+            var b_amount = _.sum(b.store);
+            return b - a;
+        });
+        var result = this.withdraw(containers[0], RESOURCE_ENERGY);
+        if(result === ERR_NOT_IN_RANGE) {
+            this.moveTo(containers[0]);
+        }
     } else {
         var result = this.deposit({
             creepDepositing: false,
             structures: [STRUCTURE_TOWER, STRUCTURE_STORAGE]
         });
+        console.log(result);
         if(result === ERR_NOT_FOUND) {
             this.memory.collecting = false;
         }
