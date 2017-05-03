@@ -37,7 +37,7 @@ var roleCourier = function() {
     } else {
         var result = this.deposit({
             creepDepositing: false,
-            structures: [STRUCTURE_TOWER, STRUCTURE_STORAGE]
+            structures: [STRUCTURE_STORAGE, STRUCTURE_TOWER]
         });
         if(result === ERR_NOT_FOUND) {
             this.memory.collecting = false;
