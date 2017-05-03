@@ -1,5 +1,4 @@
 var CreepRoleSpawnKeeper = function() {
-    console.log("this: "+this);
     if(this.memory.collecting) {
         if(this.carry.energy === this.carryCapacity) {
             this.memory.collecting = false;
