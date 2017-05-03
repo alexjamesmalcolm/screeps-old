@@ -12,9 +12,6 @@ var optimalUpgrader = function(room) {
     var moveBodyparts = Math.floor((workBodyparts + carryBodyparts) / 2);
     //x
     //x = (z + y) / 2
-    console.log("workBodyparts: "+workBodyparts);
-    console.log("carryBodyparts: "+carryBodyparts);
-    console.log("moveBodyparts: "+moveBodyparts);
     var creepCost = moveBodyparts * BODYPART_COST[MOVE] + carryBodyparts * BODYPART_COST[CARRY] + workBodyparts * BODYPART_COST[WORK];
     // t = x * m + y * c + z * w
     var bodyparts = [];
