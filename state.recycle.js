@@ -6,7 +6,7 @@ var stateRecycle = {
             if(creep.carry.energy > 0) {
                 creep.deposit({
                     creepDepositing: true,
-                    structures: [STRUCTURE_EXTENSION, STRUCTURE_SPAWN, STRUCTURE_CONTAINER, STRUCTURE_STORAGE]
+                    structures: [STRUCTURE_STORAGE, STRUCTURE_EXTENSION, STRUCTURE_SPAWN, STRUCTURE_CONTAINER]
                 });
             } else {
                 if(spawn.recycleCreep(creep) == ERR_NOT_IN_RANGE) {
