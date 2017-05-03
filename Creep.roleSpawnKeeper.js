@@ -21,8 +21,14 @@ var CreepRoleSpawnKeeper = function() {
                 }
             }
         });
-        var droppedEnergy = this.room.find(FIND_DROPPED_ENERGY);
-        if(droppedEnergy.length > 0 && droppedEnergy[0].amount > 50) {
+        var droppedEnergy = this.room.find(FIND_DROPPED_ENERGY, {
+            filter: function(energy) {
+                if(energy.amount > 100) {
+                    return true;
+                }
+            }
+        });
+        if(droppedEnergy.length > 0) {
             target = droppedEnergy[0];
             this.room.visual.circle(target.pos, {fill: 'transparent', radius: 0.55, stroke: 'red'});
             if(this.pickup(droppedEnergy[0]) === ERR_NOT_IN_RANGE) {
