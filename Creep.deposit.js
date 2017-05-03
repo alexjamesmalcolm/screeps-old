@@ -35,6 +35,8 @@ var CreepDeposit = function(input) {
                                     return structure.storeCapacity - _.sum(structure.store) > 0;
                                 case STRUCTURE_TOWER:
                                     return structure.energyCapacity - structure.energy > 0;
+                                case STRUCTURE_LINK:
+                                    return structure.energyCapacity - structure.energy > 0;
                             }
                         }
                     }
