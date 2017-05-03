@@ -1,9 +1,22 @@
 var optimalUpgrader = function(room) {
     var i;
-    var carryBodyparts = 1;
-    var workBodyparts = Math.floor(-(BODYPART_COST[MOVE] - 2 * room.energyAvailable + 2 * carryBodyparts * BODYPART_COST[CARRY]) / (BODYPART_COST[MOVE] + 2 * BODYPART_COST[WORK]));
+    var ticksToUpgrade = 50
+    var workBodyparts = Math.floor((2 * CARRY_CAPACITY * room.energyAvailable) / ((2 * BODYPART_COST[CARRY] + BODYPART_COST[MOVE]) * ticksToUpgrade * UPGRADE_CONTROLLER_POWER + CARRY_CAPACITY * (BODYPART_COST[MOVE] + 2 * BODYPART_COST[WORK])));
+    //z
+    // z = (2 * C * t) / ((2 * c + m) * T * U + C * (m + 2 * w))
+    var carryBodyparts = Math.floor((ticksToUpgrade * UPGRADE_CONTROLLER_POWER * workBodyparts) / CARRY_CAPACITY);
+    //y
+    // T = (carryBodyparts * CARRY_CAPACITY) / (UPGRADE_CONTROLLER_POWER * workBodyparts)
+    // T = (y * 50) / (1 * z)
+    // y = (T * U * z) / C
     var moveBodyparts = Math.floor((workBodyparts + carryBodyparts) / 2);
+    //x
+    //x = (z + y) / 2
+    console.log("workBodyparts: "+workBodyparts);
+    console.log("carryBodyparts: "+carryBodyparts);
+    console.log("moveBodyparts: "+moveBodyparts);
     var creepCost = moveBodyparts * BODYPART_COST[MOVE] + carryBodyparts * BODYPART_COST[CARRY] + workBodyparts * BODYPART_COST[WORK];
+    // t = x * m + y * c + z * w
     var bodyparts = [];
     for(i = 0; i < moveBodyparts; i++) {
         bodyparts.push(MOVE);
