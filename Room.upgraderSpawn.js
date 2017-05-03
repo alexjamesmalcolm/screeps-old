@@ -1,6 +1,6 @@
 var optimalUpgrader = function(room) {
     var i;
-    var ticksToUpgrade = 50
+    var ticksToUpgrade = 50;
     var workBodyparts = Math.floor((2 * CARRY_CAPACITY * room.energyAvailable) / ((2 * BODYPART_COST[CARRY] + BODYPART_COST[MOVE]) * ticksToUpgrade * UPGRADE_CONTROLLER_POWER + CARRY_CAPACITY * (BODYPART_COST[MOVE] + 2 * BODYPART_COST[WORK])));
     //z
     // z = (2 * C * t) / ((2 * c + m) * T * U + C * (m + 2 * w))
@@ -32,12 +32,13 @@ var optimalUpgrader = function(room) {
             bodyparts: bodyparts,
             workBodyparts: workBodyparts,
             moveBodyparts: moveBodyparts,
-            carryBodyparts: carryBodyparts
+            carryBodyparts: carryBodyparts,
+            creepCost: creepCost
         };
     }
 };
 var RoomUpgraderSpawn = function() {
-    if(this.memory.spawns.length) {
+    if(this.memory.spawns.length > 0) {
         var upgraders = this.find(FIND_MY_CREEPS, {
             filter: function(creep) {
                 if(creep.memory.recycle) {
