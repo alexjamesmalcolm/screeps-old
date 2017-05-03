@@ -42,7 +42,7 @@ var RoomHarvesterSpawn = function() {
             harvestPerTick = harvestPerTick + HARVEST_POWER * creep.getActiveBodyparts(WORK);
         });
         //console.log(harvester);
-        var multiplier = 1.2
+        var multiplier = 1.3
         if(harvestPerTick > multiplier * HARVEST_POWER * sources.length * 3000 / 300) {
             //console.log('The computer was about to make a dumb decision: a');
             harvesters[0].memory.recycle = true;
