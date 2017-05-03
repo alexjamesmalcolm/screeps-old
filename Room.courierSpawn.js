@@ -81,16 +81,18 @@ var RoomCourierSpawn = function() {
                     this.memory.spawns[0].memory.busy = Game.time;
                 }
             }
-            if(transitEnergy * 1 < totalCarry) {
-                if(couriers.length > 2) {
-                    couriers[0].memory.recycle = true;
-                }
+        }
+        if(transitEnergy * 1 < totalCarry) {
+            if(couriers.length > 2) {
+                couriers[0].memory.recycle = true;
             }
         }
     } else {
-        if(courier) {
-            this.memory.spawns[0].createCreep(courier.bodyparts, undefined, {role: 'courier'});
-            this.memory.spawns[0].memory.busy = Game.time;
+        if(this.memory.spawns.length > 0) {
+            if(courier) {
+                this.memory.spawns[0].createCreep(courier.bodyparts, undefined, {role: 'courier'});
+                this.memory.spawns[0].memory.busy = Game.time;
+            }
         }
     }
 };
