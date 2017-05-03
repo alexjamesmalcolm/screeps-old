@@ -19,7 +19,7 @@ var roleHarvester = function() {
     } else {
         try {this.deposit({
             creepDepositing: false,
-            structures: [STRUCTURE_LINK, STRUCTURE_CONTAINER, STRUCTURE_STORAGE, STRUCTURE_EXTENSION, STRUCTURE_SPAWN]
+            structures: [STRUCTURE_CONTAINER, STRUCTURE_STORAGE, STRUCTURE_EXTENSION, STRUCTURE_SPAWN]
         });} catch(err) {console.log(err+": Creep.roleHarvester.js this.deposit()");}
         try {this.passiveRepair();} catch(err) {console.log(err+": Creep.roleHarvester.js this.passiveRepair()");}
     }
