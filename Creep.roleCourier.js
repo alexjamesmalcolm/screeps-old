@@ -10,7 +10,7 @@ var roleCourier = function() {
             this.say('Collecting');
         }
     }
-    if(this.memory.collecting) {
+    if(this.memory.collecting) {/*
         var containers = this.room.find(FIND_STRUCTURES, {
             filter: function(structure) {
                 if(structure.structureType === STRUCTURE_CONTAINER) {
@@ -33,7 +33,10 @@ var roleCourier = function() {
         var result = this.withdraw(containers[0], RESOURCE_ENERGY);
         if(result === ERR_NOT_IN_RANGE) {
             this.moveTo(containers[0]);
-        }
+        }*/
+        var result = this.collect({
+            structures: [STRUCTURE_LINK, STRUCTURE_CONTAINER]
+        });
     } else {
         var result = this.deposit({
             creepDepositing: false,
