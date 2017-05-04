@@ -17,6 +17,15 @@ var CreepRoleSpawnKeeper = function() {
             }
         }
     });
+    var linkClosestToStorage = this.room.storage.pos.findClosestByRange(FIND_STRUCTURES, {
+        filter: function(structure) {
+            if(structure.structureType === STRUCTURE_LINK) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    });
     if(this.memory.collecting) {
         var target;
         var storage = this.pos.findClosestByRange(FIND_STRUCTURES, {
@@ -35,10 +44,18 @@ var CreepRoleSpawnKeeper = function() {
                 this.moveTo(target);
             }
         } else {
-            target = storage;
-            this.room.visual.circle(target.pos, {fill: 'transparent', radius: 0.55, stroke: 'red'});
-            if(this.withdraw(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-                this.moveTo(target);
+            if(linkClosestToStorage.energy > 0) {
+                target = linkClosestToStorage;
+                this.room.visual.circle(target.pos, {fill: 'transparent', radius: 0.55, stroke: 'red'});
+                if(this.withdraw(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
+                    this.moveTo(target);
+                }
+            } else {
+                target = storage;
+                this.room.visual.circle(target.pos, {fill: 'transparent', radius: 0.55, stroke: 'red'});
+                if(this.withdraw(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
+                    this.moveTo(target);
+                }
             }
         }
     } else {
