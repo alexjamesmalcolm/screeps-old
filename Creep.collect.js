@@ -56,7 +56,9 @@ var CreepCollect = function(input) {
     }
     if(target) {
         if(this.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
-            this.moveTo(target);
+            this.moveTo(target, {
+                "reusePath": 10
+            });
             return ERR_NOT_IN_RANGE;
         } else {
             return OK;
