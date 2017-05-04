@@ -8,15 +8,7 @@ var RoomLink = function() {
             }
         }
     });
-    var links = this.find(FIND_STRUCTURES, {
-        filter: function(structure) {
-            if(structure.structureType === STRUCTURE_LINK) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-    });
+    var links = this.memory.found.links;
     for(var i = 0; i < links.length; i++) {
         var link = links[i];
         if(link.id !== linkClosestToStorage.id) {
