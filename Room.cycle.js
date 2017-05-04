@@ -43,7 +43,7 @@ var RoomCycle = function() {
             try {spawn.cycle();} catch(err) {console.log(err+": Room.cycle.js spawn.cycle()");}
         }
     }
-    //if(energyPercent >= 1) {
+    if(energyPercent >= 1) {
         checkSpawns(room);
         try {this.harvesterSpawn();} catch(err) {console.log(err+": Room.cycle.js this.harvesterSpawn()");}
         checkSpawns(room);
@@ -54,7 +54,7 @@ var RoomCycle = function() {
         try {this.upgraderSpawn();} catch(err) {console.log(err+": Room.cycle.js this.upgraderSpawn()");}
         checkSpawns(room);
         try {this.builderSpawn();} catch(err) {console.log(err+": Room.cycle.js this.builderSpawn()");}
-    //}
+    }
     try {this.towers();} catch(err) {console.log(err+": Room.cycle.js this.towers()");}
     creeps = this.find(FIND_MY_CREEPS);
     for(name in creeps) {
