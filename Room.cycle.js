@@ -21,7 +21,7 @@ var RoomCycle = function() {
     this.memory.energyPercent = energyPercent;
     try {this.paths();} catch(err) {console.log(err+": Room.cycle.js this.paths()");}
     this.findAll();
-    sources = this.find(FIND_SOURCES);
+    sources = this.memory.found.sources;
     this.memory.harvestPoints = 0;
     sources.forEach(function(source) {
         for(var i = -1; i < 2; i++) {
@@ -57,7 +57,7 @@ var RoomCycle = function() {
         try {this.builderSpawn();} catch(err) {console.log(err+": Room.cycle.js this.builderSpawn()");}
     }
     try {this.towers();} catch(err) {console.log(err+": Room.cycle.js this.towers()");}
-    creeps = this.find(FIND_MY_CREEPS);
+    creeps = this.memory.found.myCreeps;
     for(name in creeps) {
         if(creeps[name]) {
             var creep = creeps[name];
