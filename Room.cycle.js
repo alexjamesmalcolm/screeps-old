@@ -1,17 +1,16 @@
 var checkSpawns = function(room) {
-    var spawns = room.find(FIND_MY_SPAWNS, {
-        filter: function(spawn) {
-            if(spawn.spawning || spawn.memory.busy == Game.time) {
-                return false;
-            } else {
-                return true;
-            }
+    var spawns = room.memory.found.mySpawns;
+    var activeSpawns = _.filter(spawns, function(spawn) {
+        if(spawn.spawning || spawn.memory.busy == Game.time) {
+            return false;
+        } else {
+            return true;
         }
     });
-    if(!spawns.length) {
+    if(!activeSpawns.length) {
         room.memory.spawns = [];
     } else {
-        room.memory.spawns = spawns;
+        room.memory.spawns = activeSpawns;
     }
 };
 var RoomCycle = function() {
