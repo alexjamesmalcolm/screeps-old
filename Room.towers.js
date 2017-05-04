@@ -1,13 +1,7 @@
 var RoomTowers = function() {
     /*If hostiles deal with those, if not hostiles then heal creeps, if not that, then repair structures*/
     var towers, hostiles, hurtCreeps, damagedStructures, i, tower;
-    towers = this.find(FIND_MY_STRUCTURES, {
-        filter: function(structure) {
-            if(structure.structureType == STRUCTURE_TOWER) {
-                return true;
-            }
-        }
-    });
+    towers = this.memory.found.towers;
     hostiles = this.find(FIND_HOSTILE_CREEPS);
     if(hostiles.length > 0) {
         hostiles.sort(function(a, b) {
