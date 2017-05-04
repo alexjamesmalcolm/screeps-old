@@ -26,7 +26,7 @@ var roleBuilder = function() {
         this.collect({
             resource: RESOURCE_ENERGY,
             amount: this.carryCapacity,
-            structures:[STRUCTURE_CONTAINER, STRUCTURE_STORAGE]
+            structures:[STRUCTURE_STORAGE]
         });
     }
 };
