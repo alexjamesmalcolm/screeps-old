@@ -4,6 +4,7 @@ var RoomFindAll = function() {
     found.myCreeps = this.find(FIND_MY_CREEPS);
     found.structures = this.find(FIND_STRUCTURES);
     found.links = _.filter(found.structures, {'structureType': STRUCTURE_LINK});
+    found.towers = _.filter(found.structures, {'structureType': STRUCTURE_TOWER});
     this.memory.found = found;
 };
 
