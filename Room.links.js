@@ -20,7 +20,9 @@ var RoomLink = function() {
     for(var i = 0; i < links.length; i++) {
         var link = links[i];
         if(link.id !== linkClosestToStorage.id) {
-            link.transferEnergy(linkClosestToStorage);
+            if(link.energy < linkClosestToStorage.energyCapacity - linkClosestToStorage.energy) {
+                link.transferEnergy(linkClosestToStorage);
+            }
         }
     }
 };
