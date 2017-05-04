@@ -25,6 +25,8 @@ var CreepCollect = function(input) {
                 return structure.energy >= amount;
             } else if(structure.structureType == STRUCTURE_TOWER && structures.indexOf(STRUCTURE_TOWER) != -1) {
                 return structure.energy >= amount;
+            } else if(structure.structureType == STRUCTURE_LINK && structures.indexOf(STRUCTURE_LINK) != -1) {
+                return structures.energy >= amount;
             }
         }
     });
