@@ -23,6 +23,7 @@ try {
     Room.prototype.upgraderSpawn = require('Room.upgraderSpawn');
     Room.prototype.spawnKeeperSpawn = require('Room.spawnKeeperSpawn');
     Room.prototype.links = require('Room.links');
+    Room.prototype.findAll = require('Room.findAll');
     Spawn.prototype.cycle = require('Spawn.cycle');
 } catch(err) {console.log(err+": main.js 1");}
 const profiler = require('screeps-profiler');
