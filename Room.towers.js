@@ -30,10 +30,9 @@ var RoomTowers = function() {
             }*/
         });
     } else {
-        hurtCreeps = this.find(FIND_MY_CREEPS, {
-            filter: function(creep) {
-                return creep.hitsMax - creep.hits > 0;
-            }
+        var creeps = this.memory.found.myCreeps;
+        hurtCreeps = _.filter(creeps, function(creep) {
+            return creep.hitsMax - creep.hits > 0;
         });
         if(hurtCreeps.length > 0) {
             hurtCreeps.sort(function(a, b) {
@@ -42,13 +41,10 @@ var RoomTowers = function() {
                 return a_percent - b_percent;
             });
         } else {
-            damagedStructures = this.find(FIND_STRUCTURES, {
-                filter: function(structure) {
-                    if(structure.hitsMax - structure.hits > 0) {
-                        return true;
-                    } else {
-                        return false;
-                    }
+            var structures = this.memory.found.structures;
+            damagedStructures = _.filter(structures, function(structure) {
+                if(structure.hitsMax - structure.hits > 0) {
+                   return true;
                 }
             });
             if(damagedStructures.length > 0) {
