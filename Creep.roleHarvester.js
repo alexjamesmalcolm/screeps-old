@@ -17,7 +17,8 @@ var roleHarvester = function() {
             this.moveTo(source);
         }
     } else {
-        var link = this.pos.findClosestByRange(FIND_STRUCTURES, {filter: function(structure) {
+        var links = this.room.memory.found.links;
+        var link = this.pos.findClosestByRange(links, {filter: function(structure) {
             if(structure.structureType === STRUCTURE_LINK) {
                 return true;
             } else {
