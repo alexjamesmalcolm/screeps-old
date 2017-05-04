@@ -20,7 +20,7 @@ var RoomLink = function() {
     for(var i = 0; i < links.length; i++) {
         var link = links[i];
         if(link.id !== linkClosestToStorage.id) {
-            if(link.energy < linkClosestToStorage.energyCapacity - linkClosestToStorage.energy) {
+            if(link.energy <= linkClosestToStorage.energyCapacity - linkClosestToStorage.energy) {
                 link.transferEnergy(linkClosestToStorage);
             }
         }
