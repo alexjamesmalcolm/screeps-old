@@ -21,7 +21,7 @@ var roleUpgrader = function() {
         this.collect({
             resource: RESOURCE_ENERGY,
             amount: 50,
-            structures:[STRUCTURE_CONTAINER, STRUCTURE_STORAGE]
+            structures:[STRUCTURE_STORAGE]
         });
     }
 };
