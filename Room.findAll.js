@@ -4,6 +4,7 @@ var RoomFindAll = function() {
     found.myCreeps = this.find(FIND_MY_CREEPS);
     found.mySpawns = this.find(FIND_MY_SPAWNS);
     found.structures = this.find(FIND_STRUCTURES);
+    found.droppedEnergy = this.find(FIND_DROPPED_ENERGY);
     found.links = _.filter(found.structures, {'structureType': STRUCTURE_LINK});
     found.towers = _.filter(found.structures, {'structureType': STRUCTURE_TOWER});
     this.memory.found = found;
