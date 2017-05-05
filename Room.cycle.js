@@ -18,7 +18,7 @@ var RoomCycle = function() {
     room = this;
     energyPercent = this.energyAvailable / this.energyCapacityAvailable;
     this.memory.energyPercent = energyPercent;
-    try {this.paths();} catch(err) {console.log(err+": Room.cycle.js this.paths()");}
+    //try {this.paths();} catch(err) {console.log(err+": Room.cycle.js this.paths()");}
     try {this.findAll();} catch(err) {console.log(err+": Room.cycle.js this.findAll()");}
     sources = this.memory.found.sources;
     this.memory.harvestPoints = 0;
