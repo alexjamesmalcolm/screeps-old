@@ -66,7 +66,7 @@ var RoomTowers = function() {
         } else if(hurtCreeps.length > 0) {
             tower.heal(hurtCreeps[0]);
         } else if(damagedStructures.length > 0) {
-            if(energyPercent > 0.75) {
+            /*if(energyPercent > 0.75) {
                 for(var j = 0; j < damagedStructures.length; j++) {
                     var structure = damagedStructures[j];
                     if(tower.pos.inRangeTo(structure, 5)) {
@@ -74,7 +74,7 @@ var RoomTowers = function() {
                         break;
                     }
                 }
-            }
+            }*/
         }
     }
 };
