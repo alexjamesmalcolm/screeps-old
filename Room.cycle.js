@@ -43,18 +43,7 @@ var RoomCycle = function() {
             try {spawn.cycle();} catch(err) {console.log(err+": Room.cycle.js spawn.cycle()");}
         }
     }
-    //if(energyPercent >= 1) {
-        checkSpawns(room);
-        try {this.harvesterSpawn();} catch(err) {console.log(err+": Room.cycle.js this.harvesterSpawn()");}
-        checkSpawns(room);
-        try {this.spawnKeeperSpawn();} catch(err) {console.log(err+": Room.cycle.js this.spawnKeeperSpawn()");}
-        checkSpawns(room);
-        try {this.courierSpawn();} catch(err) {console.log(err+": Room.cycle.js this.courierSpawn()");}
-        checkSpawns(room);
-        try {this.upgraderSpawn();} catch(err) {console.log(err+": Room.cycle.js this.upgraderSpawn()");}
-        checkSpawns(room);
-        try {this.builderSpawn();} catch(err) {console.log(err+": Room.cycle.js this.builderSpawn()");}
-    //}
+    try {this.spawn();} catch(err) {console.log(err+": Room.cycle.js this.spawn()");}
     try {this.towers();} catch(err) {console.log(err+": Room.cycle.js this.towers()");}
     creeps = this.memory.found.myCreeps;
     for(name in creeps) {
