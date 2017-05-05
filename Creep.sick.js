@@ -1,5 +1,6 @@
 var CreepSick = function() {
-    var spawn = this.pos.findClosestByRange(FIND_MY_SPAWNS);
+    var spawns = this.room.memory.found.mySpawns;
+    var spawn = this.pos.findClosestByRange(spawns);
     if(spawn) {
         var result = spawn.renewCreep(this);
         if(result == ERR_FULL) {
