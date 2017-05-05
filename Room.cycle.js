@@ -19,7 +19,7 @@ var RoomCycle = function() {
     energyPercent = this.energyAvailable / this.energyCapacityAvailable;
     this.memory.energyPercent = energyPercent;
     try {this.paths();} catch(err) {console.log(err+": Room.cycle.js this.paths()");}
-    this.findAll();
+    try {this.findAll();} catch(err) {console.log(err+": Room.cycle.js this.findAll()");}
     sources = this.memory.found.sources;
     this.memory.harvestPoints = 0;
     sources.forEach(function(source) {
@@ -36,7 +36,7 @@ var RoomCycle = function() {
     });
     checkSpawns(room);
     spawns = this.find(FIND_MY_SPAWNS);
-    this.links();
+    try {this.links();} catch(err) {console.log(err+": Room.cycle.js this.links()");}
     for(name in spawns) {
         if(spawns[name]) {
             spawn = spawns[name];
