@@ -35,7 +35,7 @@ var roleCourier = function() {
             this.moveTo(containers[0]);
         }*/
         var result = this.collect({
-            structures: [STRUCTURE_LINK, STRUCTURE_CONTAINER]
+            structures: [STRUCTURE_CONTAINER]
         });
     } else {
         var result = this.deposit({
