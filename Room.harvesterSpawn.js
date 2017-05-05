@@ -30,6 +30,7 @@ var RoomHarvesterSpawn = function() {
     });
     var harvester = optimalHarvester(this);
     var harvestPerTick = 0;
+    var multiplier = 1.5
     if(harvesters.length > 0) {
         harvesters.sort(function(a, b) {
             return a.getActiveBodyparts(WORK) - b.getActiveBodyparts(WORK);
@@ -38,7 +39,6 @@ var RoomHarvesterSpawn = function() {
             harvestPerTick = harvestPerTick + HARVEST_POWER * creep.getActiveBodyparts(WORK);
         });
         //console.log(harvester);
-        var multiplier = 1.5
         if(harvestPerTick > multiplier * HARVEST_POWER * sources.length * 3000 / 300) {
             //console.log('The computer was about to make a dumb decision: a');
             harvesters[0].memory.recycle = true;
