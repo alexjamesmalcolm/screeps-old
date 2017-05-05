@@ -1,4 +1,5 @@
 var CreepRoleSpawnKeeper = function() {
+    var creep = this;
     if(this.memory.collecting) {
         if(this.carry.energy === this.carryCapacity) {
             this.memory.collecting = false;
@@ -11,7 +12,7 @@ var CreepRoleSpawnKeeper = function() {
         }
     }
     var droppedEnergy = _.filter(this.room.memory.found.droppedEnergy, function(energy) {
-        if(energy.amount > this.carryCapacity * 0.1) {
+        if(energy.amount > creep.carryCapacity * 0.1) {
             return true;
         }
     });
