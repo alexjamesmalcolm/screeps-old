@@ -48,6 +48,8 @@ var CreepRoleSpawnKeeper = function() {
                 if(this.withdraw(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
                     this.moveTo(target);
                 }
+            } else {
+                this.memory.collecting = false;
             }
         }
     } else {
