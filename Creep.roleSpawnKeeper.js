@@ -42,7 +42,7 @@ var CreepRoleSpawnKeeper = function() {
                 if(this.withdraw(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
                     this.moveTo(target);
                 }
-            } else {
+            } else if(storage.store[RESOURCE_ENERGY] > 1000) {
                 target = storage;
                 this.room.visual.circle(target.pos, {fill: 'transparent', radius: 0.55, stroke: 'red'});
                 if(this.withdraw(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
