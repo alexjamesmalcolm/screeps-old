@@ -20,6 +20,8 @@ var RoomSpawns = function() {
             return true;
         }
     });
+    checkSpawns(room);
+    try {this.harvesterSpawn();} catch(err) {console.log(err+": Room.cycle.js this.harvesterSpawn()");}
     if(harvesters.length > 0) {
         checkSpawns(room);
         try {this.spawnKeeperSpawn();} catch(err) {console.log(err+": Room.cycle.js this.spawnKeeperSpawn()");}
@@ -30,8 +32,6 @@ var RoomSpawns = function() {
         checkSpawns(room);
         try {this.builderSpawn();} catch(err) {console.log(err+": Room.cycle.js this.builderSpawn()");}
     }
-    checkSpawns(room);
-    try {this.harvesterSpawn();} catch(err) {console.log(err+": Room.cycle.js this.harvesterSpawn()");}
 };
 
 module.exports = RoomSpawns;
