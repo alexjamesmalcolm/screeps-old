@@ -10,22 +10,13 @@ var CreepRoleSpawnKeeper = function() {
             this.say('Collecting');
         }
     }
-    var droppedEnergy = this.room.find(FIND_DROPPED_ENERGY, {
-        filter: function(energy) {
-            if(energy.amount > 100) {
-                return true;
-            }
+    var droppedEnergy = _.filter(this.room.memory.found.droppedEnergy, function(energy) {
+        if(energy.amount > this.energyCapacity * 0.1) {
+            return true;
         }
     });
-    var linkClosestToStorage = this.room.storage.pos.findClosestByRange(FIND_STRUCTURES, {
-        filter: function(structure) {
-            if(structure.structureType === STRUCTURE_LINK) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-    });
+    var links = this.room.memory.found.links;
+    var linkClosestToStorage = this.room.storage.pos.findClosestByRange(links);
     if(this.memory.collecting) {
         var target;
         var storage = this.pos.findClosestByRange(FIND_STRUCTURES, {
