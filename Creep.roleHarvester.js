@@ -1,19 +1,28 @@
 var roleHarvester = function() {
-    if (this.memory.harvesting) {
-        if (this.carry.energy === this.carryCapacity) {
+    if(this.memory.harvesting) {
+        if(this.carry.energy === this.carryCapacity) {
             this.memory.harvesting = false;
             this.say('Carrying');
         }
     } else {
-        if (this.carry.energy === 0) {
+        if(this.carry.energy === 0) {
             this.memory.harvesting = true;
             this.say('Harvesting');
         }
     }
 
-    if (this.memory.harvesting) {
+    if(this.memory.harvesting) {
         var source = this.pos.findClosestByPath(FIND_SOURCES_ACTIVE); //Inefficient
-        if (this.harvest(source) == ERR_NOT_IN_RANGE) {
+        if(source) {
+            if(this.harvest(source) == ERR_NOT_IN_RANGE) {
+                this.moveTo(source);
+            }
+        } else {
+            var sources = this.room.find(FIND_SOURCES);
+            sources.sort(function(a, b) {
+                return a.ticksToRegeneration - b.ticksToRegeneration;
+            });
+            source = sources[0];
             this.moveTo(source);
         }
     } else {
