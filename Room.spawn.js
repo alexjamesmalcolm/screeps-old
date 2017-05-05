@@ -20,16 +20,16 @@ var RoomSpawns = function() {
             return true;
         }
     });
-    checkSpawns(room);
+    checkSpawns(this);
     try {this.harvesterSpawn();} catch(err) {console.log(err+": Room.cycle.js this.harvesterSpawn()");}
     if(harvesters.length > 0) {
-        checkSpawns(room);
+        checkSpawns(this);
         try {this.spawnKeeperSpawn();} catch(err) {console.log(err+": Room.cycle.js this.spawnKeeperSpawn()");}
-        checkSpawns(room);
+        checkSpawns(this);
         try {this.courierSpawn();} catch(err) {console.log(err+": Room.cycle.js this.courierSpawn()");}
-        checkSpawns(room);
+        checkSpawns(this);
         try {this.upgraderSpawn();} catch(err) {console.log(err+": Room.cycle.js this.upgraderSpawn()");}
-        checkSpawns(room);
+        checkSpawns(this);
         try {this.builderSpawn();} catch(err) {console.log(err+": Room.cycle.js this.builderSpawn()");}
     }
 };
