@@ -35,7 +35,7 @@ var RoomCycle = function() {
         }
     });
     checkSpawns(room);
-    spawns = this.find(FIND_MY_SPAWNS);
+    spawns = this.memory.found.mySpawns;
     try {this.links();} catch(err) {console.log(err+": Room.cycle.js this.links()");}
     for(name in spawns) {
         if(spawns[name]) {
