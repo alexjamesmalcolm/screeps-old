@@ -3,13 +3,18 @@ var CreepCycle = function() {
     var creepCount = require('creepCount');
     var numberOfSick = _.filter(Game.creeps, (creep) => creep.memory.sick);
     if(!this.memory.sick) {
-        if(numberOfSick < creepCount.sick) {
+        if(this.memory.role != 'spawnKeeper') {
+            if(this.ticksToLive < 100) {
+                this.memory.recycle = true;
+                //this.memory.sick = true;
+            }
+        } else {
             if(this.ticksToLive < 100) {
                 this.memory.sick = true;
             }
-        } else {
-            this.memory.sick = false;
-        }
+        }/* else {
+            //this.memory.sick = false;
+        }*/
     }
     if(this.memory.sick) {
         try {this.sick();} catch(err) {console.log(err+": Creep.cycle.js this.sick()");}
