@@ -51,7 +51,7 @@ var CreepRoleSpawnKeeper = function() {
                 }
             } else if(storage.store[RESOURCE_ENERGY] > storageAmount) {
                 target = storage;
-                var amount = storage.store[RESOURCE_ENERGY] - storageAmount - rate * 50;
+                var amount = Math.floor(storage.store[RESOURCE_ENERGY] - storageAmount - rate * 50);
                 if(amount > 0) {
                     this.room.visual.circle(target.pos, {fill: 'transparent', radius: 0.55, stroke: 'red'});
                     if(this.withdraw(target, RESOURCE_ENERGY, amount) === ERR_NOT_IN_RANGE) {
