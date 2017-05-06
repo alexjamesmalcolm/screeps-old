@@ -23,6 +23,7 @@ try {
     Room.prototype.towers = require('Room.towers');
     Room.prototype.upgraderSpawn = require('Room.upgraderSpawn');
     Room.prototype.spawnKeeperSpawn = require('Room.spawnKeeperSpawn');
+    Room.prototype.fighterSpawn = require('Room.fighterSpawn');
     Room.prototype.links = require('Room.links');
     Room.prototype.spawn = require('Room.spawn');
     Room.prototype.findAll = require('Room.findAll');
