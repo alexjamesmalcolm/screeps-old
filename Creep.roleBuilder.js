@@ -40,7 +40,7 @@ var roleBuilder = function() {
                 ]
             });
             if(result == ERR_NOT_FOUND) {
-                this.memory.recycle = true;
+                //this.memory.recycle = true;
             }
             this.passiveRepair();
         }
