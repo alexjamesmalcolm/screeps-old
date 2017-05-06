@@ -1,6 +1,6 @@
 var optimalBuilder = function(room) {
     var carryBodyparts, workBodyparts, moveBodyparts, creepCost, bodyparts, progressPerTick;
-    carryBodyparts = 1;
+    carryBodyparts = 2;
     //x = 1
     workBodyparts = Math.floor((2 * room.energyAvailable - (2 * BODYPART_COST[CARRY] + BODYPART_COST[MOVE]) * carryBodyparts) / (BODYPART_COST[MOVE] + 2 * BODYPART_COST[WORK]));
     //y = (2 * t - (2 * c + m) * x) / (m + 2 * w);
