@@ -3,6 +3,9 @@ var stateRecycle = {
         if(creep.memory.recycle) {
             creep.memory.closestSpawn = creep.pos.findClosestByRange(FIND_MY_SPAWNS);
             var spawn = creep.memory.closestSpawn;
+            if(!spawn) {
+                spawn = Game.spawns['Spawn1'];
+            }
             if(creep.carry.energy > 0) {
                 creep.deposit({
                     creepDepositing: true,
