@@ -1,7 +1,7 @@
 var CreepRoleSpawnKeeper = function() {
     var creep = this;
     var startTime = 19040828;
-    var rate = 0.75
+    var rate = 0.75;
     var storageAmount = Math.floor(rate * (Game.time - startTime) + 2534);
     if(storageAmount > 100000) {
         storageAmount = 100000;
@@ -35,7 +35,7 @@ var CreepRoleSpawnKeeper = function() {
         }
     });
     if(this.memory.collecting) {
-        var target;
+        var target, result;
         var containers = _.filter(this.room.memory.found.structures, function(structure) {
             if(structure.structureType === STRUCTURE_CONTAINER) {
                 if(structure.store.energy > 0) {
@@ -67,7 +67,7 @@ var CreepRoleSpawnKeeper = function() {
                 }
                 if(amount > 0) {
                     this.room.visual.circle(target.pos, {fill: 'transparent', radius: 0.55, stroke: 'red'});
-                    var result = this.withdraw(target, RESOURCE_ENERGY, amount);
+                    result = this.withdraw(target, RESOURCE_ENERGY, amount);
                     if(result === ERR_NOT_IN_RANGE) {
                         this.moveTo(target);
                     }
@@ -77,7 +77,7 @@ var CreepRoleSpawnKeeper = function() {
             } else if(containers.length > 0) {
                 target = containers[0];
                 this.room.visual.circle(target.pos, {fill: 'transparent', radius: 0.55, stroke: 'red'});
-                var result = this.withdraw(target, RESOURCE_ENERGY);
+                result = this.withdraw(target, RESOURCE_ENERGY);
                 if(result === ERR_NOT_IN_RANGE) {
                     this.moveTo(target);
                 }
