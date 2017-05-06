@@ -16,7 +16,7 @@ var roleFighter = function() {
         var nearestFlag = this.pos.findClosestByPath(hostileFlags);
         this.moveTo(nearestFlag);
     } else {
-        this.moveTo(new RoomPosition(25, 20, 'W94S6'));
+        this.moveTo(new RoomPosition(25, 20, this.room.name));
         //creep.move(Math.floor(Math.random()*8+1));
     }
 };
