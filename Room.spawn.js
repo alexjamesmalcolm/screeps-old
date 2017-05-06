@@ -28,23 +28,23 @@ var RoomSpawns = function() {
     });
     if(hostiles.length > 0) {
         checkSpawns(this);
-        try {this.fighterSpawn();} catch(err) {console.log(err+": Room.cycle.js this.fighterSpawn()");}
+        try {this.fighterSpawn();} catch(err) {console.log(err+" "+this+": Room.cycle.js this.fighterSpawn()");}
     } else {
         checkSpawns(this);
-        try {this.harvesterSpawn();} catch(err) {console.log(err+": Room.cycle.js this.harvesterSpawn()");}
+        try {this.harvesterSpawn();} catch(err) {console.log(err+" "+this+": Room.cycle.js this.harvesterSpawn()");}
         if(hostileFlags.length > 0) {
             checkSpawns(this);
-            try {this.fighterSpawn();} catch(err) {console.log(err+": Room.cycle.js this.fighterSpawn()");}
+            try {this.fighterSpawn();} catch(err) {console.log(err+" "+this+": Room.cycle.js this.fighterSpawn()");}
         }
         if(harvesters.length > 0) {
             checkSpawns(this);
-            try {this.spawnKeeperSpawn();} catch(err) {console.log(err+": Room.cycle.js this.spawnKeeperSpawn()");}
+            try {this.spawnKeeperSpawn();} catch(err) {console.log(err+" "+this+": Room.cycle.js this.spawnKeeperSpawn()");}
             checkSpawns(this);
-            try {this.courierSpawn();} catch(err) {console.log(err+": Room.cycle.js this.courierSpawn()");}
+            try {this.courierSpawn();} catch(err) {console.log(err+" "+this+": Room.cycle.js this.courierSpawn()");}
             checkSpawns(this);
-            try {this.upgraderSpawn();} catch(err) {console.log(err+": Room.cycle.js this.upgraderSpawn()");}
+            try {this.upgraderSpawn();} catch(err) {console.log(err+" "+this+": Room.cycle.js this.upgraderSpawn()");}
             checkSpawns(this);
-            try {this.builderSpawn();} catch(err) {console.log(err+": Room.cycle.js this.builderSpawn()");}
+            try {this.builderSpawn();} catch(err) {console.log(err+" "+this+": Room.cycle.js this.builderSpawn()");}
         }
     }
 };
