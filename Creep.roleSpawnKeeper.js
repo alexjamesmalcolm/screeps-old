@@ -8,12 +8,12 @@ var CreepRoleSpawnKeeper = function() {
     }
     //y = (x-t)*r + 2000
     if(this.memory.collecting) {
-        if(this.carry.energy === this.carryCapacity) {
+        if(_.sum(this.carry) === this.carryCapacity) {
             this.memory.collecting = false;
             this.say('Delivering');
         }
     } else {
-        if(this.carry.energy === 0) {
+        if(t_.sum(this.carry) === 0) {
             this.memory.collecting = true;
             this.say('Collecting');
         }
