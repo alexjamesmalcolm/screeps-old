@@ -13,7 +13,7 @@ var CreepRoleSpawnKeeper = function() {
             this.say('Delivering');
         }
     } else {
-        if(t_.sum(this.carry) === 0) {
+        if(_.sum(this.carry) === 0) {
             this.memory.collecting = true;
             this.say('Collecting');
         }
