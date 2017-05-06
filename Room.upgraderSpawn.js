@@ -35,6 +35,7 @@ var optimalUpgrader = function(room) {
     }
 };
 var RoomUpgraderSpawn = function() {
+    var multiplier = 0.75;
     if(this.memory.spawns.length > 0) {
         var upgraders = this.find(FIND_MY_CREEPS, {
             filter: function(creep) {
@@ -64,12 +65,12 @@ var RoomUpgraderSpawn = function() {
                         this.memory.spawns[0].createCreep(upgrader.bodyparts, undefined, {role: 'upgrader'});
                         this.memory.spawns[0].memory.busy = Game.time;
                     }
-                } else if(upgradePerTick + upgrader.workBodyparts < this.memory.harvestPerTick * 0.5) {
+                } else if(upgradePerTick + upgrader.workBodyparts < this.memory.harvestPerTick * multiplier) {
                     this.memory.spawns[0].createCreep(upgrader.bodyparts, undefined, {role: 'upgrader'});
                     this.memory.spawns[0].memory.busy = Game.time;
                 }
             }
-            if(upgradePerTick > this.memory.harvestPerTick * 0.5) {
+            if(upgradePerTick > this.memory.harvestPerTick * multiplier) {
                 upgraders[0].memory.recycle = true;
             }
         } else {
