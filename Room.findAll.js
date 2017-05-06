@@ -1,5 +1,6 @@
 var RoomFindAll = function() {
     var found = {};
+    found.flags = this.find(FIND_FLAGS);
     found.sources = this.find(FIND_SOURCES);
     found.myCreeps = this.find(FIND_MY_CREEPS);
     found.mySpawns = this.find(FIND_MY_SPAWNS);
