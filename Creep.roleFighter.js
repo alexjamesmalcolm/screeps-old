@@ -7,8 +7,6 @@ var roleFighter = function() {
         }
     });
     if(enemy) {
-        console.log(enemy);
-        console.log(this.attack(enemy));
         this.say('F: Attack');
         if(this.attack(enemy) == ERR_NOT_IN_RANGE) {
             this.moveTo(enemy);
@@ -19,11 +17,11 @@ var roleFighter = function() {
             this.moveTo(structure);
         }
     } else if(hostileFlags.length > 0) {
-        var nearestFlag = this.pos.findClosestByPath(hostileFlags);
-        this.moveTo(nearestFlag);
+        var flag = hostileFlags[0];
+        this.moveTo(flag);
     } else {
-        this.moveTo(new RoomPosition(25, 20, this.room.name));
-        //creep.move(Math.floor(Math.random()*8+1));
+        this.memory.recycle = true;
+        creep.move(Math.floor(Math.random()*8+1));
     }
 };
 
