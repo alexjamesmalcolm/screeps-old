@@ -6,7 +6,6 @@ var CreepRoleSpawnKeeper = function() {
     if(storageAmount > 100000) {
         storageAmount = 100000;
     }
-    console.log(storageAmount);
     //y = (x-t)*r + 2000
     if(this.memory.collecting) {
         if(this.carry.energy === this.carryCapacity) {
