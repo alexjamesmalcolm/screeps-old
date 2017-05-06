@@ -1,11 +1,12 @@
 var CreepRoleSpawnKeeper = function() {
     var creep = this;
-    var startTime = 19030141;
-    var rate = 0.05
-    var storageAmount = Math.floor(rate * (Game.time - startTime) + 2000);
+    var startTime = 19040828;
+    var rate = 0.75
+    var storageAmount = Math.floor(rate * (Game.time - startTime) + 2534);
     if(storageAmount > 100000) {
         storageAmount = 100000;
     }
+    console.log(storageAmount);
     //y = (x-t)*r + 2000
     if(this.memory.collecting) {
         if(this.carry.energy === this.carryCapacity) {
