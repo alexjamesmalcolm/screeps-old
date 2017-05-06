@@ -7,6 +7,12 @@ var CreepRoleSpawnKeeper = function() {
         storageAmount = 100000;
     }
     //y = (x-t)*r + 2000
+    if(_.sum(this.carry) === this.carry.energy) {
+        this.moveTo(this.room.storage);
+        for(const resourceType in creep.carry) {
+            creep.transfer(this.room.storage, resourceType);
+        }
+    } else {
     if(this.memory.collecting) {
         if(_.sum(this.carry) === this.carryCapacity) {
             this.memory.collecting = false;
@@ -83,7 +89,7 @@ var CreepRoleSpawnKeeper = function() {
                 });
             }
         }
-    }
+    }}
 };
 
 module.exports = CreepRoleSpawnKeeper;
