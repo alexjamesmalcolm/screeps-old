@@ -43,6 +43,9 @@ var CreepRoleSpawnKeeper = function() {
                 }
             }
         });
+        containers.sort(function(a, b) {
+            return b.store.energy - a.store.energy;
+        });
         if(droppedEnergy.length > 0) {
             target = droppedEnergy[0];
             this.room.visual.circle(target.pos, {fill: 'transparent', radius: 0.55, stroke: 'red'});
@@ -72,7 +75,7 @@ var CreepRoleSpawnKeeper = function() {
                     this.memory.collecting = false;
                 }
             } else if(containers.length > 0) {
-                target = this.pos.findClosestByRange(containers);
+                target = containers[0];
                 this.room.visual.circle(target.pos, {fill: 'transparent', radius: 0.55, stroke: 'red'});
                 var result = this.withdraw(target, RESOURCE_ENERGY);
                 if(result === ERR_NOT_IN_RANGE) {
