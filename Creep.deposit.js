@@ -66,13 +66,19 @@ var CreepDeposit = function(input) {
     }
     //console.log(target);
     if(target) {
-        var result = this.transfer(target, RESOURCE_ENERGY);
-        if(result == ERR_NOT_IN_RANGE) {
-            this.moveTo(target);
-            return ERR_NOT_IN_RANGE;
-            //try {this.pathing(target);} catch(err) {console.log(err+": Creep.deposit.js this.pathing(target)");}
+        if(target.structureType === STRUCTURE_STORAGE) {
+            for(const resourceType in this.carry) {
+                this.transfer(target, resourceType);
+            }
         } else {
-            return result;
+            var result = this.transfer(target, RESOURCE_ENERGY);
+            if(result == ERR_NOT_IN_RANGE) {
+                this.moveTo(target);
+                return ERR_NOT_IN_RANGE;
+                //try {this.pathing(target);} catch(err) {console.log(err+": Creep.deposit.js this.pathing(target)");}
+            } else {
+                return result;
+            }
         }
     }
 };
