@@ -10,30 +10,7 @@ var roleCourier = function() {
             this.say('Collecting');
         }
     }
-    if(this.memory.collecting) {/*
-        var containers = this.room.find(FIND_STRUCTURES, {
-            filter: function(structure) {
-                if(structure.structureType === STRUCTURE_CONTAINER) {
-                    var amount = _.sum(structure.store);
-                    if(amount > 0) {
-                        return true;
-                    } else {
-                        return false;
-                    }
-                } else {
-                    return false;
-                }
-            }
-        });
-        containers.sort(function(a, b) {
-            var a_amount = _.sum(a.store);
-            var b_amount = _.sum(b.store);
-            return b - a;
-        });
-        var result = this.withdraw(containers[0], RESOURCE_ENERGY);
-        if(result === ERR_NOT_IN_RANGE) {
-            this.moveTo(containers[0]);
-        }*/
+    if(this.memory.collecting) {
         var result = this.collect({
             structures: [STRUCTURE_CONTAINER]
         });
