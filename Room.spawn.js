@@ -20,6 +20,8 @@ var RoomSpawns = function() {
             return true;
         }
     });
+    var hostiles;
+    var hostileFlags;
     checkSpawns(this);
     try {this.harvesterSpawn();} catch(err) {console.log(err+": Room.cycle.js this.harvesterSpawn()");}
     if(harvesters.length > 0) {
