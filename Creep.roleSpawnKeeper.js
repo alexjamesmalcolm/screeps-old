@@ -49,11 +49,16 @@ var CreepRoleSpawnKeeper = function() {
                 if(this.withdraw(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
                     this.moveTo(target);
                 }
-            } else if(storage.store[RESOURCE_ENERGY] > storageAmount + this.carryCapacity) {
+            } else if(storage.store[RESOURCE_ENERGY] > storageAmount) {
                 target = storage;
-                this.room.visual.circle(target.pos, {fill: 'transparent', radius: 0.55, stroke: 'red'});
-                if(this.withdraw(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-                    this.moveTo(target);
+                var amount = storage.store[RESOURCE_ENERGY] - storageAmount;
+                if(amount > 0) {
+                    this.room.visual.circle(target.pos, {fill: 'transparent', radius: 0.55, stroke: 'red'});
+                    if(this.withdraw(target, RESOURCE_ENERGY, amount) === ERR_NOT_IN_RANGE) {
+                        this.moveTo(target);
+                    }
+                } else {
+                    this.memory.collecting = false;
                 }
             } else {
                 this.memory.collecting = false;
