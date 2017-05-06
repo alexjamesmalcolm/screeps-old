@@ -20,19 +20,32 @@ var RoomSpawns = function() {
             return true;
         }
     });
-    var hostiles;
-    var hostileFlags;
-    checkSpawns(this);
-    try {this.harvesterSpawn();} catch(err) {console.log(err+": Room.cycle.js this.harvesterSpawn()");}
-    if(harvesters.length > 0) {
+    var hostiles = this.find(FIND_HOSTILE_CREEPS);
+    var hostileFlags = _.filter(Game.flags, function(flag) {
+        if(flag.color === COLOR_RED) {
+            return true;
+        }
+    });
+    if(hostiles.length > 0) {
         checkSpawns(this);
-        try {this.spawnKeeperSpawn();} catch(err) {console.log(err+": Room.cycle.js this.spawnKeeperSpawn()");}
+        try {this.fighterSpawn();} catch(err) {console.log(err+": Room.cycle.js this.fighterSpawn()");}
+    } else {
         checkSpawns(this);
-        try {this.courierSpawn();} catch(err) {console.log(err+": Room.cycle.js this.courierSpawn()");}
-        checkSpawns(this);
-        try {this.upgraderSpawn();} catch(err) {console.log(err+": Room.cycle.js this.upgraderSpawn()");}
-        checkSpawns(this);
-        try {this.builderSpawn();} catch(err) {console.log(err+": Room.cycle.js this.builderSpawn()");}
+        try {this.harvesterSpawn();} catch(err) {console.log(err+": Room.cycle.js this.harvesterSpawn()");}
+        if(hostileFlags.length > 0) {
+            checkSpawns(this);
+            try {this.fighterSpawn();} catch(err) {console.log(err+": Room.cycle.js this.fighterSpawn()");}
+        }
+        if(harvesters.length > 0) {
+            checkSpawns(this);
+            try {this.spawnKeeperSpawn();} catch(err) {console.log(err+": Room.cycle.js this.spawnKeeperSpawn()");}
+            checkSpawns(this);
+            try {this.courierSpawn();} catch(err) {console.log(err+": Room.cycle.js this.courierSpawn()");}
+            checkSpawns(this);
+            try {this.upgraderSpawn();} catch(err) {console.log(err+": Room.cycle.js this.upgraderSpawn()");}
+            checkSpawns(this);
+            try {this.builderSpawn();} catch(err) {console.log(err+": Room.cycle.js this.builderSpawn()");}
+        }
     }
 };
 
