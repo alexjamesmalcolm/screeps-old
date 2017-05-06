@@ -83,16 +83,7 @@ var RoomCourierSpawn = function() {
             }
         }
         if(transitEnergy * 1 < totalCarry) {
-            if(couriers.length > 1) {
-                couriers[0].memory.recycle = true;
-            }
-        }
-    } else {
-        if(this.memory.spawns.length > 0) {
-            if(courier) {
-                this.memory.spawns[0].createCreep(courier.bodyparts, undefined, {role: 'courier'});
-                this.memory.spawns[0].memory.busy = Game.time;
-            }
+            couriers[0].memory.recycle = true;
         }
     }
 };
