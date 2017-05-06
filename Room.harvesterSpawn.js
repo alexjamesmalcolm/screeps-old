@@ -30,7 +30,7 @@ var RoomHarvesterSpawn = function() {
     });
     var harvester = optimalHarvester(this);
     var harvestPerTick = 0;
-    var multiplier = 1.5
+    var multiplier = 1.1
     if(harvesters.length > 0) {
         harvesters.sort(function(a, b) {
             return a.getActiveBodyparts(WORK) - b.getActiveBodyparts(WORK);
