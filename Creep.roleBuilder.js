@@ -10,7 +10,7 @@ var roleBuilder = function() {
         this.say('Building');
     }
     if(this.memory.building) {
-        var flags = this.room.memory.found.flags;
+        var flags = Game.flags;
         var myConstructionSites = this.room.memory.found.myConstructionSites;
         var wipSpawns = _.filter(myConstructionSites, function(site) {
             if(site.structureType === STRUCTURE_SPAWN) {
