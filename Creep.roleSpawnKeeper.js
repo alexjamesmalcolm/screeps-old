@@ -55,7 +55,6 @@ var CreepRoleSpawnKeeper = function() {
             }
             return b_energyPercent - a_energyPercent;
         });
-        console.log(this+targets[0]);
         var remainingEnergy = this.carryCapacity - _.sum(this.carry);
         targets = _.filter(targets, function(structure) {
             if(structure) {
