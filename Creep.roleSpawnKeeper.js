@@ -1,6 +1,6 @@
 var CreepRoleSpawnKeeper = function() {
     var creep = this;
-    var carryMultiplier
+    var carryMultiplier = 0.05;
     var startTime = 19040828;
     var rate = 0.75;
     var storageAmount = Math.floor(rate * (Game.time - startTime) + 2534);
@@ -81,7 +81,7 @@ var CreepRoleSpawnKeeper = function() {
             if(targets.length > 0) {
                 target = targets[0];
                 this.room.visual.circle(target.pos, {fill: 'transparent', radius: 0.55, stroke: 'red'});
-                var result = this.withdraw(target, RESOURCE_ENERGY);
+                result = this.withdraw(target, RESOURCE_ENERGY);
                 if(result === ERR_NOT_IN_RANGE) {
                     this.moveTo(target);
                 }
