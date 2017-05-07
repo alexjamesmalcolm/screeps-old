@@ -106,10 +106,18 @@ var CreepRoleSpawnKeeper = function() {
         }
     } else {
         if(droppedEnergy.length > 0) {
-            this.deposit({
-                creepDepositing: false,
-                structures: [STRUCTURE_STORAGE]
-            });
+            if(storage) { 
+                this.deposit({
+                    creepDepositing: false,
+                    structures: [STRUCTURE_STORAGE]
+                    
+                });
+            } else {
+                this.deposit({
+                    creepDepositing: false,
+                    structures: [STRUCTURE_SPAWN, STRUCTURE_EXTENSION, STRUCTURE_CONTAINER]
+                });
+            }
         } else {
             if(storage) {
                 if(storage.store[RESOURCE_ENERGY] > storageAmount) {
