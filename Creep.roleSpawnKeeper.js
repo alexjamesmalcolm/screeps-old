@@ -1,13 +1,15 @@
 var CreepRoleSpawnKeeper = function() {
     var creep = this;
-    var carryMultiplier = 0.1;
+    var carryMultiplier = 0.5;
     var startTime = 19040828;
+    var max = 3000;
     var rate = 0.1;
     var storageAmount = Math.floor(rate * (Game.time - startTime) + 2534);
     var structures = this.room.memory.found.structures;
-    if(storageAmount > 100000) {
-        storageAmount = 100000;
+    if(storageAmount > max) {
+        storageAmount = max;
     }
+    console.log(storageAmount);
     //y = (x-t)*r + 2000
     if(this.memory.collecting) {
         if(this.carry.energy === this.carryCapacity) {
@@ -55,16 +57,15 @@ var CreepRoleSpawnKeeper = function() {
             }
             return b_energyPercent - a_energyPercent;
         });
-        var remainingEnergy = this.carryCapacity - _.sum(this.carry);
         targets = _.filter(targets, function(structure) {
             if(structure) {
-                var energy;
+                var energyPercent;
                 if(structure.structureType === STRUCTURE_LINK) {
-                    energy = structure.energy;
+                    energyPercent = structure.energy / structure.energyCapacity;
                 } else if(structure.structureType === STRUCTURE_CONTAINER) {
-                    energy = structure.store.energy;
+                    energyPercent = structure.store.energy / structure.storeCapacity;
                 }
-                if(energy * carryMultiplier > remainingEnergy) {
+                if(energyPercent > 0.5) {
                     return true;
                 } else {
                     return false;
