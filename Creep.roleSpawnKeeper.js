@@ -3,7 +3,7 @@ var CreepRoleSpawnKeeper = function() {
     var carryMultiplier = 0.1;
     var startTime = 19051976;
     var max = 100000;
-    var rate = 0.01;
+    var rate = 0.05;
     var storageAmount = Math.floor(rate * (Game.time - startTime) + 3000);
     var structures = this.room.memory.found.structures;
     if(storageAmount > max) {
