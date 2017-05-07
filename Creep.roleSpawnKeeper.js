@@ -55,6 +55,7 @@ var CreepRoleSpawnKeeper = function() {
             }
             return b_energy - a_energy;
         });
+        var remainingEnergy = this.carryCapacity - _.sum(this.carry);
         targets = _.filter(targets, function(structure) {
             if(structure) {
                 var energy;
@@ -63,7 +64,6 @@ var CreepRoleSpawnKeeper = function() {
                 } else if(structure.structureType === STRUCTURE_CONTAINER) {
                     energy = structure.store.energy;
                 }
-                var remainingEnergy = this.carryCapacity - _.sum(this.carry);
                 if(energy > remainingEnergy * carryMultiplier) {
                     return true;
                 } else {
