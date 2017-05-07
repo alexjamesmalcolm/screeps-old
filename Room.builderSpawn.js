@@ -69,12 +69,12 @@ var RoomBuilderSpawn = function() {
         return a_work - b_work;
     });
     var builder = optimalBuilder(this);
-    var buildPerTick = 0;
-    var repairPerTick = 0;
+    var workBodyparts = 0;
     builders.forEach(function(creep) {
-        buildPerTick = buildPerTick + BUILD_POWER * creep.getActiveBodyparts(WORK);
-        repairPerTick = repairPerTick + REPAIR_POWER * creep.getActiveBodyparts(WORK);
+        workBodyparts = workBodyparts + creep.getActiveBodyparts(WORK);
     });
+    var buildPerTick = workBodyparts * BUILD_POWER;
+    var repairPerTick = workBodyparts * REPAIR_POWER;
     var timeToFinish;
     var timeToBuild;
     if(buildPerTick > 0) {
