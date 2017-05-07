@@ -18,7 +18,7 @@ var roleHarvester = function() {
                 this.moveTo(source);
             }
         } else {
-            var sources = this.room.find(FIND_SOURCES);
+            var sources = this.room.memory.found.sources;
             sources.sort(function(a, b) {
                 return a.ticksToRegeneration - b.ticksToRegeneration;
             });
