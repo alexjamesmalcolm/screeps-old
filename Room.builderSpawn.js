@@ -13,10 +13,10 @@ var optimalBuilder = function(room) {
     for(var i = 0; i < moveBodyparts; i++) {
         bodyparts.push(MOVE);
     }
-    for(var i = 0; i < workBodyparts; i++) {
+    for(i = 0; i < workBodyparts; i++) {
         bodyparts.push(WORK);
     }
-    for(var i = 0; i < carryBodyparts; i++) {
+    for(i = 0; i < carryBodyparts; i++) {
         bodyparts.push(CARRY);
     }
     if(workBodyparts > 0 && moveBodyparts > 0 && carryBodyparts > 0) {
@@ -32,7 +32,7 @@ var optimalBuilder = function(room) {
 };
 var RoomBuilderSpawn = function() {
     var multiplier = 0.25;
-    var constructionProjects = this.find(FIND_CONSTRUCTION_SITES);
+    var constructionProjects = this.memory.found.myConstructionSites;
     var progressTotal = 0;
     var progress = 0;
     constructionProjects.forEach(function(constructionProject) {
@@ -40,8 +40,7 @@ var RoomBuilderSpawn = function() {
         progress = progress + constructionProject.progress;
     });
     var remainingProgress = progressTotal - progress;
-    
-    var structures = this.find(FIND_STRUCTURES);
+    var structures = this.memory.found.structures;
     var hitsTotal = 0;
     var hits = 0;
     structures.forEach(function(structure) {
@@ -55,13 +54,12 @@ var RoomBuilderSpawn = function() {
     //console.log("hits: "+hits);
     //REPAIR_POWER
     //console.log("remainingProgress: "+remainingProgress);
-    var builders = this.find(FIND_MY_CREEPS, {
-        filter: function(creep) {
-            if(creep.memory.recycle) {
-                return false;
-            } else if(creep.memory.role == 'builder') {
-                return true;
-            }
+    var creeps = this.memory.found.myCreeps;
+    var builders = _.filter(creeps, function(creep) {
+        if(creep.memory.recycle) {
+            return false;
+        } else if(creep.memory.role == 'builder') {
+            return true;
         }
     });
     builders.sort(function(a, b) {
