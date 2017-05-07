@@ -25,7 +25,10 @@ var CreepRoleSpawnKeeper = function() {
         }
     });
     var links = this.room.memory.found.links;
-    var linkClosestToStorage = this.room.storage.pos.findClosestByRange(links);
+    var linkClosestToStorage;
+    if(links.length > 0) {
+        linkClosestToStorage = this.room.storage.pos.findClosestByRange(links);
+    }
     var storage = this.room.storage;
     if(this.memory.collecting) {
         var target, result;
@@ -46,13 +49,13 @@ var CreepRoleSpawnKeeper = function() {
                 this.moveTo(target);
             }
         } else {
-            if(linkClosestToStorage.energy > 0) {
+            if(linkClosestToStorage && linkClosestToStorage.energy > 0) {
                 target = linkClosestToStorage;
                 this.room.visual.circle(target.pos, {fill: 'transparent', radius: 0.55, stroke: 'red'});
                 if(this.withdraw(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
                     this.moveTo(target);
                 }
-            } else if(storage.store[RESOURCE_ENERGY] > storageAmount) {
+            } else if(storage && storage.store[RESOURCE_ENERGY] > storageAmount) {
                 target = storage;
                 var amount = Math.floor(storage.store[RESOURCE_ENERGY] - storageAmount - rate * 50);
                 if(amount > this.carryCapacity - this.carry.energy) {
