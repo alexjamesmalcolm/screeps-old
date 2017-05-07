@@ -13,8 +13,12 @@ var RoomLink = function() {
         for(var i = 0; i < links.length; i++) {
             var link = links[i];
             if(link.id !== linkClosestToStorage.id) {
-                if(link.energy <= linkClosestToStorage.energyCapacity - linkClosestToStorage.energy) {
-                    link.transferEnergy(linkClosestToStorage);
+                if(linkClosestToStorage.energyCapacity > linkClosestToStorage.energy) {
+                    var amount = linkClosestToStorage.energyCapacity - linkClosestToStorage.energy;
+                    if(amount > link.energy) {
+                        amount = link.energy;
+                    }
+                    link.transferEnergy(linkClosestToStorage, amount);
                 }
             }
         }
