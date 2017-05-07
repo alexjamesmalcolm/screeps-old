@@ -25,13 +25,12 @@ var optimalSpawnKeeper = function(room) {
     }
 };
 var RoomSpawnKeeperSpawn = function() {
-    var spawnKeepers = this.find(FIND_MY_CREEPS, {
-        filter: function(creep) {
-            if(creep.memory.recycle) {
-                return false;
-            } else if(creep.memory.role == 'spawnKeeper') {
-                return true;
-            }
+    var creeps = this.memory.found.myCreeps;
+    var spawnKeepers = _.filter(creeps, function(creep) {
+        if(creep.memory.recycle) {
+            return false;
+        } else if(creep.memory.role == 'spawnKeeper') {
+            return true;
         }
     });
     var spawnKeeper = optimalSpawnKeeper(this);
