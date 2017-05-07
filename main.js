@@ -34,7 +34,7 @@ profiler.enable();
 module.exports.loop = function () {
     profiler.wrap(function() {
         var bucketPercent = Game.cpu.bucket / 10000;
-        var randomPercent = Math.random()
+        var randomPercent = Math.random();
         if(bucketPercent > randomPercent) {
             var name;
             for(name in Memory.creeps) {
@@ -69,6 +69,9 @@ module.exports.loop = function () {
             }
         } else {
             console.log('Taking random break to preserve cpu bucket: '+Game.cpu.bucket);
+            if(Memory.profiler.disableTick < Game.time) {
+                Game.profiler.email(300);
+            }
         }
     });
 };
