@@ -25,13 +25,12 @@ var optimalCourier = function(room) {
     }
 };
 var RoomCourierSpawn = function() {
-    var couriers = this.find(FIND_MY_CREEPS, {
-        filter: function(creep) {
-            if(creep.memory.recycle) {
-                return false;
-            } else if(creep.memory.role == 'courier') {
-                return true;
-            }
+    var creeps = this.room.memory.found.myCreeps;
+    var couriers = _.filter(creeps, function(creep) {
+        if(creep.memory.recycle) {
+            return false;
+        } else if(creep.memory.role == 'courier') {
+            return true;
         }
     });
     var courier = optimalCourier(this);
