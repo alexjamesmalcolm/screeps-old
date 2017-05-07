@@ -42,19 +42,20 @@ var CreepRoleSpawnKeeper = function() {
         });
         var targets = containers.concat([linkClosestToStorage]);
         targets.sort(function(a, b) {
-            var a_energy, b_energy;
+            var a_energyPercent, b_energyPercent;
             if(a.structureType === STRUCTURE_LINK) {
-                a_energy = a.energy;
+                a_energyPercent = a.energy / a.energyCapacity;
             } else if(a.structureType === STRUCTURE_CONTAINER) {
-                a_energy = a.store.energy;
+                a_energyPercent = a.store.energy / a.storeCapacity;
             }
             if(b.structureType === STRUCTURE_LINK) {
-                b_energy = b.energy;
+                b_energyPercent = b.energy / b.energyCapacity;
             } else if(b.structureType === STRUCTURE_CONTAINER) {
-                b_energy = b.store.energy;
+                b_energyPercent = b.store.energy / b.storeCapacity;
             }
-            return b_energy - a_energy;
+            return b_energyPercent - a_energyPercent;
         });
+        console.log(this+targets[0]);
         var remainingEnergy = this.carryCapacity - _.sum(this.carry);
         targets = _.filter(targets, function(structure) {
             if(structure) {
