@@ -25,7 +25,7 @@ var optimalCourier = function(room) {
     }
 };
 var RoomCourierSpawn = function() {
-    var creeps = this.room.memory.found.myCreeps;
+    var creeps = this.memory.found.myCreeps;
     var couriers = _.filter(creeps, function(creep) {
         if(creep.memory.recycle) {
             return false;
@@ -54,11 +54,13 @@ var RoomCourierSpawn = function() {
             totalCarry = totalCarry + CARRY_CAPACITY * creep.getActiveBodyparts(CARRY);
         });
         var droppedResources = 0;
-        this.find(FIND_DROPPED_RESOURCES).forEach(function(resource) {
+        console.log(this.memory.found.droppedResources);
+        this.memory.found.droppedResources.forEach(function(resource) {
             droppedResources = droppedResources + resource.amount;
         });
         var containerEnergy = 0;
-        this.find(FIND_STRUCTURES).forEach(function(structure) {
+        console.log(this.memory.found.structures);
+        this.memory.found.structures.forEach(function(structure) {
             if(structure.structureType === STRUCTURE_CONTAINER) {
                 containerEnergy = containerEnergy + _.sum(structure.store);
             }
