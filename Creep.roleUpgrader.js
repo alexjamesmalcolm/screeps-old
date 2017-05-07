@@ -13,9 +13,12 @@ var roleUpgrader = function() {
         }
     }
     if(this.memory.upgrading) {
-        if(this.upgradeController(this.room.controller) == ERR_NOT_IN_RANGE) {
+        var result = this.upgradeController(this.room.controller);
+        if(result == ERR_NOT_IN_RANGE) {
             this.moveTo(this.room.controller, {visualizePathStyle: {stroke: '#ffffff'}});
             //try {this.pathing(this.room.controller);} catch(err) {console.log(err+": Creep.roleUpgrader.js this.pathing(this.room.controller)");}
+        } else if(result == OK) {
+            this.moveTo(this.room.controller);
         }
     } else {
         var storage = this.room.storage;
