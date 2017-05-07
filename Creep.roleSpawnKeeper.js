@@ -1,6 +1,6 @@
 var CreepRoleSpawnKeeper = function() {
     var creep = this;
-    var carryMultiplier = 0.05;
+    var carryMultiplier = 0.1;
     var startTime = 19040828;
     var rate = 0.1;
     var storageAmount = Math.floor(rate * (Game.time - startTime) + 2534);
@@ -64,7 +64,7 @@ var CreepRoleSpawnKeeper = function() {
                 } else if(structure.structureType === STRUCTURE_CONTAINER) {
                     energy = structure.store.energy;
                 }
-                if(energy > remainingEnergy * carryMultiplier) {
+                if(energy * carryMultiplier > remainingEnergy) {
                     return true;
                 } else {
                     return false;
@@ -110,7 +110,6 @@ var CreepRoleSpawnKeeper = function() {
                 this.deposit({
                     creepDepositing: false,
                     structures: [STRUCTURE_STORAGE]
-                    
                 });
             } else {
                 this.deposit({
