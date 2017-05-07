@@ -133,7 +133,7 @@ var CreepRoleSpawnKeeper = function() {
             } else {
                 this.deposit({
                     creepDepositing: false,
-                    structures: [STRUCTURE_SPAWN]
+                    structures: [STRUCTURE_SPAWN, STRUCTURE_EXTENSION]
                 });
             }
         }
