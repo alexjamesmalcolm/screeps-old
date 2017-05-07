@@ -31,7 +31,7 @@ var optimalBuilder = function(room) {
     }
 };
 var RoomBuilderSpawn = function() {
-    var multiplier = 0.5;
+    var multiplier = 1;
     var constructionProjects = this.memory.found.myConstructionSites;
     var progressTotal = 0;
     var progress = 0;
