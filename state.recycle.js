@@ -1,7 +1,8 @@
 var stateRecycle = {
     run: function(creep) {
         if(creep.memory.recycle) {
-            creep.memory.closestSpawn = creep.pos.findClosestByRange(FIND_MY_SPAWNS);
+            var mySpawns = creep.room.memory.found.mySpawns;
+            creep.memory.closestSpawn = creep.pos.findClosestByRange(mySpawns);
             var spawn = creep.memory.closestSpawn;
             if(!spawn) {
                 spawn = Game.spawns['Spawn1'];
