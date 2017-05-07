@@ -3,6 +3,7 @@ var CreepRoleSpawnKeeper = function() {
     var startTime = 19040828;
     var rate = 0.75;
     var storageAmount = Math.floor(rate * (Game.time - startTime) + 2534);
+    var structures = this.room.memory.found.structures;
     if(storageAmount > 100000) {
         storageAmount = 100000;
     }
@@ -25,18 +26,10 @@ var CreepRoleSpawnKeeper = function() {
     });
     var links = this.room.memory.found.links;
     var linkClosestToStorage = this.room.storage.pos.findClosestByRange(links);
-    var storage = this.pos.findClosestByRange(FIND_STRUCTURES, {
-        filter: function(structure) {
-            if(structure.structureType === STRUCTURE_STORAGE) {
-                return true;
-            } else {
-                return false;
-            }
-        }
-    });
+    var storage = this.room.storage;
     if(this.memory.collecting) {
         var target, result;
-        var containers = _.filter(this.room.memory.found.structures, function(structure) {
+        var containers = _.filter(structures, function(structure) {
             if(structure.structureType === STRUCTURE_CONTAINER) {
                 if(structure.store.energy > 0) {
                     return true;
