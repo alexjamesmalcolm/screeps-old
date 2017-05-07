@@ -18,11 +18,20 @@ var roleUpgrader = function() {
             //try {this.pathing(this.room.controller);} catch(err) {console.log(err+": Creep.roleUpgrader.js this.pathing(this.room.controller)");}
         }
     } else {
-        this.collect({
-            resource: RESOURCE_ENERGY,
-            amount: 50,
-            structures:[STRUCTURE_STORAGE]
-        });
+        var storage = this.room.storage;
+        if(storage) {
+            this.collect({
+                resource: RESOURCE_ENERGY,
+                amount: 50,
+                structures:[STRUCTURE_STORAGE]
+            });
+        } else {
+            this.collect({
+                resource: RESOURCE_ENERGY,
+                amount: 50,
+                structures:[STRUCTURE_CONTAINER, STRUCTURE_SPAWN]
+            });
+        }
     }
 };
 
