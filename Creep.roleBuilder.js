@@ -45,11 +45,22 @@ var roleBuilder = function() {
             this.passiveRepair();
         }
     } else {
+        var containers = _.filter(this.room.memory.found.structures, function(structure) {
+            if(structure.structureType === STRUCTURE_CONTAINER) {
+                return true;
+            }
+        });
         if(this.room.storage) {
             this.collect({
                 resource: RESOURCE_ENERGY,
                 amount: this.carryCapacity,
                 structures:[STRUCTURE_STORAGE]
+            });
+        } else if(containers.length > 0) {
+            this.collect({
+                resouce: RESOURCE_ENERGY,
+                amount: this.carryCapacity,
+                structures: [STRUCTURE_CONTAINER]
             });
         } else {
             var sources = this.room.memory.found.sources;
