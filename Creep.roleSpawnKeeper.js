@@ -85,15 +85,22 @@ var CreepRoleSpawnKeeper = function() {
                 structures: [STRUCTURE_STORAGE]
             });
         } else {
-            if(storage.store[RESOURCE_ENERGY] > storageAmount) {
-                this.deposit({
-                    creepDepositing: false,
-                    structures: [STRUCTURE_TOWER, STRUCTURE_SPAWN, STRUCTURE_EXTENSION]
-                });
+            if(storage) {
+                if(storage.store[RESOURCE_ENERGY] > storageAmount) {
+                    this.deposit({
+                        creepDepositing: false,
+                        structures: [STRUCTURE_TOWER, STRUCTURE_SPAWN, STRUCTURE_EXTENSION]
+                    });
+                } else {
+                    this.deposit({
+                        creepDepositing: false,
+                        structures: [STRUCTURE_STORAGE]
+                    });
+                }
             } else {
                 this.deposit({
                     creepDepositing: false,
-                    structures: [STRUCTURE_STORAGE]
+                    structures: [STRUCTURE_SPAWN]
                 });
             }
         }
