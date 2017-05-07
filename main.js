@@ -33,36 +33,42 @@ const profiler = require('screeps-profiler');
 profiler.enable();
 module.exports.loop = function () {
     profiler.wrap(function() {
-        var name;
-        for(name in Memory.creeps) {
-            if(Memory.creeps[name]) {
-                var creep = Game.creeps[name];
-                if(creep) {
-                    if(creep.ticksToLive <= 1) {
-                        for(var resourceType in creep.carry) {
-                            if(creep.carry[resourceType]) {
-                                creep.drop(resourceType);
+        var bucketPercent = Game.cpu.bucket / 10000;
+        var randomPercent = Math.random()
+        if(bucketPercent > randomPercent) {
+            var name;
+            for(name in Memory.creeps) {
+                if(Memory.creeps[name]) {
+                    var creep = Game.creeps[name];
+                    if(creep) {
+                        if(creep.ticksToLive <= 1) {
+                            for(var resourceType in creep.carry) {
+                                if(creep.carry[resourceType]) {
+                                    creep.drop(resourceType);
+                                }
                             }
+                            try {creep.suicide();} catch(err) {console.log(err+": main.js creep.suicide()");}
+                            delete Memory.creeps[name];
+                            console.log('Clearing non-existing creep memory:', name);
                         }
-                        try {creep.suicide();} catch(err) {console.log(err+": main.js creep.suicide()");}
+                    }
+                    if(!Game.creeps[name]) {
                         delete Memory.creeps[name];
                         console.log('Clearing non-existing creep memory:', name);
                     }
                 }
-                if(!Game.creeps[name]) {
-                    delete Memory.creeps[name];
-                    console.log('Clearing non-existing creep memory:', name);
+            }
+            for(name in Game.rooms) {
+                if(Game.rooms[name]) {
+                    var room = Game.rooms[name];
+                    try {room.cycle();} catch(err) {console.log(err+": main.js room.cycle()");}
+                } else {
+                    delete Memory.rooms[name];
+                    console.log('Clearing non-existing room memory:', name);
                 }
             }
-        }
-        for(name in Game.rooms) {
-            if(Game.rooms[name]) {
-                var room = Game.rooms[name];
-                try {room.cycle();} catch(err) {console.log(err+": main.js room.cycle()");}
-            } else {
-                delete Memory.rooms[name];
-                console.log('Clearing non-existing room memory:', name);
-            }
+        } else {
+            console.log('Taking random break to preserve cpu bucket: '+Game.cpu.bucket);
         }
     });
 };
