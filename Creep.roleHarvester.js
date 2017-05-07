@@ -34,16 +34,18 @@ var roleHarvester = function() {
                 return false;
             }
         }});
-        if(this.pos.inRangeTo(link, 2)) {
+        if(link && this.pos.inRangeTo(link, 2)) {
             var result = this.transfer(link, RESOURCE_ENERGY);
             if(result === ERR_NOT_IN_RANGE) {
                 this.moveTo(link);
             }
         } else {
-            try {this.deposit({
-                creepDepositing: false,
-                structures: [STRUCTURE_CONTAINER, STRUCTURE_STORAGE, STRUCTURE_EXTENSION, STRUCTURE_SPAWN]
-            });} catch(err) {console.log(err+": Creep.roleHarvester.js this.deposit()");}
+            try {
+                this.deposit({
+                    creepDepositing: false,
+                    structures: [STRUCTURE_CONTAINER, STRUCTURE_STORAGE, STRUCTURE_EXTENSION, STRUCTURE_SPAWN]
+                });
+            } catch(err) {console.log(err+": Creep.roleHarvester.js this.deposit()");}
         }
         try {this.passiveRepair();} catch(err) {console.log(err+": Creep.roleHarvester.js this.passiveRepair()");}
     }
