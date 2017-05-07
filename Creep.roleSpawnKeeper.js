@@ -55,18 +55,20 @@ var CreepRoleSpawnKeeper = function() {
             }
             return b_energy - a_energy;
         });
-        targets = _.filter(targets, function(target) {
-            var energy;
-            if(target.structureType === STRUCTURE_LINK) {
-                energy = target.energy;
-            } else if(target.structureType === STRUCTURE_CONTAINER) {
-                energy = target.store.energy;
-            }
-            var remainingEnergy = this.carryCapacity - _.sum(this.carry);
-            if(energy > remainingEnergy * carryMultiplier) {
-                return true;
-            } else {
-                return false;
+        targets = _.filter(targets, function(structure) {
+            if(structure) {
+                var energy;
+                if(structure.structureType === STRUCTURE_LINK) {
+                    energy = structure.energy;
+                } else if(structure.structureType === STRUCTURE_CONTAINER) {
+                    energy = structure.store.energy;
+                }
+                var remainingEnergy = this.carryCapacity - _.sum(this.carry);
+                if(energy > remainingEnergy * carryMultiplier) {
+                    return true;
+                } else {
+                    return false;
+                }
             }
         });
         if(droppedEnergy.length > 0) {
@@ -101,25 +103,6 @@ var CreepRoleSpawnKeeper = function() {
             } else {
                 this.memory.collecting = false;
             }
-            /*
-            if(linkClosestToStorage && linkClosestToStorage.energy > 0) {
-                target = linkClosestToStorage;
-                this.room.visual.circle(target.pos, {fill: 'transparent', radius: 0.55, stroke: 'red'});
-                if(this.withdraw(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
-                    this.moveTo(target);
-                }
-            } else if(storage && storage.store[RESOURCE_ENERGY] > storageAmount) {
-            } else if(containers.length > 0) {
-                target = containers[0];
-                this.room.visual.circle(target.pos, {fill: 'transparent', radius: 0.55, stroke: 'red'});
-                result = this.withdraw(target, RESOURCE_ENERGY);
-                if(result === ERR_NOT_IN_RANGE) {
-                    this.moveTo(target);
-                }
-            } else {
-                this.memory.collecting = false;
-            }
-            */
         }
     } else {
         if(droppedEnergy.length > 0) {
