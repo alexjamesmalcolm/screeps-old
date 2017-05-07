@@ -69,8 +69,6 @@ var CreepRoleSpawnKeeper = function() {
                 return false;
             }
         });
-        console.log(targets);
-        console.log(targets.length);
         if(droppedEnergy.length > 0) {
             target = droppedEnergy[0];
             this.room.visual.circle(target.pos, {fill: 'transparent', radius: 0.55, stroke: 'red'});
