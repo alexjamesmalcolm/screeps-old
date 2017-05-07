@@ -1,6 +1,6 @@
 var CreepRoleSpawnKeeper = function() {
     var creep = this;
-    var carryMultiplier = 0.5;
+    var carryMultiplier = 0.1;
     var startTime = 19051976;
     var max = 100000;
     var rate = 0.01;
