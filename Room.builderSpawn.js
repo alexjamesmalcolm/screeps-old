@@ -31,6 +31,7 @@ var optimalBuilder = function(room) {
     }
 };
 var RoomBuilderSpawn = function() {
+    var multiplier = 0.25;
     var constructionProjects = this.find(FIND_CONSTRUCTION_SITES);
     var progressTotal = 0;
     var progress = 0;
@@ -104,9 +105,10 @@ var RoomBuilderSpawn = function() {
                         this.memory.spawns[0].createCreep(builder.bodyparts, undefined, {role: 'builder'});
                         this.memory.spawns[0].memory.busy = Game.time;
                     } else if(timeToFinish > 720) {
-                        console.log(builder.bodyparts);
-                        this.memory.spawns[0].createCreep(builder.bodyparts, undefined, {role: 'builder'});
-                        this.memory.spawns[0].memory.busy = Game.time;
+                        if(buildPerTick + builder.workBodyparts * BUILD_POWER < this.memory.harvestPerTick * multiplier) {
+                            this.memory.spawns[0].createCreep(builder.bodyparts, undefined, {role: 'builder'});
+                            this.memory.spawns[0].memory.busy = Game.time;
+                        }
                     }
                 }
             }
