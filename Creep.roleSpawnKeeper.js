@@ -20,13 +20,13 @@ var CreepRoleSpawnKeeper = function() {
         }
     }
     var storage = this.room.storage;
+    var droppedEnergy = _.filter(this.room.memory.found.droppedEnergy, function(energy) {
+        if(energy.amount > creep.carryCapacity * 0.05) {
+            return true;
+        }
+    });
     if(this.memory.collecting) {
         var target, result;
-        var droppedEnergy = _.filter(this.room.memory.found.droppedEnergy, function(energy) {
-            if(energy.amount > creep.carryCapacity * 0.05) {
-                return true;
-            }
-        });
         var targets = [];
         var links = this.room.memory.found.links;
         var linkClosestToStorage;
