@@ -31,7 +31,7 @@ var CreepCollect = function(input) {
     });
     var closestStructure = this.pos.findClosestByPath(structures);
     var closestStructureDistance = this.pos.getRangeTo(closestStructure);
-    var droppedEnergy = this.pos.findClosestByRange(FIND_DROPPED_ENERGY);
+    var droppedEnergy = this.pos.findClosestByRange(this.room.memory.found.droppedEnergy);
     var droppedEnergyDistance;
     if(droppedEnergy) {
         if(this.pickup(droppedEnergy) == ERR_NOT_IN_RANGE) {
