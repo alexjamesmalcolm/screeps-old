@@ -1,5 +1,6 @@
 var CreepRoleSpawnKeeper = function() {
     var creep = this;
+    var carryMultiplier
     var startTime = 19040828;
     var rate = 0.75;
     var storageAmount = Math.floor(rate * (Game.time - startTime) + 2534);
@@ -21,13 +22,12 @@ var CreepRoleSpawnKeeper = function() {
     }
     var storage = this.room.storage;
     var droppedEnergy = _.filter(this.room.memory.found.droppedEnergy, function(energy) {
-        if(energy.amount > creep.carryCapacity * 0.05) {
+        if(energy.amount > creep.carryCapacity * carryMultiplier) {
             return true;
         }
     });
     if(this.memory.collecting) {
         var target, result;
-        var targets = [];
         var links = this.room.memory.found.links;
         var linkClosestToStorage;
         if(links.length > 0) {
@@ -40,9 +40,37 @@ var CreepRoleSpawnKeeper = function() {
                 }
             }
         });
-        containers.sort(function(a, b) {
-            return b.store.energy - a.store.energy;
+        var targets = containers.concat([linkClosestToStorage]);
+        targets.sort(function(a, b) {
+            var a_energy, b_energy;
+            if(a.structureType === STRUCTURE_LINK) {
+                a_energy = a.energy;
+            } else if(a.structureType === STRUCTURE_CONTAINER) {
+                a_energy = a.store.energy;
+            }
+            if(b.structureType === STRUCTURE_LINK) {
+                b_energy = b.energy;
+            } else if(b.structureType === STRUCTURE_CONTAINER) {
+                b_energy = b.store.energy;
+            }
+            return b_energy - a_energy;
         });
+        targets = _.filter(targets, function(target) {
+            var energy;
+            if(target.structureType === STRUCTURE_LINK) {
+                energy = target.energy;
+            } else if(target.structureType === STRUCTURE_CONTAINER) {
+                energy = target.store.energy;
+            }
+            var remainingEnergy = this.carryCapacity - _.sum(this.carry);
+            if(energy > remainingEnergy * carryMultiplier) {
+                return true;
+            } else {
+                return false;
+            }
+        });
+        console.log(targets);
+        console.log(targets.length);
         if(droppedEnergy.length > 0) {
             target = droppedEnergy[0];
             this.room.visual.circle(target.pos, {fill: 'transparent', radius: 0.55, stroke: 'red'});
@@ -50,10 +78,11 @@ var CreepRoleSpawnKeeper = function() {
                 this.moveTo(target);
             }
         } else {
-            if(linkClosestToStorage && linkClosestToStorage.energy > 0) {
-                target = linkClosestToStorage;
+            if(targets.length > 0) {
+                target = targets[0];
                 this.room.visual.circle(target.pos, {fill: 'transparent', radius: 0.55, stroke: 'red'});
-                if(this.withdraw(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
+                var result = this.withdraw(target, RESOURCE_ENERGY);
+                if(result === ERR_NOT_IN_RANGE) {
                     this.moveTo(target);
                 }
             } else if(storage && storage.store[RESOURCE_ENERGY] > storageAmount) {
@@ -71,6 +100,17 @@ var CreepRoleSpawnKeeper = function() {
                 } else {
                     this.memory.collecting = false;
                 }
+            } else {
+                this.memory.collecting = false;
+            }
+            /*
+            if(linkClosestToStorage && linkClosestToStorage.energy > 0) {
+                target = linkClosestToStorage;
+                this.room.visual.circle(target.pos, {fill: 'transparent', radius: 0.55, stroke: 'red'});
+                if(this.withdraw(target, RESOURCE_ENERGY) === ERR_NOT_IN_RANGE) {
+                    this.moveTo(target);
+                }
+            } else if(storage && storage.store[RESOURCE_ENERGY] > storageAmount) {
             } else if(containers.length > 0) {
                 target = containers[0];
                 this.room.visual.circle(target.pos, {fill: 'transparent', radius: 0.55, stroke: 'red'});
@@ -81,6 +121,7 @@ var CreepRoleSpawnKeeper = function() {
             } else {
                 this.memory.collecting = false;
             }
+            */
         }
     } else {
         if(droppedEnergy.length > 0) {
