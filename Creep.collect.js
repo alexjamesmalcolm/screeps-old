@@ -1,4 +1,5 @@
 var CreepCollect = function(input) {
+    var reusePath = 10;
     /*
     methods:
     grab from fullest of given structures
@@ -30,30 +31,46 @@ var CreepCollect = function(input) {
         }
     });
     var closestStructure = this.pos.findClosestByPath(structures);
-    var closestStructureDistance = this.pos.getRangeTo(closestStructure);
     var droppedEnergy = this.pos.findClosestByRange(this.room.memory.found.droppedEnergy);
-    var droppedEnergyDistance;
-    if(droppedEnergy) {
-        if(this.pickup(droppedEnergy) == ERR_NOT_IN_RANGE) {
-            this.moveTo(droppedEnergy);
-        }
-        droppedEnergyDistance = this.pos.getRangeTo(droppedEnergy);
-    }
     if(closestStructure) {
+        var closestStructureDistance = this.pos.getRangeTo(closestStructure);
         if(droppedEnergy) {
+            var droppedEnergyDistance = this.pos.getRangeTo(droppedEnergy);
             if(closestStructureDistance <= droppedEnergyDistance) {
                 target = closestStructure;
+                if(this.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                    this.moveTo(target, {
+                        "reusePath": reusePath
+                    });
+                }
             } else {
                 target = droppedEnergy;
+                if(this.pickup(target) == ERR_NOT_IN_RANGE) {
+                    this.moveTo(target,{
+                        "reusePath": reusePath
+                    });
+                }
             }
         } else {
             target = closestStructure;
+            if(this.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
+                this.moveTo(target, {
+                    "reusePath": reusePath
+                });
+            }
         }
     } else {
         if(droppedEnergy) {
             target = droppedEnergy;
+            if(this.pickup(target) == ERR_NOT_IN_RANGE) {
+                this.moveTo(target, {
+                    "reusePath": reusePath
+                });
+            }
         }
+        
     }
+    /*
     if(target) {
         if(this.withdraw(target, RESOURCE_ENERGY) == ERR_NOT_IN_RANGE) {
             this.moveTo(target, {
@@ -67,6 +84,7 @@ var CreepCollect = function(input) {
         this.say("No energy");
         return ERR_NOT_FOUND;
     }
+    */
 };
 
 module.exports = CreepCollect;
