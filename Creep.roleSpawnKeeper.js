@@ -54,7 +54,22 @@ var CreepRoleSpawnKeeper = function() {
             } else {
                 targets = containers;
             }
-            if(targets.length > 0) {
+            if(storage && storage.store[RESOURCE_ENERGY] > storageAmount) {
+                target = storage;
+                var amount = Math.floor(storage.store[RESOURCE_ENERGY] - storageAmount - rate * 50);
+                if(amount > this.carryCapacity - this.carry.energy) {
+                    amount = this.carryCapacity - this.carry.energy;
+                }
+                if(amount > 0) {
+                    this.room.visual.circle(target.pos, {fill: 'transparent', radius: 0.55, stroke: 'red'});
+                    result = this.withdraw(target, RESOURCE_ENERGY, amount);
+                    if(result === ERR_NOT_IN_RANGE) {
+                        this.moveTo(target);
+                    }
+                } else {
+                    this.memory.collecting = false;
+                }
+            } else if(targets.length > 0) {
                 /*targets.sort(function(a, b) {
                     var a_energyPercent, b_energyPercent;
                     if(a.structureType === STRUCTURE_LINK) {
@@ -91,21 +106,6 @@ var CreepRoleSpawnKeeper = function() {
                     if(result === ERR_NOT_IN_RANGE) {
                         this.moveTo(target);
                     }
-                }
-            } else if(storage && storage.store[RESOURCE_ENERGY] > storageAmount) {
-                target = storage;
-                var amount = Math.floor(storage.store[RESOURCE_ENERGY] - storageAmount - rate * 50);
-                if(amount > this.carryCapacity - this.carry.energy) {
-                    amount = this.carryCapacity - this.carry.energy;
-                }
-                if(amount > 0) {
-                    this.room.visual.circle(target.pos, {fill: 'transparent', radius: 0.55, stroke: 'red'});
-                    result = this.withdraw(target, RESOURCE_ENERGY, amount);
-                    if(result === ERR_NOT_IN_RANGE) {
-                        this.moveTo(target);
-                    }
-                } else {
-                    this.memory.collecting = false;
                 }
             } else {
                 this.memory.collecting = false;
