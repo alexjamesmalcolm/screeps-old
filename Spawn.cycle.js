@@ -1,7 +1,8 @@
 //var creepCount = require('creepCount');
 var SpawnCycle = function() {
     var creepsInRange, creep;
-    creepsInRange = this.pos.findInRange(FIND_MY_CREEPS, 1);
+    var myCreeps = this.room.memory.found.myCreeps;
+    creepsInRange = this.pos.findInRange(myCreeps, 1);
     if(creepsInRange.length > 0) {
         creepsInRange.sort(function(a, b) {
             return a.ticksToLive - b.ticksToLive;
