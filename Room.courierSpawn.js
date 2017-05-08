@@ -69,21 +69,21 @@ var RoomCourierSpawn = function() {
     if(this.memory.spawns.length > 0) {
         var storage = this.storage;
         if(storage) {
-        if(courier) {
-            if(couriers.length > 0) {
-                if(courier.carryBodyparts > couriers[0].getActiveBodyparts(CARRY)) {
-                    if(Math.ceil(couriers[0].weight() / couriers[0].getActiveBodyparts(MOVE)) >= 1) {
-                        couriers[0].memory.recycle = true;
-                        this.memory.spawns[0].createCreep(courier.bodyparts, undefined, {role: 'courier'});
-                        this.memory.spawns[0].memory.busy = Game.time;
+            if(courier) {
+                if(couriers.length > 0) {
+                    if(courier.carryBodyparts > couriers[0].getActiveBodyparts(CARRY)) {
+                        if(Math.ceil(couriers[0].weight() / couriers[0].getActiveBodyparts(MOVE)) >= 1) {
+                            couriers[0].memory.recycle = true;
+                            this.memory.spawns[0].createCreep(courier.bodyparts, undefined, {role: 'courier'});
+                            this.memory.spawns[0].memory.busy = Game.time;
+                        }
                     }
                 }
+                if(transitEnergy * multiplier > totalCarry + CARRY_CAPACITY * courier.carryBodyparts) {
+                    this.memory.spawns[0].createCreep(courier.bodyparts, undefined, {role: 'courier'});
+                    this.memory.spawns[0].memory.busy = Game.time;
+                }
             }
-            if(transitEnergy * multiplier > totalCarry + CARRY_CAPACITY * courier.carryBodyparts) {
-                this.memory.spawns[0].createCreep(courier.bodyparts, undefined, {role: 'courier'});
-                this.memory.spawns[0].memory.busy = Game.time;
-            }
-        }
         }
     }
     if(transitEnergy * multiplier < totalCarry) {
