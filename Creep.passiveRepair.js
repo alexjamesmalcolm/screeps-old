@@ -1,6 +1,7 @@
 var CreepPassiveRepair = function() {
     var workBodyparts = this.getActiveBodyparts(WORK);
-    var repairTargets = this.pos.findInRange(FIND_STRUCTURES, 1, {
+    var structures = this.room.memory.found.structures;
+    var repairTargets = this.pos.findInRange(structures, 1, {
         filter: function(structure) {
             if(structure.hits < structure.hitsMax) {
                 if(structure.hitsMax - structure.hits > REPAIR_POWER * workBodyparts) {
