@@ -26,19 +26,18 @@ var CreepDeposit = function(input) {
                 closestStructure = this.pos.findClosestByRange(foundStructures, {
                     filter: function(structure) {
                         if(structure.structureType == structureType) {
-                            switch(structureType) {
-                                case STRUCTURE_EXTENSION:
-                                    return structure.energyCapacity - structure.energy > 0;
-                                case STRUCTURE_SPAWN:
-                                    return structure.energyCapacity - structure.energy > 0;
-                                case STRUCTURE_STORAGE:
-                                    return structure.storeCapacity - _.sum(structure.store) > 0;
-                                case STRUCTURE_CONTAINER:
-                                    return structure.storeCapacity - _.sum(structure.store) > 0;
-                                case STRUCTURE_TOWER:
-                                    return structure.energyCapacity - structure.energy > 0;
-                                case STRUCTURE_LINK:
-                                    return structure.energyCapacity - structure.energy > 0;
+                            if(structureType === STRUCTURE_EXTENSION) {
+                                return structure.energyCapacity - structure.energy > 0;
+                            } else if(structureType === STRUCTURE_SPAWN) {
+                                return structure.energyCapacity - structure.energy > 0;
+                            } else if(structureType === STRUCTURE_STORAGE) {
+                                return structure.storeCapacity - _.sum(structure.store) > 0;
+                            } else if(structureType === STRUCTURE_CONTAINER) {
+                                return structure.storeCapacity - _.sum(structure.store) > 0;
+                            } else if(structureType === STRUCTURE_TOWER) {
+                                return structure.energyCapacity - structure.energy > 0;
+                            } else if(structureType === STRUCTURE_LINK) {
+                                return structure.energyCapacity - structure.energy > 0;
                             }
                         }
                     }
