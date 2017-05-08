@@ -67,6 +67,8 @@ var RoomCourierSpawn = function() {
         });
     }
     if(this.memory.spawns.length > 0) {
+        var storage = this.storage;
+        if(storage) {
         if(courier) {
             if(couriers.length > 0) {
                 if(courier.carryBodyparts > couriers[0].getActiveBodyparts(CARRY)) {
@@ -81,6 +83,7 @@ var RoomCourierSpawn = function() {
                 this.memory.spawns[0].createCreep(courier.bodyparts, undefined, {role: 'courier'});
                 this.memory.spawns[0].memory.busy = Game.time;
             }
+        }
         }
     }
     if(transitEnergy * multiplier < totalCarry) {
