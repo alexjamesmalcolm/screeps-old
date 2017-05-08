@@ -20,7 +20,7 @@ var RoomSpawns = function() {
             return true;
         }
     });
-    var hostiles = this.find(FIND_HOSTILE_CREEPS);
+    var hostiles = this.memory.found.hostileCreeps;
     var hostileFlags = _.filter(Game.flags, function(flag) {
         if(flag.color === COLOR_RED) {
             return true;
