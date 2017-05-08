@@ -105,38 +105,26 @@ var CreepRoleSpawnKeeper = function() {
             }
         }
     } else {
+        var depositStructures = [];
         if(droppedEnergy.length > 0) {
-            if(storage) { 
-                this.deposit({
-                    creepDepositing: false,
-                    structures: [STRUCTURE_STORAGE]
-                });
+            if(storage) {
+                depositStructures = [STRUCTURE_STORAGE];
             } else {
-                this.deposit({
-                    creepDepositing: false,
-                    structures: [STRUCTURE_SPAWN, STRUCTURE_EXTENSION]
-                });
+                depositStructures = [STRUCTURE_TOWER, STRUCTURE_SPAWN, STRUCTURE_EXTENSION];
+            }
+        } else if(storage) {
+            if(storage.store[RESOURCE_ENERGY] > storageAmount) {
+                depositStructures = [STRUCTURE_TOWER, STRUCTURE_SPAWN, STRUCTURE_EXTENSION];
+            } else {
+                depositStructures = [STRUCTURE_STORAGE];
             }
         } else {
-            if(storage) {
-                if(storage.store[RESOURCE_ENERGY] > storageAmount) {
-                    this.deposit({
-                        creepDepositing: false,
-                        structures: [STRUCTURE_TOWER, STRUCTURE_SPAWN, STRUCTURE_EXTENSION]
-                    });
-                } else {
-                    this.deposit({
-                        creepDepositing: false,
-                        structures: [STRUCTURE_STORAGE]
-                    });
-                }
-            } else {
-                this.deposit({
-                    creepDepositing: false,
-                    structures: [STRUCTURE_SPAWN, STRUCTURE_EXTENSION]
-                });
-            }
+            depositStructures = [STRUCTURE_TOWER, STRUCTURE_SPAWN, STRUCTURE_EXTENSION];
         }
+        this.deposit({
+            creepDepositing: false,
+            structures: depositStructures
+        });
     }
 };
 
