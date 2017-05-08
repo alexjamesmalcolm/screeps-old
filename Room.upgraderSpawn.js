@@ -37,8 +37,9 @@ var optimalUpgrader = function(room) {
 var RoomUpgraderSpawn = function() {
     var upgraderLimit = 5;
     var multiplier = 0.5;
+    var myCreeps = this.memory.found.myCreeps;
     if(this.memory.spawns.length > 0) {
-        var upgraders = this.find(FIND_MY_CREEPS, {
+        var upgraders = this.find(myCreeps, {
             filter: function(creep) {
                 if(creep.memory.recycle) {
                     return false;
