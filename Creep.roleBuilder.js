@@ -60,7 +60,7 @@ var roleBuilder = function() {
             this.collect({
                 resouce: RESOURCE_ENERGY,
                 amount: this.carryCapacity,
-                structures: [STRUCTURE_CONTAINER]
+                structures: [STRUCTURE_CONTAINER, STRUCTURE_SPAWN]
             });
         } else {
             var sources = this.room.memory.found.sources;
