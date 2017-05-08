@@ -84,8 +84,8 @@ var CreepRoleSpawnKeeper = function() {
                         }
                     }
                 });
-                target = targets[0];
-                if(target) {
+                if(targets.length > 0) {
+                    target = this.pos.findClosestByRange(targets);
                     this.room.visual.circle(target.pos, {fill: 'transparent', radius: 0.55, stroke: 'red'});
                     result = this.withdraw(target, RESOURCE_ENERGY);
                     if(result === ERR_NOT_IN_RANGE) {
