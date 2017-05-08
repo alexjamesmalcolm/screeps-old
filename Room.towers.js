@@ -2,7 +2,7 @@ var RoomTowers = function() {
     /*If hostiles deal with those, if not hostiles then heal creeps, if not that, then repair structures*/
     var towers, hostiles, hurtCreeps, damagedStructures, i, tower;
     towers = this.memory.found.towers;
-    hostiles = this.room.memory.found.hostileCreeps;
+    hostiles = this.memory.found.hostileCreeps;
     if(hostiles.length > 0) {
         hostiles.sort(function(a, b) {
             //F = 2 * (W - M)
