@@ -38,56 +38,53 @@ var RoomUpgraderSpawn = function() {
     var multiplier = 0.5;
     var upgraderLimit = Math.ceil(this.memory.harvestPoints * multiplier);
     var myCreeps = this.memory.found.myCreeps;
-    //if(this.memory.spawns.length > 0) {
-        var upgraders = this.find(myCreeps, {
-            filter: function(creep) {
-                if(creep.memory.recycle) {
-                    return false;
-                } else if(creep.memory.role == 'upgrader') {
-                    return true;
-                }
-            }
+    var upgraders = _.filter(myCreeps, function(creep) {
+        if(creep.memory.recycle) {
+            return false;
+        } else if(creep.memory.role == 'upgrader') {
+            return true;
+        }
+    });
+    var upgrader = optimalUpgrader(this);
+    if(upgraders.length > 0) {
+        upgraders.sort(function(a, b) {
+            var a_work = a.getActiveBodyparts(WORK);
+            var b_work = b.getActiveBodyparts(WORK);
+            return a_work - b_work;
         });
-        var upgrader = optimalUpgrader(this);
-        if(upgraders.length > 0) { //this shouldn't go here
-            upgraders.sort(function(a, b) {
-                var a_work = a.getActiveBodyparts(WORK);
-                var b_work = b.getActiveBodyparts(WORK);
-                return a_work - b_work;
-            });
-            var upgradePerTick = 0;
-            upgraders.forEach(function(creep) {
-                upgradePerTick = upgradePerTick + creep.getActiveBodyparts(WORK);
-            });
-            //console.log(JSON.stringify(this));
-            if(upgrader) {
-                if(this.memory.spawns.length > 0) {
-                    if(upgrader.workBodyparts > upgraders[0].getActiveBodyparts(WORK)) {
-                        upgraders[0].memory.recycle = true;
+        var upgradePerTick = 0;
+        upgraders.forEach(function(creep) {
+            upgradePerTick = upgradePerTick + creep.getActiveBodyparts(WORK);
+        });
+        //console.log(JSON.stringify(this));
+        if(upgrader) {
+            if(this.memory.spawns.length > 0) {
+                if(upgrader.workBodyparts > upgraders[0].getActiveBodyparts(WORK)) {
+                    upgraders[0].memory.recycle = true;
+                    this.memory.spawns[0].createCreep(upgrader.bodyparts, undefined, {role: 'upgrader'});
+                    this.memory.spawns[0].memory.busy = Game.time;
+                } else if(upgradePerTick + upgrader.workBodyparts < this.memory.harvestPerTick * multiplier) {
+                    if(upgraders.length < upgraderLimit) {
                         this.memory.spawns[0].createCreep(upgrader.bodyparts, undefined, {role: 'upgrader'});
                         this.memory.spawns[0].memory.busy = Game.time;
-                    } else if(upgradePerTick + upgrader.workBodyparts < this.memory.harvestPerTick * multiplier) {
-                        if(upgraders.length < upgraderLimit) {
-                            this.memory.spawns[0].createCreep(upgrader.bodyparts, undefined, {role: 'upgrader'});
-                            this.memory.spawns[0].memory.busy = Game.time;
-                        }
                     }
                 }
             }
-            if(upgradePerTick > this.memory.harvestPerTick * multiplier) {
-                upgraders[0].memory.recycle = true;
-            }
-            if(upgraders.length > upgraderLimit) {
-                upgraders[0].memory.recycle = true;
-            }
-        } else {
-            if(upgrader) {
-                if(this.memory.spawns.length > 0) {
-                    this.memory.spawns[0].createCreep(upgrader.bodyparts, undefined, {role: 'upgrader'});
-                    this.memory.spawns[0].memory.busy = Game.time;
-                }
+        }
+        if(upgradePerTick > this.memory.harvestPerTick * multiplier) {
+            upgraders[0].memory.recycle = true;
+        }
+        if(upgraders.length > upgraderLimit) {
+            upgraders[0].memory.recycle = true;
+        }
+    } else {
+        if(upgrader) {
+            if(this.memory.spawns.length > 0) {
+                this.memory.spawns[0].createCreep(upgrader.bodyparts, undefined, {role: 'upgrader'});
+                this.memory.spawns[0].memory.busy = Game.time;
             }
         }
-    //}
+    }
 };
+
 module.exports = RoomUpgraderSpawn;
