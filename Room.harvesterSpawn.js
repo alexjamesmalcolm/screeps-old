@@ -22,7 +22,7 @@ var optimalHarvester = function(room) {
 };
 
 var RoomHarvesterSpawn = function() {
-    var sources = this.find(FIND_SOURCES);
+    var sources = this.memory.found.sources;
     var harvesters = _.filter(this.memory.found.myCreeps, function(creep) {
         if(creep.memory.role === "harvester") {
             return true;
