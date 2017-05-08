@@ -59,12 +59,10 @@ var RoomUpgraderSpawn = function() {
             });
             //console.log(JSON.stringify(this));
             if(upgrader) {
-                if(this.memory.energyPercent === 1) {
-                    if(upgrader.workBodyparts > upgraders[0].getActiveBodyparts(WORK)) {
-                        upgraders[0].memory.recycle = true;
-                        this.memory.spawns[0].createCreep(upgrader.bodyparts, undefined, {role: 'upgrader'});
-                        this.memory.spawns[0].memory.busy = Game.time;
-                    }
+                if(upgrader.workBodyparts > upgraders[0].getActiveBodyparts(WORK)) {
+                    upgraders[0].memory.recycle = true;
+                    this.memory.spawns[0].createCreep(upgrader.bodyparts, undefined, {role: 'upgrader'});
+                    this.memory.spawns[0].memory.busy = Game.time;
                 } else if(upgradePerTick + upgrader.workBodyparts < this.memory.harvestPerTick * multiplier) {
                     this.memory.spawns[0].createCreep(upgrader.bodyparts, undefined, {role: 'upgrader'});
                     this.memory.spawns[0].memory.busy = Game.time;
