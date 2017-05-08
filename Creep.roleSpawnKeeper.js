@@ -77,7 +77,7 @@ var CreepRoleSpawnKeeper = function() {
                         } else if(structure.structureType === STRUCTURE_CONTAINER) {
                             energyPercent = structure.store.energy / structure.storeCapacity;
                         }
-                        if(energyPercent > 0.5) {
+                        if(energyPercent > 0.5 || structure.energy > creep.carryCapacity) {
                             return true;
                         } else {
                             return false;
@@ -85,10 +85,12 @@ var CreepRoleSpawnKeeper = function() {
                     }
                 });
                 target = targets[0];
-                this.room.visual.circle(target.pos, {fill: 'transparent', radius: 0.55, stroke: 'red'});
-                result = this.withdraw(target, RESOURCE_ENERGY);
-                if(result === ERR_NOT_IN_RANGE) {
-                    this.moveTo(target);
+                if(target) {
+                    this.room.visual.circle(target.pos, {fill: 'transparent', radius: 0.55, stroke: 'red'});
+                    result = this.withdraw(target, RESOURCE_ENERGY);
+                    if(result === ERR_NOT_IN_RANGE) {
+                        this.moveTo(target);
+                    }
                 }
             } else if(storage && storage.store[RESOURCE_ENERGY] > storageAmount) {
                 target = storage;
