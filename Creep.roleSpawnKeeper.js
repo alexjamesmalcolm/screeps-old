@@ -55,7 +55,7 @@ var CreepRoleSpawnKeeper = function() {
                 targets = containers;
             }
             if(targets.length > 0) {
-                targets.sort(function(a, b) {
+                /*targets.sort(function(a, b) {
                     var a_energyPercent, b_energyPercent;
                     if(a.structureType === STRUCTURE_LINK) {
                         a_energyPercent = a.energy / a.energyCapacity;
@@ -68,7 +68,7 @@ var CreepRoleSpawnKeeper = function() {
                         b_energyPercent = b.store.energy / b.storeCapacity;
                     }
                     return b_energyPercent - a_energyPercent;
-                });
+                });*/
                 targets = _.filter(targets, function(structure) {
                     if(structure) {
                         var energyPercent;
