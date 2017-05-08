@@ -5,7 +5,6 @@ var CreepRoleSpawnKeeper = function() {
     var max = 100000;
     var rate = 0.05;
     var storageAmount = Math.floor(rate * (Game.time - startTime) + 3000);
-    var structures = this.room.memory.found.structures;
     if(storageAmount > max) {
         storageAmount = max;
     }
@@ -28,49 +27,7 @@ var CreepRoleSpawnKeeper = function() {
         }
     });
     if(this.memory.collecting) {
-        var target, result;
-        var links = this.room.memory.found.links;
-        var linkClosestToStorage;
-        if(links.length > 0) {
-            linkClosestToStorage = this.room.storage.pos.findClosestByRange(links);
-        }
-        var containers = _.filter(structures, function(structure) {
-            if(structure.structureType === STRUCTURE_CONTAINER) {
-                if(structure.store.energy > 0) {
-                    return true;
-                }
-            }
-        });
-        var targets = containers.concat([linkClosestToStorage]);
-        targets.sort(function(a, b) {
-            var a_energyPercent, b_energyPercent;
-            if(a.structureType === STRUCTURE_LINK) {
-                a_energyPercent = a.energy / a.energyCapacity;
-            } else if(a.structureType === STRUCTURE_CONTAINER) {
-                a_energyPercent = a.store.energy / a.storeCapacity;
-            }
-            if(b.structureType === STRUCTURE_LINK) {
-                b_energyPercent = b.energy / b.energyCapacity;
-            } else if(b.structureType === STRUCTURE_CONTAINER) {
-                b_energyPercent = b.store.energy / b.storeCapacity;
-            }
-            return b_energyPercent - a_energyPercent;
-        });
-        targets = _.filter(targets, function(structure) {
-            if(structure) {
-                var energyPercent;
-                if(structure.structureType === STRUCTURE_LINK) {
-                    energyPercent = structure.energy / structure.energyCapacity;
-                } else if(structure.structureType === STRUCTURE_CONTAINER) {
-                    energyPercent = structure.store.energy / structure.storeCapacity;
-                }
-                if(energyPercent > 0.5) {
-                    return true;
-                } else {
-                    return false;
-                }
-            }
-        });
+        var target;
         if(droppedEnergy.length > 0) {
             target = droppedEnergy[0];
             this.room.visual.circle(target.pos, {fill: 'transparent', radius: 0.55, stroke: 'red'});
@@ -78,7 +35,55 @@ var CreepRoleSpawnKeeper = function() {
                 this.moveTo(target);
             }
         } else {
+            var result;
+            var structures = this.room.memory.found.structures;
+            var containers = _.filter(structures, function(structure) {
+                if(structure.structureType === STRUCTURE_CONTAINER) {
+                    if(structure.store.energy > 0) {
+                        return true;
+                    }
+                }
+            });
+            var targets, linkClosestToStorage;
+            if(storage) {
+                var links = this.room.memory.found.links;
+                if(links.length > 0) {
+                    linkClosestToStorage = this.room.storage.pos.findClosestByRange(links);
+                }
+                targets = containers.concat([linkClosestToStorage]);
+            } else {
+                targets = containers;
+            }
             if(targets.length > 0) {
+                targets.sort(function(a, b) {
+                    var a_energyPercent, b_energyPercent;
+                    if(a.structureType === STRUCTURE_LINK) {
+                        a_energyPercent = a.energy / a.energyCapacity;
+                    } else if(a.structureType === STRUCTURE_CONTAINER) {
+                        a_energyPercent = a.store.energy / a.storeCapacity;
+                    }
+                    if(b.structureType === STRUCTURE_LINK) {
+                        b_energyPercent = b.energy / b.energyCapacity;
+                    } else if(b.structureType === STRUCTURE_CONTAINER) {
+                        b_energyPercent = b.store.energy / b.storeCapacity;
+                    }
+                    return b_energyPercent - a_energyPercent;
+                });
+                targets = _.filter(targets, function(structure) {
+                    if(structure) {
+                        var energyPercent;
+                        if(structure.structureType === STRUCTURE_LINK) {
+                            energyPercent = structure.energy / structure.energyCapacity;
+                        } else if(structure.structureType === STRUCTURE_CONTAINER) {
+                            energyPercent = structure.store.energy / structure.storeCapacity;
+                        }
+                        if(energyPercent > 0.5) {
+                            return true;
+                        } else {
+                            return false;
+                        }
+                    }
+                });
                 target = targets[0];
                 this.room.visual.circle(target.pos, {fill: 'transparent', radius: 0.55, stroke: 'red'});
                 result = this.withdraw(target, RESOURCE_ENERGY);
