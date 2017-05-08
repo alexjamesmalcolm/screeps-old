@@ -1,6 +1,8 @@
 var roleFighter = function() {
-    var enemy = this.pos.findClosestByPath(FIND_HOSTILE_CREEPS);
-    var enemyStructures = this.room.find(FIND_HOSTILE_STRUCTURES);
+    var hostileCreeps = this.room.memory.found.hostileCreeps;
+    var hostileStructures = this.room.memory.found.hostileStructures;
+    var enemy = this.pos.findClosestByPath(hostileCreeps);
+    var enemyStructures = this.room.find(hostileStructures);
     var hostileFlags = _.filter(Game.flags, function(flag) {
         if(flag.color === COLOR_RED) {
             return true;
