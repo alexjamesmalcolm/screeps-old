@@ -3,6 +3,8 @@ var CreepDeposit = function(input) {
     var creepDepositing, structures, amount, target, closestStructure, check, closestCreepDistance, closestStructureDistance, closestCreep;
     creepDepositing = input.creepDepositing;
     structures = input.structures;
+    var foundStructures = this.room.memory.found.structures;
+    var myCreeps = this.room.memory.found.myCreeps;
     amount = this.carry.energy;
     check = function(structure, structures, structureType) {
         if(structure.structureType == structureType) {
@@ -21,7 +23,7 @@ var CreepDeposit = function(input) {
             if(closestStructure) {
                 break;
             } else {
-                closestStructure = this.pos.findClosestByRange(FIND_STRUCTURES, {
+                closestStructure = this.pos.findClosestByRange(foundStructures, {
                     filter: function(structure) {
                         if(structure.structureType == structureType) {
                             switch(structureType) {
@@ -47,7 +49,7 @@ var CreepDeposit = function(input) {
         closestStructureDistance = this.pos.getRangeTo(closestStructure);
     }
     if(creepDepositing) {
-        closestCreep = this.pos.findClosestByRange(FIND_MY_CREEPS, {
+        closestCreep = this.pos.findClosestByRange(myCreeps, {
             filter: function(creep) {
                 if(creep.memory.needEnergy) {
                     if(creep.carryCapacity - creep.carry.energy >= amount) {
