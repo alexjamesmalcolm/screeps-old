@@ -4,9 +4,15 @@ var sourceAvailability = function(source) {
         for(var j = -1; j < 2; j++) {
             if(i * j != i + j) {
                 var pos = new RoomPosition(source.pos.x + i, source.pos.y + j, room.name);
-                if(pos.lookFor(LOOK_TERRAIN) != 'wall') {
-                    room.memory.harvestPoints = room.memory.harvestPoints + 1;
-                    if(!pos.lookFor(LOOK_CREEPS)) {
+                var wallAtPosition = pos.lookFor(LOOK_TERRAIN)[0] === 'wall';
+                var creepAtPosition;
+                if(pos.lookFor(LOOK_CREEPS).length > 0) {
+                    creepAtPosition = true;
+                } else {
+                    creepAtPosition = false;
+                }
+                if(!wallAtPosition) {
+                    if(!creepAtPosition) {
                         return true;
                     }
                 }
@@ -29,12 +35,22 @@ var roleHarvester = function() {
         }
     }
     if(this.memory.harvesting) {
+        var creep = this;
+        var source;
         var activeSources = this.room.memory.found.activeSources;
-        var availableSources = _.filter(activeSources, function(source) {
-            return sourceAvailability(source);
+        activeSources.forEach(function(s) {
+            if(s.pos.isNearTo(creep)) {
+                source = s;
+            }
         });
-        var source = this.pos.findClosestByRange(availableSources);
+        if(!source) {
+            var availableSources = _.filter(activeSources, function(source) {
+                return sourceAvailability(source);
+            });
+            source = this.pos.findClosestByRange(availableSources);
+        }
         if(source) {
+            this.room.visual.circle(source.pos, {fill: 'transparent', radius: 0.55, stroke: 'blue'});
             if(this.harvest(source) == ERR_NOT_IN_RANGE) {
                 this.moveTo(source);
             }
