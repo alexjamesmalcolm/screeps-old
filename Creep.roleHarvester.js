@@ -50,7 +50,7 @@ var roleHarvester = function() {
             source = this.pos.findClosestByRange(availableSources);
         }
         if(source) {
-            this.room.visual.circle(source.pos, {fill: 'transparent', radius: 0.55, stroke: 'blue'});
+            //this.room.visual.circle(source.pos, {fill: 'transparent', radius: 0.55, stroke: 'blue'});
             if(this.harvest(source) == ERR_NOT_IN_RANGE) {
                 this.moveTo(source);
             }
