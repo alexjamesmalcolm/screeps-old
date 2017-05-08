@@ -35,8 +35,8 @@ var optimalUpgrader = function(room) {
     }
 };
 var RoomUpgraderSpawn = function() {
-    var upgraderLimit = 3;
     var multiplier = 0.5;
+    var upgraderLimit = Math.ceil(this.memory.harvestPoints * multiplier);
     var myCreeps = this.memory.found.myCreeps;
     if(this.memory.spawns.length > 0) {
         var upgraders = this.find(myCreeps, {
