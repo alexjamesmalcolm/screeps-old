@@ -47,6 +47,20 @@ var RoomCourierSpawn = function() {
         }
     });
     var transitEnergy = droppedResources + containerEnergy;
+    var links = this.memory.found.links;
+    if(links.length >= 2) {
+        var linkClosestToStorage = this.storage.pos.findClosestByRange(links, {
+            filter: function(structure) {
+                if(structure.structureType === STRUCTURE_LINK) {
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+        });
+        var linkEnergy = linkClosestToStorage.energy;
+        transitEnergy = transitEnergy + linkEnergy;
+    }
     if(couriers.length > 0) {
         couriers.sort(function(a, b){
             //var a_movementTime = Math.ceil(a.weight() / a.getActiveBodyparts[MOVE]);
