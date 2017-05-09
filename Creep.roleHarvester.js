@@ -35,6 +35,10 @@ var roleHarvester = function() {
         }
     }
     if(this.memory.harvesting) {
+        if(this.getActiveBodyparts(WORK) * HARVEST_POWER + this.carry.energy >= this.carryCapacity) {
+            var repositories = this.getRepositories();
+            this.transfer(repositories[0], RESOURCE_ENERGY);
+        }
         var creep = this;
         var source;
         var activeSources = this.room.memory.found.activeSources;
