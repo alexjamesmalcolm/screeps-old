@@ -1,5 +1,5 @@
 var CreepGetRepositories = function() {
-    var foundStructures = this.room.found.structures;
+    var foundStructures = this.room.memory.found.structures;
     var inRangeStructures = this.pos.findInRange(foundStructures, 1);
     var repositories = _.filter(inRangeStructures, function(structure) {
         var viableRepositories = [
