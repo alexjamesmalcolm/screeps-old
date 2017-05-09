@@ -30,8 +30,6 @@ var RoomSpawns = function() {
         checkSpawns(this);
         try {this.fighterSpawn();} catch(err) {console.log(err+" "+this+": Room.cycle.js this.fighterSpawn()");}
     } else {
-        checkSpawns(this);
-        try {this.harvesterSpawn();} catch(err) {console.log(err+" "+this+": Room.cycle.js this.harvesterSpawn()");}
         if(hostileFlags.length > 0) {
             checkSpawns(this);
             try {this.fighterSpawn();} catch(err) {console.log(err+" "+this+": Room.cycle.js this.fighterSpawn()");}
@@ -42,9 +40,14 @@ var RoomSpawns = function() {
             checkSpawns(this);
             try {this.courierSpawn();} catch(err) {console.log(err+" "+this+": Room.cycle.js this.courierSpawn()");}
             checkSpawns(this);
+            try {this.harvesterSpawn();} catch(err) {console.log(err+" "+this+": Room.cycle.js this.harvesterSpawn()");}
+            checkSpawns(this);
             try {this.upgraderSpawn();} catch(err) {console.log(err+" "+this+": Room.cycle.js this.upgraderSpawn()");}
             checkSpawns(this);
             try {this.builderSpawn();} catch(err) {console.log(err+" "+this+": Room.cycle.js this.builderSpawn()");}
+        } else {
+            checkSpawns(this);
+            try {this.harvesterSpawn();} catch(err) {console.log(err+" "+this+": Room.cycle.js this.harvesterSpawn()");}
         }
     }
 };
