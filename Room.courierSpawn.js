@@ -25,7 +25,7 @@ var optimalCourier = function(room) {
     }
 };
 var RoomCourierSpawn = function() {
-    var multiplier = 1;
+    var multiplier = 0.5;
     var creeps = this.memory.found.myCreeps;
     var couriers = _.filter(creeps, function(creep) {
         if(creep.memory.recycle) {
