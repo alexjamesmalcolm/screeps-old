@@ -4,12 +4,12 @@ var CreepCycle = function() {
     var numberOfSick = _.filter(Game.creeps, (creep) => creep.memory.sick);
     if(!this.memory.sick) {
         if(this.memory.role != 'spawnKeeper') {
-            if(this.ticksToLive < 100) {
+            if(this.ticksToLive < 200) {
                 this.memory.recycle = true;
                 //this.memory.sick = true;
             }
         } else {
-            if(this.ticksToLive < 100) {
+            if(this.ticksToLive < 200) {
                 this.memory.sick = true;
             }
         }/* else {
