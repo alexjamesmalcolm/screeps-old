@@ -18,7 +18,9 @@ var RoomLink = function() {
                     if(amount > link.energy) {
                         amount = link.energy;
                     }
-                    link.transferEnergy(linkClosestToStorage, amount);
+                    if(Math.floor(amount * (1 - LINK_LOSS_RATIO)) > 0) {
+                        link.transferEnergy(linkClosestToStorage, amount);
+                    }
                 }
             }
         }
