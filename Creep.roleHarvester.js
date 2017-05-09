@@ -51,6 +51,7 @@ var roleHarvester = function() {
                 return true;
             }
         });
+        this.transfer(repositories[0], RESOURCE_ENERGY);
         var creep = this;
         var source;
         var activeSources = this.room.memory.found.activeSources;
