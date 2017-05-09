@@ -12,7 +12,7 @@ var roleCourier = function() {
     }
     if(this.memory.collecting) {
         var result = this.collect({
-            structures: [STRUCTURE_CONTAINER]
+            structures: [STRUCTURE_CONTAINER, STRUCTURE_LINK]
         });
     } else {
         var result = this.deposit({
