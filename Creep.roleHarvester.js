@@ -35,6 +35,22 @@ var roleHarvester = function() {
         }
     }
     if(this.memory.harvesting) {
+        var foundStructures = this.room.found.structures;
+        var inRangeStructures = this.pos.findInRange(foundStructures, 1);
+        var repositories = _.filter(inRangeStructures, function(structure) {
+            var viableRepositories = [
+                STRUCTURE_SPAWN,
+                STRUCTURE_EXTENSION,
+                STRUCTURE_LINK,
+                STRUCTURE_STORAGE,
+                STRUCTURE_TOWER,
+                STRUCTURE_TERMINAL,
+                STRUCTURE_CONTAINER
+            ];
+            if(viableRepositories.indexOf(structure.structureType) > -1) {
+                return true;
+            }
+        });
         var creep = this;
         var source;
         var activeSources = this.room.memory.found.activeSources;
