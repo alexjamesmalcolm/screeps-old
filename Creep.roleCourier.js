@@ -18,6 +18,7 @@ var roleCourier = function() {
         });
     } else {
         var repositories = this.getRepositories(collectionTypes);
+        this.transfer(repositories[0], RESOURCE_ENERGY);
         var result = this.deposit({
             creepDepositing: false,
             structures: depositTypes
