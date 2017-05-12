@@ -26,6 +26,8 @@ var CreepRoleSpawnKeeper = function() {
             return true;
         }
     });
+    var repositories = this.getRepositories([STRUCTURE_CONTAINER, STRUCTURE_STORAGE, STRUCTURE_LINK]);
+    this.transfer(repositories[0], RESOURCE_ENERGY);
     if(this.memory.collecting) {
         var target;
         if(droppedEnergy.length > 0) {
@@ -70,20 +72,6 @@ var CreepRoleSpawnKeeper = function() {
                     this.memory.collecting = false;
                 }
             } else if(targets.length > 0) {
-                /*targets.sort(function(a, b) {
-                    var a_energyPercent, b_energyPercent;
-                    if(a.structureType === STRUCTURE_LINK) {
-                        a_energyPercent = a.energy / a.energyCapacity;
-                    } else if(a.structureType === STRUCTURE_CONTAINER) {
-                        a_energyPercent = a.store.energy / a.storeCapacity;
-                    }
-                    if(b.structureType === STRUCTURE_LINK) {
-                        b_energyPercent = b.energy / b.energyCapacity;
-                    } else if(b.structureType === STRUCTURE_CONTAINER) {
-                        b_energyPercent = b.store.energy / b.storeCapacity;
-                    }
-                    return b_energyPercent - a_energyPercent;
-                });*/
                 targets = _.filter(targets, function(structure) {
                     if(structure) {
                         var energyPercent;
