@@ -78,7 +78,7 @@ module.exports.loop = function () {
             console.log('Taking random break to preserve cpu bucket: '+Game.cpu.bucket);
             try {
                 if(disableTick < Game.time) {
-                    Game.profiler.email(300);
+                    Game.profiler.email(1515);
                 }
             } catch(err) {console.log(err+": main.js Game.profiler.email()");}
         }
