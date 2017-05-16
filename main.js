@@ -36,7 +36,12 @@ module.exports.loop = function () {
     profiler.wrap(function() {
         var bucketPercent = Game.cpu.bucket / 10000;
         var randomPercent = Math.random();
-        var disableTick = Memory.profiler.disableTick;
+        var disableTick;
+        if(Memory.profiler) {
+            disableTick = Memory.profiler.disableTick;
+        } else {
+            disableTick = 0;
+        }
         if(bucketPercent > randomPercent) {
             var name;
             for(name in Memory.creeps) {
